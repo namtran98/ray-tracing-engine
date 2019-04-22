@@ -43,6 +43,8 @@ The engine can be extended ad infinitum. Below are some recommendations but thes
 - adding optical effects
 - adding a variety of acceleration structures
 - implementing parallelization
+- adding texturing
+- adding bump or normal mapping
 - adding sophisticated ray tracers
 
 Remember to conspicuously mention additional work on your web page in order to qualify for a bonus.
