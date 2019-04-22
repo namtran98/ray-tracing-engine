@@ -28,7 +28,7 @@ public:
   // Desctructor.
   virtual ~Directional(void);  // dummy function.
 
-  // Set light direction. Supplied direction must be normalized for storing.
+  // Set dir parallel to the supplied direction.
   void set_direction(const Vector3D& d);
   void set_direction(float x, float y, float z);
 

@@ -32,10 +32,10 @@ public:
   // Set spotlight position and angle.
   void set_theta(float t);  // set theta to t which must be in radians.
 
-  // Set light direction. Supplied direction must be normalized for storing.
-  void set_direction(float c);  // to (c, c, c) and normalize.
-  void set_direction(float x, float y, float z);  // to (x, y, z) and normalize.
-  void set_direction(const Vector3D& d);  // to d and normalize.
+  // Set dir parallel to supplied direction.
+  void set_direction(float c);  // parallel to (c, c, c).
+  void set_direction(float x, float y, float z);  // parallel to (x, y, z).
+  void set_direction(const Vector3D& d);  // parallel to d.
 
   // Normalized direction vector from light source to hit point.
   virtual Vector3D get_direction(ShadeInfo& sinfo) const;

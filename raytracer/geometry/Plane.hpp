@@ -15,7 +15,7 @@ protected:
 public:
   // Constructors.
   Plane();  // set plane to xz-plane.
-  Plane(const Point3D& pt, const Vector3D& n);  // set point and normal, then normalize.
+  Plane(const Point3D& pt, const Vector3D& normal);  // set a; n parallel to normal.
 
   // Copy constructor and assignment operator.
   Plane(const Plane& object);
