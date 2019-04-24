@@ -6,7 +6,7 @@
    Courtesy Kevin Suffern.
 */
 
-#include "Vector3D.h"
+#include "Vector3D.hpp"
 
 class Point3D {
 public:
