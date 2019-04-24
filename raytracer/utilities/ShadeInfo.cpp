@@ -17,5 +17,4 @@ ShadeInfo::ShadeInfo(const ShadeInfo& sr){
 }
 
  ShadeInfo::~ShadeInfo(){
-
  }

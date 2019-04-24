@@ -1,5 +1,6 @@
 #pragma once
-
+#include "Point3D.hpp"
+#include "Vector3D.hpp"
 /**
    This file declares the class Ray which represents a ray.
 

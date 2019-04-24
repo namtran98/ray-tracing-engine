@@ -29,16 +29,16 @@ Vector3D::~Vector3D() {
 }
 
 Vector3D& Vector3D::operator= (const Vector3D& rhs) {
-    this -> x == rhs.x;
-    this -> y == rhs.y;
-    this -> z == rhs.z;
+    this -> x = rhs.x;
+    this -> y = rhs.y;
+    this -> z = rhs.z;
     return *this;
 }
 
 Vector3D& Vector3D::operator=(const Point3D& rhs) {
-    this -> x == rhs.x;
-    this -> y == rhs.y;
-    this -> z == rhs.z;
+    this -> x = rhs.x;
+    this -> y = rhs.y;
+    this -> z = rhs.z;
     return *this;
 }
 
