@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 /**
    This file declares the Image class which is a utility for storing image
@@ -7,9 +8,15 @@
    x increases to the right, and y to the bottom.
 */
 
+// Forward Declarations
+class RGBColor;
+class ViewPlane;
+
 class Image {
 private:
-  int **colors;  // pixel colors.
+  RGBColor **colors;  // pixel colors.
+  int pic_hres;
+  int pic_vres;
 
 public:
   // Constructors.
@@ -19,7 +26,7 @@ public:
   // Destructor.
   ~Image();  // free memory.
 
-  // Set pixel color. Convert to integer values.
+  // Set pixel color.
   void set_pixel(int x, int y, RGBColor color);
 
   // Write image to file in PPM format.
