@@ -11,17 +11,16 @@
 class Point3D {
 public:
   float x, y, z;  // the co-ordinates.
-  
+
 public:
-  float x, y, z;  // the co-ordinates.
   // Constructors.
   Point3D();   // set point to (0, 0, 0).
   Point3D(const float c);  // set point to (c, c, c).
   Point3D(const float x, const float y, const float z);	// set point to (x,y,z).
-  
+
   // Destructor.
-  ~Point3D();		
-		
+  ~Point3D();
+
   // Copy constructor and assignment operator.
   Point3D(const Point3D& p);
   Point3D& operator= (const Point3D& p);

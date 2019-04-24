@@ -19,7 +19,7 @@ public:
   Vector3D(double c);  // set vector to (c, c, c).
   Vector3D(double _x, double _y, double _z);  // set vector to (_x, _y, _z).
   Vector3D(const Point3D& p);  // construct from a point.
-  
+
   // Copy constructor and assignment operator.
   Vector3D(const Vector3D& v);
   Vector3D& operator= (const Vector3D& rhs);
@@ -51,6 +51,3 @@ public:
 
 // Scaling.
 Vector3D operator* (const double a, const Vector3D& v);
-
-
-
