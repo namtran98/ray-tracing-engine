@@ -1,5 +1,13 @@
 #pragma once
-
+#include "utilities/RGBColor.hpp"
+#include "utilities/ShadeInfo.hpp"
+#include "ViewPlane.hpp"
+#include "../cameras/Camera.hpp"
+#include "../samplers/Sampler.hpp"
+#include "../geometry/Geometry.hpp"
+#include "../lights/Light.hpp"
+#include <vector>
+#include <memory>
 /**
    This file declares the World class which contains all the information about
    the scene - geometry and materials, lights, viewplane, camera, samplers, and
@@ -15,9 +23,9 @@ public:
   ViewPlane vplane;
   RGBColor bg_color;
   std::vector<Geometry*> geometry;
-  vector<Light*> lights;
-  Camera* camera_ptr;
-  Sampler* sampler_ptr;
+  std::vector<Light*> lights;
+  std::unique_ptr<Camera> camera_ptr;
+  std::unique_ptr<Sampler> sampler_ptr;
 
   // Light* ambient_ptr;
   // Tracer* tracer_ptr;

@@ -1,4 +1,8 @@
 #pragma once
+#include "../utilities/RGBColor.hpp"
+#include "../utilities/Vector3D.hpp"
+#include "../utilities/ShadeInfo.hpp"
+
 
 /**
    This file declares the BRDF class which is an abstract class for concrete

@@ -1,4 +1,8 @@
 #pragma once
+#include <vector>
+#include "../cameras/Camera.hpp"
+#include "../world/ViewPlane.hpp"
+#include "../utilities/Ray.hpp"
 
 /**
    This file declares the Sampler class which is an abstract class for concrete
@@ -35,5 +39,6 @@ public:
   // Get rays corresponding to a pixel in the view plane. px and py are 0-based
   // indexes of the pixel in the view plane, with the origin at the top left of
   // the view plane.
-  std::vector<Ray> get_rays(int px, int py) const = 0;
+  virtual std::vector<Ray> get_rays(int px, int py) const = 0;
+  // i made this virtual bc of the const = 0 thing. feel free to change if not right
 };
