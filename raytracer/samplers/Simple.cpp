@@ -34,7 +34,6 @@ Simple::~Simple(){
 
 // Shoot a ray of weight 1 through the center of the pixel.
 std::vector<Ray> Simple::get_rays(int px, int py) const{
-    std::vector<Ray> rays = {};
     Point3D point = Point3D(px+.5, py+.5,-kEpsilon);
     Ray new_ray = Ray(point, camera_ptr->get_direction(point));
     std::vector<Ray> rays = {new_ray};
