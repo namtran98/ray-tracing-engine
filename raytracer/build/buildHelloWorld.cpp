@@ -1,3 +1,7 @@
+#include "../world/World.hpp"
+#include "../utilities/Constants.hpp"
+#include "../cameras/Perspective.hpp"
+#include "../samplers/Simple.hpp"
 
 /**
    This builds a simple scene that consists of a sphere, a triangle, and a

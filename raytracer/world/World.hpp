@@ -39,7 +39,7 @@ public:
   ~World();  // free memory.
 
   // Add to the scene.
-  void add_geometry(Geometry* geom_ptr);
+  void add_object(Geometry* geom_ptr);
   void add_light(Light* light_ptr);
   void set_camera(Camera* c_ptr);
   // void set_ambient_light(Light* light_ptr);

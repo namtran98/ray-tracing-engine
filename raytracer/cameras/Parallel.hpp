@@ -1,5 +1,6 @@
 #pragma once
-
+#include "Camera.hpp"
+#include "../utilities/Vector3D.hpp"
 /**
    This file declares the Parallel class which represents a parallel viewing
    camera.
@@ -29,5 +30,5 @@ public:
   virtual ~Parallel();   							
 
   // Get direction of projection for a point.
-  virtual Vector3D get_direction(const Point3D& p) const = 0;
+  virtual Vector3D get_direction(const Point3D& p) const;
 };
