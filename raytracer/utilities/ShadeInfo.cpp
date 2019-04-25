@@ -14,6 +14,7 @@ ShadeInfo::ShadeInfo(const ShadeInfo& sr){
     depth = sr.depth; 
     t = sr.t;
     w = std::make_unique<World>(sr.w); 
+    normal = sr.normal;
 }
 
  ShadeInfo::~ShadeInfo(){

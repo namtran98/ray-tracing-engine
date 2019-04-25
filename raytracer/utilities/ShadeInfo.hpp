@@ -21,6 +21,7 @@ public:
   int depth;  // recursion depth.
   float t;  // ray parameter at hit point.
   std::unique_ptr<World> w;  // pointer to the world.
+  Vector3D normal; // normal at the hit point; I added this bc we need normal to calc the shade later
 
 public:
   // Constructor.

@@ -2,7 +2,8 @@
 #include "../utilities/Constants.hpp"
 #include "../cameras/Perspective.hpp"
 #include "../samplers/Simple.hpp"
-
+#include "../geometry/Plane.hpp"
+#include "../materials/Cosine.hpp"
 /**
    This builds a simple scene that consists of a sphere, a triangle, and a
    plane.
@@ -181,8 +182,8 @@ World::build(void) {
   add_object(sphere_ptr35);
 	
   // vertical plane
-  Plane* plane_ptr = new Plane(Point3D(0, 0, -150), Normal(0, 0, 1));
-  plane_ptr->set_material(new Cosine(grey));
+  Plane* plane_ptr = new Plane(Point3D(0, 0, -150), Vector3D(0, 0, 1));
+  plane_ptr->set_material( std::make_unique<Material>(new Cosine(grey)));
   add_object(plane_ptr);
 }
 
