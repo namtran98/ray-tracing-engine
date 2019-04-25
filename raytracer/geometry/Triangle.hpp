@@ -1,4 +1,6 @@
 #pragma once
+#include "Geometry.hpp"
+#include "../utilities/Point3D.hpp"
 
 /**
    This file declares the Triangle class which represents a triangle defined by its

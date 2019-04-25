@@ -6,7 +6,7 @@ int main(int argc, char **argv) {
   World world;
   world.build();
 
-  std::unique_ptr<Sampler> sampler = world.sampler_ptr;
+  std::unique_ptr<Sampler> sampler = std::make_unique<Sampler>(world.sampler_ptr);
   ViewPlane& viewplane = world.vplane;
   Image image(viewplane);
 
@@ -16,8 +16,8 @@ int main(int argc, char **argv) {
       // Get rays for the pixel from the sampler. The pixel color is the
       // weighted sum of the shades for each ray.
       RGBColor pixel_color(0);
-      rays = sampler.get_rays(x, y);
-      for (const auto&& ray : rays) {
+      rays = sampler->get_rays(x, y);
+      for (const auto& ray : rays) {
         float weight = ray.w;  // ray weight for the pixel.
         ShadeInfo sinfo = world.hit_objects(ray);
         if (sinfo.hit) {

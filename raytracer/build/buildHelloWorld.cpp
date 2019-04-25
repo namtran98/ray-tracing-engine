@@ -26,7 +26,7 @@ World::build(void) {
   
   // Camera and sampler.
   set_camera(new Perspective(0, 0, 20));
-  sampler_ptr = new Simple(camera_ptr, &vplane);
+  sampler_ptr = std::make_unique<Simple>(new Simple(camera_ptr.get(), &vplane));
 	
   // sphere
   Sphere* sphere_ptr = new Sphere(Point3D(-1, 3, 0), 3); 

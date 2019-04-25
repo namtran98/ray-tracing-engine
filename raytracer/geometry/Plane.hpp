@@ -1,4 +1,9 @@
 #pragma once
+#include "Geometry.hpp"
+#include "../utilities/Point3D.hpp"
+#include "../utilities/Vector3D.hpp"
+
+
 
 /**
    This file declares the Plane class which represents a plane defined by an

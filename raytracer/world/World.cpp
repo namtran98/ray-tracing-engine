@@ -41,5 +41,16 @@ void set_camera(Camera* c_ptr){
 // Returns appropriate shading information corresponding to intersection of
 // the ray with the scene geometry.
 ShadeInfo hit_objects(const Ray& ray){
-    
+    ShadeInfo sinfo = new ShadeInfo(*this);
+    float t = kHugeValue;
+    for (const auto& shape: geometry){
+        ShadeInfo temp_sinfo = new ShadeInfo(*this);
+        float tempt = 0.0f;
+
+        if(shape.hit(ray, tempt&, temp_sinfo&) && tempt < t ){
+            t = tempt;
+            sinfo = temp_sinfo;
+        }
+    }
+    return sinfo;
 }

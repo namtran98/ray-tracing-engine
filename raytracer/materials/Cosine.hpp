@@ -1,4 +1,7 @@
 #pragma once
+#include "Material.hpp"
+#include "../utilities/RGBColor.hpp"
+#include "../utilities/ShadeInfo.hpp"
 
 /**
    This file declares the Cosine class which represents a simple cosine
@@ -32,7 +35,7 @@ public:
   virtual ~Cosine();   							
 
   /* Returned shade is: color * cos \theta.
-     \theta is the angle between the normal at the hit pont and the ray.
+     \theta is the angle between the normal at the hit point and the ray.
      Assuming unit vectors, cos \theta = dot product of normal and -ray.dir.
   */
   virtual RGBColor shade(const ShadeInfo& sinfo) const;

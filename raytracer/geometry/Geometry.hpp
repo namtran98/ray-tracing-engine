@@ -1,5 +1,7 @@
 #pragma once
-
+#include "../materials/Material.hpp"
+#include "../utilities/Ray.hpp"
+#include "../utilities/ShadeInfo.hpp"
 /**
    This file declares the Geometry class which is an abstract class from which
    other concrete geometric objects will inherit.

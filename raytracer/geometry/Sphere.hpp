@@ -1,4 +1,6 @@
 #pragma once
+#include "Geometry.hpp"
+#include "../utilities/Point3D.hpp"
 
 /**
    This file declares the Sphere class which represents a sphere defined by its
