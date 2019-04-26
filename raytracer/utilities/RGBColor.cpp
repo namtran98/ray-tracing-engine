@@ -36,7 +36,7 @@ RGBColor::RGBColor(const RGBColor& c){
 RGBColor& RGBColor::operator= (const RGBColor& rhs){
   r = rhs.r;
   g = rhs.g;
-  r = rhs.r;
+  b = rhs.b;
   return *this;
 }
 
