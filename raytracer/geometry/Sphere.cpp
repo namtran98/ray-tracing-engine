@@ -1,4 +1,5 @@
 #include "Sphere.hpp"
+#include "../utilities/Constants.hpp"
 #include <cmath>
 
 Sphere::Sphere(): c(0), r(0){}
@@ -29,20 +30,28 @@ bool Sphere::hit(const Ray& ray, float& t_min, ShadeInfo& s) const{
     double e = sqrt(discrim);
     double denom = 2.0 * a;
     t = (-b - e) / denom; // Try smaller root first
-    if (t > .000001){ // TODO: Replace with a static const in Geometry
+    if (t > kEpsilon){
       t_min = t;
       s.normal = (origin_to_center + t * ray.d) / r;
       s.hit_point = ray.o + t * ray.d;
+      s.hit = true;
+      s.material_ptr = material_ptr;
       return true;
     }
 
     t = (-b + e); // Else try larger root
-    if (t > .000001){
+    if (t > kEpsilon){
       t_min = t;
       s.normal = (origin_to_center + t * ray.d) / r;
       s.hit_point = ray.o + t * ray.d;
+      s.hit = true;
+      s.material_ptr = material_ptr;
       return true;
     }
   }
   return false;
+}
+
+Sphere* Sphere::clone() const{
+  return new Sphere(*this);
 }
