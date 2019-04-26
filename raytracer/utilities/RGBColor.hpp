@@ -1,4 +1,5 @@
 #pragma once
+#import <string>
 
 /**
    This file declares the class RGBColor which represents an RGB color.
@@ -39,6 +40,7 @@ public:
   bool operator==(const RGBColor& c) const;  // equality.
   RGBColor powc(float p) const;  // raise components to a power.
   float average(void) const;  // the average of the components.
+  std::string toString() const;
 private:
   void setR(float _r);
   void setB(float _b);

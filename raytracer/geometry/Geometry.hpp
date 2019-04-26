@@ -10,20 +10,20 @@
    Courtesy Kevin Suffern.
 */
 
-class Geometry {	
+class Geometry {
 protected:
   Material* material_ptr;  // this object's material.
-	
-public:	
+
+public:
   // Constructors.
   Geometry();  // sets material_ptr to NULL.
 
   // Copy constructor and assignment operator.
   Geometry(const Geometry& object);
   Geometry& operator= (const Geometry& rhs);
-	
+
   // Destructor.
-  virtual ~Geometry();	
+  virtual ~Geometry();
 
   // Virtual copy constructor.
   virtual Geometry* clone() const = 0;

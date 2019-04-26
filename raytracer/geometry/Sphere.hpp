@@ -9,11 +9,11 @@
    Courtesy Kevin Suffern.
 */
 
-class Sphere: public Geometry {	
+class Sphere: public Geometry {
 protected:
   Point3D c;  // center.
-  float r;  // radius. 
-								  	
+  float r;  // radius.
+
 public:
   // Constructors.
   Sphere();  // sphere at origin with radius 0.
@@ -22,12 +22,12 @@ public:
   // Copy constructor and assignment operator.
   Sphere(const Sphere& object);
   Sphere& operator=(const Sphere& rhs);
-	
+
   // Destructor.
-  virtual ~Sphere();	
+  virtual ~Sphere();
 
   // Virtual copy constructor.
-  virtual Sphere* clone() const = 0;
+  virtual Sphere* clone() const;
 
   // Ray intersection. Set t and sinfo as per intersection with this object.
   virtual bool hit(const Ray& ray, float& t, ShadeInfo& s) const;
