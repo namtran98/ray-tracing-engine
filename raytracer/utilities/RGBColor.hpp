@@ -1,5 +1,5 @@
 #pragma once
-#import <string>
+#include <string>
 
 /**
    This file declares the class RGBColor which represents an RGB color.
