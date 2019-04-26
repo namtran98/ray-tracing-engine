@@ -12,8 +12,8 @@
 class Simple: public Sampler {
 protected:
   // add members to cache values to avoid recomputation in get_rays().
-  std::unique_ptr<Camera> camera_ptr;  // the camera that decides the projectors.
-  std::unique_ptr<ViewPlane> viewplane_ptr; 
+  Camera* camera_ptr;  // the camera that decides the projectors.
+  ViewPlane* viewplane_ptr; 
 public:
   // Constructors.
   Simple();  // initializes members to NULL.

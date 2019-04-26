@@ -12,7 +12,7 @@
 
 class Geometry {	
 protected:
-  std::unique_ptr<Material> material_ptr;  // this object's material.
+  Material* material_ptr;  // this object's material.
 	
 public:	
   // Constructors.
@@ -29,8 +29,8 @@ public:
   virtual Geometry* clone() const = 0;
 
   // Get/set material.
-  virtual std::unique_ptr<Material> get_material() const;
-  virtual void set_material(std::unique_ptr<Material> mPtr);
+  virtual Material* get_material() const;
+  virtual void set_material(Material* mPtr);
 
   // Ray intersection. Set t and sinfo as per intersection with this object.
   virtual bool hit(const Ray& ray, float& t, ShadeInfo& sinfo) const = 0;

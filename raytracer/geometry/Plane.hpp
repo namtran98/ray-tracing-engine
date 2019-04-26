@@ -32,10 +32,6 @@ public:
   // Virtual copy constructor.
   virtual Plane* clone() const;
 
-   // Get/set material.
-  virtual std::unique_ptr<Material> get_material() const;
-  virtual void set_material(std::unique_ptr<Material> mPtr);
-
 
   // Ray intersection. Set t and sinfo as per intersection with this object.
   virtual bool hit(const Ray& ray, float& t, ShadeInfo& s) const;

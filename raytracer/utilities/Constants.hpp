@@ -1,5 +1,5 @@
 #pragma once
-
+#include "RGBColor.hpp"
 /**
     This file caches common values and constants.
 

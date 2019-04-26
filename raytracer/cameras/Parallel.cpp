@@ -23,6 +23,7 @@ Parallel::Parallel(const Parallel& camera){
 
 Parallel& Parallel::operator= (const Parallel& other){
     this->dir = other.dir;
+    return *this;
 }
 
 // Virtual copy constructor.

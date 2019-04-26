@@ -1,5 +1,5 @@
 #pragma once
-
+#include "../utilities/Point3D.hpp"
 /**
    This file declares the Camera class which is an abstract class for concrete
    cameras to inherit from. A camera views the world through a view plane.

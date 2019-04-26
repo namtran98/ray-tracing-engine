@@ -1,7 +1,6 @@
 #pragma once
 #include "Material.hpp"
-#include "../utilities/RGBColor.hpp"
-#include "../utilities/ShadeInfo.hpp"
+
 
 /**
    This file declares the Cosine class which represents a simple cosine

@@ -1,4 +1,6 @@
 #pragma once
+#include "../utilities/ShadeInfo.hpp"
+#include "../utilities/RGBColor.hpp"
 
 /**
    This file declares the Material class which is an abstract class for concrete

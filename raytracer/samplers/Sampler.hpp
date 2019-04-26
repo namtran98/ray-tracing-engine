@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "../cameras/Camera.hpp"
-#include "../world/ViewPlane.hpp"
+// #include "../world/ViewPlane.hpp"
 #include "../utilities/Ray.hpp"
 
 /**
@@ -15,6 +15,9 @@
 
    Courtesy Kevin Suffern.
 */
+
+class ViewPlane;
+
 
 class Sampler {
 protected:

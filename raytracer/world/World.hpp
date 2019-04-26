@@ -1,6 +1,7 @@
 #pragma once
-#include "utilities/RGBColor.hpp"
-#include "utilities/ShadeInfo.hpp"
+
+#include "../utilities/RGBColor.hpp"
+#include "../utilities/ShadeInfo.hpp"
 #include "ViewPlane.hpp"
 #include "../cameras/Camera.hpp"
 #include "../samplers/Sampler.hpp"

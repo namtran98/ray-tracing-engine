@@ -1,12 +1,13 @@
 #include "world/World.hpp"
 #include "utilities/Image.hpp"
 #include <memory>
+#include "samplers/Simple.hpp"
 
 int main(int argc, char **argv) {
   World world;
   world.build();
 
-  std::unique_ptr<Sampler> sampler = std::make_unique<Sampler>(world.sampler_ptr);
+  Sampler* sampler = world.sampler_ptr.get();
   ViewPlane& viewplane = world.vplane;
   Image image(viewplane);
 

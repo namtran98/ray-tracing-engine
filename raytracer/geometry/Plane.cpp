@@ -18,13 +18,13 @@ Plane::Plane(const Point3D& pt, const Vector3D& normal){
 Plane::Plane(const Plane& object){
     a = object.a;
     n = object.n;
-    material_ptr = std::make_unique<Material>(object.material_ptr);;
+    material_ptr = object.material_ptr;
 }
 
 Plane& Plane::operator=(const Plane& rhs){
     this->a = rhs.a;
     this->n = rhs.n;
-    this->material_ptr = std::make_unique<Material>(rhs.material_ptr);;
+    this->material_ptr = rhs.material_ptr;
     return *this;
 }
 
@@ -53,19 +53,10 @@ bool Plane::hit(const Ray& ray, float& t, ShadeInfo& s) const{
         // i believe this is it
         s.hit_point = ray.o + t * ray.d;
         // maybe
-        s.material_ptr = std::make_unique<Material>(material_ptr);
+        s.material_ptr = material_ptr;
         s.normal = n;
         s.ray = ray;
         return true;
     }
     return false;
-}
-
-
-std::unique_ptr<Material> Plane::get_material() const{
-    return std::make_unique<Material>(material_ptr);
-}
-
-void Plane::set_material(std::unique_ptr<Material> mPtr){
-    this->material_ptr = std::make_unique<Material>(mPtr);
 }
