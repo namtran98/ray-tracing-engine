@@ -47,11 +47,19 @@ void Image::set_pixel(int x, int y, RGBColor color){
 void Image::write_ppm(std::string path){
   std::ofstream file;
   file.open(path);
-  file << "P6\t";
+  file << "P3\t";
   file << pic_hres << "\t";
   file << pic_vres << "\t";
-  file << "256" << "\t"; // Max value
+  file << "255" << "\t"; // Max value
   // TODO: Figure out if this should be PPM of PPM plain and actually write
   // the pixel values
+  for (int i = 0; i < pic_hres; i++){
+    for (int j = 0; j < pic_vres; j++){
+      file << (int) 255 * colors[i][j].r << " ";
+      file << (int) 255 * colors[i][j].g << " ";
+      file << (int) 255 * colors[i][j].b << "\t";
+    }
+    file << "\n";
+  }
   file.close();
 }
