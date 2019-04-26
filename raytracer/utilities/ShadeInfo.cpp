@@ -8,11 +8,11 @@ ShadeInfo::ShadeInfo(World& wr){
 }
 
 ShadeInfo::ShadeInfo(const ShadeInfo& sr){
-    hit = sr.hit;  
-    material_ptr = material_ptr; 
-    hit_point = sr.hit_point; 
-    ray = sr.ray; 
-    depth = sr.depth; 
+    hit = sr.hit;
+    material_ptr = sr.material_ptr;
+    hit_point = sr.hit_point;
+    ray = sr.ray;
+    depth = sr.depth;
     t = sr.t;
     w = sr.w;
     normal = sr.normal;

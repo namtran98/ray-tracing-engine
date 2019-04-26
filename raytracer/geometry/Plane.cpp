@@ -42,7 +42,7 @@ Plane* Plane::clone() const{
 bool Plane::hit(const Ray& ray, float& t, ShadeInfo& s) const{
     // d * n
     double check = ray.d * n;
-    if(abs(check) > 0.0){
+    if(std::abs(check) > 0.0){
         // calc and set info
         float calcedT = ((a-ray.o) * n)/check;
         t = calcedT;

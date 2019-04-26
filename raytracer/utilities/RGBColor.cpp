@@ -19,6 +19,14 @@ void RGBColor::setR(float _r){
   r = std::min((float) 1, std::max((float) 0, _r));
 }
 
+void RGBColor::setG(float _g){
+  g = std::min((float) 1, std::max((float) 0, _g));
+}
+
+void RGBColor::setB(float _b){
+  b = std::min((float) 1, std::max((float) 0, _b));
+}
+
 RGBColor::RGBColor(const RGBColor& c){
   r = c.r;
   g = c.g;
