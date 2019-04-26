@@ -25,7 +25,7 @@ public:
   // Destructor.
   virtual ~Triangle();
 
-  // Virtual copy constructor.
+  // Pure virtual copy constructor
   virtual Triangle* clone() const = 0;
 
   // Ray intersection. Set t and sinfo as per intersection with this object.
