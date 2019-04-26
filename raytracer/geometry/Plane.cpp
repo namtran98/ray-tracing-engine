@@ -39,24 +39,19 @@ Plane* Plane::clone() const{
 }
 
 // Ray intersection. Set t and sinfo as per intersection with this object.
-bool Plane::hit(const Ray& ray, float& t, ShadeInfo& s) const{
+bool Plane::hit(const Ray& ray, float& t_min, ShadeInfo& s) const{
+  const float EPSILON = .000001;
     // d * n
     double check = ray.d * n;
     if(std::abs(check) > 0.0){
         // calc and set info
-        float calcedT = ((a-ray.o) * n)/check;
-        t = calcedT;
-        s.t = t;
-        // not sure what depth is
-        s.depth = 0;
-        s.hit = true;
-        // i believe this is it
-        s.hit_point = ray.o + t * ray.d;
-        // maybe
-        s.material_ptr = material_ptr;
-        s.normal = n;
-        s.ray = ray;
-        return true;
+        float t = ((a-ray.o) * n)/check;
+        if (t > EPSILON){
+          t_min = t;
+          s.normal = n;
+          s.hit_point = ray.o + t * ray.d;
+          return true;
+        }
     }
     return false;
 }
