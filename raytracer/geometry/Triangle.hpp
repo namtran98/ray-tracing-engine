@@ -9,10 +9,10 @@
    Courtesy Kevin Suffern.
 */
 
-class Triangle: public Geometry {	
+class Triangle: public Geometry {
 protected:
   Point3D a, b, c;  // the vertices. they must not be colinear.
-								  	
+
 public:
   // Constructors. Passed vertices are assumed to be ordered for orientation,
   Triangle();  // triangle with vertices at origin.
@@ -21,9 +21,9 @@ public:
   // Copy constructor and assignment operator.
   Triangle(const Triangle& object);
   Triangle& operator=(const Triangle& rhs);
-	
+
   // Destructor.
-  virtual ~Triangle();	
+  virtual ~Triangle();
 
   // Virtual copy constructor.
   virtual Triangle* clone() const = 0;
