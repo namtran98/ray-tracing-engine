@@ -50,6 +50,7 @@ bool Triangle::hit(const Ray& ray, float& t_min, ShadeInfo& si) const{
     si.normal = edge1 ^ edge2;
     si.hit = true;
     si.material_ptr = material_ptr;
+    si.ray = ray;
     t_min = t;
     return true;
   } else {

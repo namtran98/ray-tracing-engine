@@ -1,6 +1,7 @@
 #include "RGBColor.hpp"
 #include <algorithm>
 #include <cmath>
+#include <sstream>
 
 RGBColor::RGBColor() : r(0), g(0), b(0){}
 RGBColor::RGBColor(float c){
@@ -111,4 +112,10 @@ float RGBColor::average(void) const { // the average of the components.
 
 RGBColor operator* (const float a, const RGBColor& c){ // Multiplication by a float.
   return c * a;
+}
+
+std::string RGBColor::toString() const {
+  std::ostringstream oss;
+  oss << "R: " << r << " G: " << g << " B: " << b;
+  return oss.str();
 }

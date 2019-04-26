@@ -30,12 +30,16 @@ Cosine* Cosine::clone() const{
 // Desctructor.
 Cosine::~Cosine(){
 
-}   							
+}
 
 /* Returned shade is: color * cos \theta.
     \theta is the angle between the normal at the hit point and the ray.
     Assuming unit vectors, cos \theta = dot product of normal and -ray.dir.
 */
 RGBColor Cosine::shade(const ShadeInfo& sinfo) const{
-    return color*(sinfo.normal*(-sinfo.ray.d));
+    Vector3D normal_copy = sinfo.normal;
+    Vector3D ray_copy = sinfo.ray.d;
+    normal_copy.normalize();
+    ray_copy.normalize();
+    return color*(normal_copy * (-ray_copy));
 }
