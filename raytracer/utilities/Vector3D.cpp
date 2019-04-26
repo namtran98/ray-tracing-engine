@@ -71,11 +71,10 @@ Vector3D Vector3D::operator/(const double a) const {
 
 void Vector3D::normalize() {
     float mag = length();
-    mag = 1.0f/mag;
 
-    this-> x/= mag;
-    this-> y/= mag;
-    this-> z/= mag;
+    x/= mag;
+    y/= mag;
+    z/= mag;
 }
 
 double Vector3D::length() {
@@ -83,15 +82,15 @@ double Vector3D::length() {
 }
 
 double Vector3D::len_squared() {
-    return (this->x*x+this->y*y+this->z*z);
+    return (x * x + y * y + z * z);
 }
 
 double Vector3D::operator* (const Vector3D& b) const {
-    return (this->x*b.x +this->y*b.y+this->z*b.z);
+    return (x*b.x +y*b.y+z*b.z);
 }
 
 Vector3D Vector3D::operator^ (const Vector3D& v) const {
-    return Vector3D(this->y*v.z - this->z * v.y, this->z*v.x - this->x*v.z, this->x*v.y - this->y*v.x);
+    return Vector3D(y*v.z - z * v.y, z*v.x - x*v.z, x*v.y - y*v.x);
 }
 
 Vector3D operator* (const double a, const Vector3D& v) {
