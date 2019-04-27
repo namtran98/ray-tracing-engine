@@ -52,6 +52,7 @@ bool Triangle::hit(const Ray& ray, float& t_min, ShadeInfo& si) const{
     si.material_ptr = material_ptr;
     si.ray = ray;
     t_min = t;
+    si.t = t;
     return true;
   } else {
     return false; // Line intersects but before the origin
