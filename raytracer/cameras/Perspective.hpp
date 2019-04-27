@@ -11,7 +11,7 @@
 class Perspective : public Camera {
 protected:
   Point3D pos;  // center of projection.
-  
+
 public:
   // Constructors.
   Perspective();  // set pos to origin.
@@ -27,7 +27,7 @@ public:
   virtual Perspective* clone() const;
 
   // Desctructor.
-  virtual ~Perspective();   							
+  virtual ~Perspective();
 
   // Get direction of projection for a point.
   virtual Vector3D get_direction(const Point3D& p) const;

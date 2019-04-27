@@ -25,5 +25,4 @@ ViewPlane& ViewPlane::operator= (const ViewPlane& rhs){
 }
 
 // Destructor.
-ViewPlane::~ViewPlane(){
-}
+ViewPlane::~ViewPlane(){}

@@ -13,7 +13,7 @@ class Simple: public Sampler {
 protected:
   // add members to cache values to avoid recomputation in get_rays().
   Camera* camera_ptr;  // the camera that decides the projectors.
-  ViewPlane* viewplane_ptr; 
+  ViewPlane* viewplane_ptr;
 public:
   // Constructors.
   Simple();  // initializes members to NULL.
@@ -27,7 +27,7 @@ public:
   virtual Simple* clone() const;
 
   // Desctructor.
-  virtual ~Simple();   							
+  virtual ~Simple();
 
   // Shoot a ray of weight 1 through the center of the pixel.
   virtual std::vector<Ray> get_rays(int px, int py) const;

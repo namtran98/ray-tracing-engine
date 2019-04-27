@@ -1,5 +1,5 @@
 #include "Perspective.hpp"
- 
+
 // Constructors.
 Perspective::Perspective(){
     pos = Point3D(0,0,0);
@@ -30,7 +30,7 @@ Perspective* Perspective::clone() const{
 
 // Desctructor.
 Perspective::~Perspective(){
-} 							
+}
 
 // Get direction of projection for a point.
 Vector3D Perspective::get_direction(const Point3D& p) const{
