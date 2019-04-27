@@ -1,6 +1,7 @@
 #include "Simple.hpp"
 #include "../utilities/Constants.hpp"
 #include "../utilities/Point3D.hpp"
+#include "../world/ViewPlane.hpp"
 
 Simple::Simple(){
     camera_ptr = NULL;
@@ -36,7 +37,11 @@ Simple::~Simple(){
 
 // Shoot a ray of weight 1 through the center of the pixel.
 std::vector<Ray> Simple::get_rays(int px, int py) const{
-    Point3D point = Point3D(px+.5, py+.5,-kEpsilon);
+    // float offsetX = 1/viewplane_ptr->hres;
+    // float offsetY = 1/viewplane_ptr->vres;
+    float pixelWidth = (viewplane_ptr-> bottom_right.x - viewplane_ptr->top_left.x)/viewplane_ptr->hres;
+    float pixelHeight = (viewplane_ptr->top_left.y - viewplane_ptr->bottom_right.y)/viewplane_ptr->vres;
+    Point3D point = Point3D(px*pixelWidth+(viewplane_ptr->top_left.x), py*pixelHeight + (viewplane_ptr->bottom_right.y),-kEpsilon);
     Ray new_ray = Ray(point, camera_ptr->get_direction(point));
     std::vector<Ray> rays = {new_ray};
     return rays;
