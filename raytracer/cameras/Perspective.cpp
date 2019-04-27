@@ -19,7 +19,7 @@ Perspective::Perspective(const Perspective& camera){
     pos = camera.pos;
 }
 Perspective& Perspective::operator= (const Perspective& other){
-    this->pos = other.pos;
+    pos = other.pos;
     return *this;
 }
 
@@ -34,5 +34,5 @@ Perspective::~Perspective(){
 
 // Get direction of projection for a point.
 Vector3D Perspective::get_direction(const Point3D& p) const{
-    return p-(this->pos);
+    return p-(pos);
 }
