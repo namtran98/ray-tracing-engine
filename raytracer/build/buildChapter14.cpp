@@ -1,3 +1,11 @@
+#include "../world/World.hpp"
+#include "../utilities/Constants.hpp"
+#include "../geometry/Sphere.hpp"
+#include "../geometry/Plane.hpp"
+#include "../materials/Cosine.hpp"
+#include "../cameras/Parallel.hpp"
+#include "../samplers/Simple.hpp"
+
 
 /**
    This builds a scene that consists of 35 shaded spheres and a plane.
@@ -23,19 +31,19 @@ World::build(void) {
   
   // camera and sampler.
   set_camera(new Parallel(0, 0, -1));
-  sampler_ptr = new Simple(camera_ptr, &vplane);
+  sampler_ptr = std::make_unique<Simple>(camera_ptr.get(), &vplane);
 	
-  // colors
-  RGBColor yellow(1, 1, 0);  // yellow
-  RGBColor brown(0.71, 0.40, 0.16);  // brown
-  RGBColor darkGreen(0.0, 0.41, 0.41);  // darkGreen
-  RGBColor orange(1, 0.75, 0);  // orange
-  RGBColor green(0, 0.6, 0.3);  // green
-  RGBColor lightGreen(0.65, 1, 0.30);  // light green
-  RGBColor darkYellow(0.61, 0.61, 0);  // dark yellow
-  RGBColor lightPurple(0.65, 0.3, 1);  // light purple
-  RGBColor darkPurple(0.5, 0, 1);  // dark purple
-  RGBColor grey(0.25);  // grey
+  // // colors
+  // RGBColor yellow(1, 1, 0);  // yellow
+  // RGBColor brown(0.71, 0.40, 0.16);  // brown
+  // RGBColor darkGreen(0.0, 0.41, 0.41);  // darkGreen
+  // RGBColor orange(1, 0.75, 0);  // orange
+  // RGBColor green(0, 0.6, 0.3);  // green
+  // RGBColor lightGreen(0.65, 1, 0.30);  // light green
+  // RGBColor darkYellow(0.61, 0.61, 0);  // dark yellow
+  // RGBColor lightPurple(0.65, 0.3, 1);  // light purple
+  // RGBColor darkPurple(0.5, 0, 1);  // dark purple
+  // RGBColor grey(0.25);  // grey
 	
   // spheres
   Sphere* sphere_ptr1 = new Sphere(Point3D(5, 3, 0), 30); 
@@ -179,7 +187,7 @@ World::build(void) {
   add_object(sphere_ptr35);
 	
   // vertical plane
-  Plane* plane_ptr = new Plane(Point3D(0, 0, -150), Normal(0, 0, 1));
+  Plane* plane_ptr = new Plane(Point3D(0, 0, -150), Vector3D(0, 0, 1));
   plane_ptr->set_material(new Cosine(grey));
   add_object(plane_ptr);
 }
