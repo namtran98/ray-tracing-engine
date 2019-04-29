@@ -1,4 +1,6 @@
 #pragma once
+#include "../utilities/RGBColor.hpp"
+#include "Light.hpp"
 
 /**
    This file declares the Ambient class which represents an ambient light source.
@@ -26,7 +28,7 @@ public:
 
   // Normalized direction vector from light source to hit point.
   virtual Vector3D get_direction(ShadeInfo& sinfo) const;
-  
+
   // Luminance from this light source at hit point.
   virtual RGBColor L(ShadeInfo& sinfo) const;
 };
