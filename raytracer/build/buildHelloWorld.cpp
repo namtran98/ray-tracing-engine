@@ -33,9 +33,10 @@ World::build(void) {
 
   // Background color.  
   bg_color = black;
-//   set_camera(new Parallel(0, 0, -1));
 
   // Camera and sampler.
+//   set_camera(new Parallel(0, 0, -1));
+
   set_camera(new Perspective(0, 0, 20));
   sampler_ptr = std::make_unique<Simple>(camera_ptr.get(), &vplane);
 	

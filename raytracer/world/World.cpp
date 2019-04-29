@@ -1,4 +1,4 @@
-#include "World.hpp" 
+#include "World.hpp"
 #include "../cameras/Perspective.hpp"
 #include "../build/buildHelloWorld.cpp"
 

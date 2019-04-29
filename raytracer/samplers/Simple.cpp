@@ -1,4 +1,4 @@
-#include "Simple.hpp" 
+#include "Simple.hpp"
 #include "../utilities/Constants.hpp"
 #include "../utilities/Point3D.hpp"
 #include "../world/ViewPlane.hpp"
@@ -33,7 +33,7 @@ Simple* Simple::clone() const{
 // Desctructor.
 Simple::~Simple(){
 
-} 							
+}
 
 // Shoot a ray of weight 1 through the center of the pixel.
 std::vector<Ray> Simple::get_rays(int px, int py) const{

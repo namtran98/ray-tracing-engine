@@ -24,4 +24,4 @@ Sampler& Sampler::operator= (const Sampler& other){
 // Desctructor.
 Sampler::~Sampler(){
 
-}   							
+}

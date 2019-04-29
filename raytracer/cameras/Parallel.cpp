@@ -6,7 +6,7 @@ Parallel::Parallel(){
     dir = Vector3D(0,0,-1);
 }  // set dir parallel to -z (negative z) axis.
 Parallel::Parallel(float c){
-    dir = Vector3D(c,c,c);    
+    dir = Vector3D(c,c,c);
 }  // set dir parallel to (c, c, c).
 Parallel::Parallel(float x, float y, float z){
     dir = Vector3D(x,y,z);
@@ -33,8 +33,7 @@ Parallel* Parallel::clone() const{
 
 // Desctructor.
 Parallel::~Parallel(){
-
-} 							
+}
 
 // Get direction of projection for a point.
 Vector3D Parallel::get_direction(const Point3D& p) const{
