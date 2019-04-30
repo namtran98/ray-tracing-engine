@@ -11,10 +11,10 @@
 class Ambient: public Light {
 public:
   // Constructors.
-  Ambient();  // set color to white (1, 1, 1).
-  Ambient(float c);  // set color to (c, c, c).
-  Ambient(float r, float g, float b);  // set color to (r, g, b).
-  Ambient(const RGBColor& _color);  // set color to _color.
+  Ambient();  // set color to white (1, 1, 1), ls to 0
+  Ambient(float c, float ls);  // set color to (c, c, c).
+  Ambient(float r, float g, float b, float ls);  // set color to (r, g, b).
+  Ambient(const RGBColor& _color, float ls);  // set color to _color.
 
   // Copy constructor and assignment operator.
   Ambient(const Ambient& rhs);
@@ -31,4 +31,6 @@ public:
 
   // Luminance from this light source at hit point.
   virtual RGBColor L(ShadeInfo& sinfo) const;
+protected:
+  float ls;
 };
