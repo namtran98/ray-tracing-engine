@@ -3,20 +3,15 @@
    plane.
    Parallel viewing is used with a single sample per pixel.
 */
-
 #include "../cameras/Perspective.hpp"
 #include "../cameras/Parallel.hpp"
 
 #include "../geometry/Plane.hpp"
 #include "../geometry/Sphere.hpp"
 #include "../geometry/Triangle.hpp"
-
 #include "../materials/Cosine.hpp"
-
 #include "../samplers/Simple.hpp"
-
 #include "../utilities/Constants.hpp"
-
 #include "../world/World.hpp"
 
 void
@@ -35,7 +30,7 @@ World::build(void) {
   bg_color = black;
 
   // Camera and sampler.
-//   set_camera(new Parallel(0, 0, -1));
+  // set_camera(new Parallel(0, 0, -1));
 
   set_camera(new Perspective(0, 0, 20));
   sampler_ptr = std::make_unique<Simple>(camera_ptr.get(), &vplane);

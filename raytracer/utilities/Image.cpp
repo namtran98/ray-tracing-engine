@@ -53,11 +53,11 @@ void Image::write_ppm(std::string path){
   file << "255" << "\n"; // Max value
   // TODO: Figure out if this should be PPM of PPM plain and actually write
   // the pixel values
-  for (int i = 0; i < pic_hres; i++){
-    for (int j = 0; j < pic_vres; j++){
-      file << (int) (255 * colors[i][j].r) << " ";
-      file << (int) (255 * colors[i][j].g) << " ";
-      file << (int) (255 * colors[i][j].b) << "\t";
+  for (int i = pic_vres; i >=0 ; i--){
+    for (int j = 0; j < pic_hres; j++){
+      file << (int) (255 * colors[j][i].r) << " ";
+      file << (int) (255 * colors[j][i].g) << " ";
+      file << (int) (255 * colors[j][i].b) << "\t";
     }
     file << "\n";
   }
