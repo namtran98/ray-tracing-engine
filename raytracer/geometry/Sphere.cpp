@@ -7,6 +7,7 @@ Sphere::Sphere(const Point3D& center, float radius) : c(center), r(radius){}
 Sphere::Sphere(const Sphere& object){
   r = object.r;
   c = object.c;
+  bbox = BBox(Point3D(c.x - r, c.y - r, c.z - r), Point3D(c.x + r, c.y + r, c.z + r));
 }
 
 Sphere& Sphere::operator=(const Sphere& rhs){
@@ -18,6 +19,9 @@ Sphere& Sphere::operator=(const Sphere& rhs){
 Sphere::~Sphere(){}
 
 bool Sphere::hit(const Ray& ray, float& t_min, ShadeInfo& s) const{
+  if (not bbox.hit(ray)){
+    return false;
+  }
   float t;
   Vector3D origin_to_center = ray.o - c;
   double a = ray.d * ray.d;
