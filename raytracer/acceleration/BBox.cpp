@@ -4,6 +4,7 @@
 BBox::BBox(): min_point(0), max_point(0) {}
 BBox::BBox(Point3D min, Point3D max): min_point(min), max_point(max) {}
 BBox::BBox(const BBox& v) : min_point(v.min_point), max_point(v.max_point) {}
+BBox::~BBox(){}
 BBox& BBox::operator= (const BBox& rhs){
   min_point = rhs.min_point;
   max_point = rhs.max_point;
@@ -21,31 +22,31 @@ bool BBox::hit(const Ray &ray) const{
   double tx_min, ty_min, tz_min;
   double tx_max, ty_max, tz_max;
 
-  double a = 1/ dx;
+  double a = 1.0 / dx;
   if (a >= 0){
     tx_min = (min_point.x - ox) * a;
     tx_max = (max_point.x - ox) * a;
   } else {
-    tx_min = (ox - min_point.x) * a;
-    tx_max = (ox - max_point.x) * a;
+    tx_min = (max_point.x - ox) * a;
+    tx_max = (min_point.x - ox) * a;
   }
 
-  double b = 1/ dy;
+  double b = 1.0 / dy;
   if (b >= 0){
     ty_min = (min_point.y - oy) * b;
     ty_max = (max_point.y - oy) * b;
   } else {
-    ty_min = (oy - min_point.y) * b;
-    ty_max = (oy - max_point.y) * b;
+    ty_min = (max_point.y - oy) * b;
+    ty_max = (min_point.y - oy) * b;
   }
 
-  double c = 1/ dz;
+  double c = 1.0 / dz;
   if (c >= 0){
     tz_min = (min_point.z - oz) * c;
     tz_max = (max_point.z - oz) * c;
   } else {
-    tz_min = (oz - min_point.z) * c;
-    tz_max = (oz - max_point.z) * c;
+    tz_min = (max_point.z - oz) * c;
+    tz_max = (min_point.z - oz) * c;
   }
 
   double t0, t1;

@@ -2,6 +2,7 @@
 #include "../materials/Material.hpp"
 #include "../utilities/Ray.hpp"
 #include "../utilities/ShadeInfo.hpp"
+#include "../acceleration/BBox.hpp"
 #include <memory>
 /**
    This file declares the Geometry class which is an abstract class from which
@@ -13,6 +14,7 @@
 class Geometry {
 protected:
   Material* material_ptr;  // this object's material.
+  BBox bbox;
 
 public:
   // Constructors.
