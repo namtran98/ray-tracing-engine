@@ -1,6 +1,6 @@
 #include "World.hpp"
 #include "../cameras/Perspective.hpp"
-#include "../build/buildChapter14.cpp"
+#include "../build/buildHelloWorld.cpp"
 
 World::World(){
     vplane = ViewPlane();
