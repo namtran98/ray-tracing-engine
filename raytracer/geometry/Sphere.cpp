@@ -3,7 +3,9 @@
 #include <cmath>
 
 Sphere::Sphere(): c(0), r(0){}
-Sphere::Sphere(const Point3D& center, float radius) : c(center), r(radius){}
+Sphere::Sphere(const Point3D& center, float radius) : c(center), r(radius){
+  bbox = BBox(Point3D(c.x - r, c.y - r, c.z - r), Point3D(c.x + r, c.y + r, c.z + r));
+}
 Sphere::Sphere(const Sphere& object){
   r = object.r;
   c = object.c;
