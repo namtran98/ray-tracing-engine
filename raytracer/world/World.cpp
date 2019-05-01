@@ -1,5 +1,4 @@
 #include "World.hpp"
-#include "../cameras/Perspective.hpp"
 #include "../build/buildHelloWorld.cpp"
 
 World::World(){
@@ -9,6 +8,8 @@ World::World(){
     lights = std::vector<Light*>();
     camera_ptr = NULL;
     sampler_ptr = NULL;
+    accel_ptr = NULL;
+    tracer_ptr = NULL;
 } // initialize members.
 
 // Destructor.
@@ -27,8 +28,13 @@ void World::set_camera(Camera* c_ptr){
     camera_ptr = std::unique_ptr<Camera>(c_ptr);
 }
 // void set_ambient_light(Light* light_ptr);
-// void set_tracer(Tracer* tracer_ptr);
-// void set_acceleration(Acceleration* acceleration_ptr);
+void World::set_tracer(Tracer* t_ptr){
+    tracer_ptr = std::unique_ptr<Tracer>(t_ptr);
+}
+
+void World::set_acceleration(Acceleration* acceleration_ptr){
+    accel_ptr = std::unique_ptr<Acceleration>(acceleration_ptr);
+}
 
 
 // Returns appropriate shading information corresponding to intersection of
