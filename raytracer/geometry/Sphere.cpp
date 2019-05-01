@@ -13,6 +13,7 @@ Sphere::Sphere(const Sphere& object){
 Sphere& Sphere::operator=(const Sphere& rhs){
   r = rhs.r;
   c = rhs.c;
+  bbox = rhs.bbox;
   return *this;
 }
 
