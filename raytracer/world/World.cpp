@@ -1,6 +1,7 @@
 #include "World.hpp"
 #include "../build/buildHelloWorld.cpp"
 
+
 World::World(){
     vplane = ViewPlane();
     bg_color = RGBColor();

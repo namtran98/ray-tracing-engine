@@ -93,12 +93,11 @@ bool MeshTriangle::hit(const Ray& ray, float& t_min, ShadeInfo& si) const{
 	si.normal = interpolate_normal(beta, gamma); // for smooth shading
 	si.hit_point = ray.o + t * ray.d;	
 	si.t = t;
-	return true;	
-
-} 
+	return true;
+}
 
 BBox MeshTriangle::get_bounding_box(){
-    double delta = 0.0001;  // to avoid degenerate bounding boxes
+    double delta = 0.0001; 
 	
 	Point3D v1 = Point3D(mesh_ptr->vertices[index0]);
 	Point3D v2 = Point3D(mesh_ptr->vertices[index1]);
@@ -114,8 +113,7 @@ Vector3D MeshTriangle::get_normal() const{
 }			
 
 Vector3D MeshTriangle::compute_normal(){
-    normal = (mesh_ptr->vertices[index1] - mesh_ptr->vertices[index0]) ^
-			 (mesh_ptr->vertices[index2] - mesh_ptr->vertices[index0]);
+    normal = (mesh_ptr->vertices[index1] - mesh_ptr->vertices[index0]) ^ (mesh_ptr->vertices[index2] - mesh_ptr->vertices[index0]);
 	normal.normalize();
     return normal;
 }

@@ -10,7 +10,8 @@ class Mesh {
         // normal at each vertex;			
 		std::vector<Vector3D> normals;
         // the triangles shared by each vertex				
-		std::vector<std::vector<int> > 	vertex_faces;			
+		std::vector<std::vector<int> > 	vertex_faces;
+		std::vector<std::vector<int> > 	tris;		
 		int num_vertices; 			
 		int num_triangles; 
 		

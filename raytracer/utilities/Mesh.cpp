@@ -9,6 +9,7 @@ Mesh::Mesh(char* file_name){
     std::vector<Point3D> vertices;		
     std::vector<Vector3D> normals;		
     std::vector<std::vector<int>> vertex_faces;
+    std::vector<std::vector<int>> tris;
     num_vertices=0; 			
     num_triangles=0; 
     populate(file_name);
@@ -20,6 +21,7 @@ Mesh::Mesh(const Mesh& m){
     vertex_faces = m.vertex_faces;
     num_vertices = m.num_vertices;
     num_triangles = m.num_triangles;
+    tris = m.tris;
 }						
 
 Mesh::~Mesh(){
@@ -31,6 +33,7 @@ Mesh& Mesh::operator= (const Mesh& rhs){
     vertex_faces = rhs.vertex_faces;
     num_vertices = rhs.num_vertices;
     num_triangles = rhs.num_triangles;
+    tris = rhs.tris;
     return *this;
 }
 
@@ -54,28 +57,34 @@ void Mesh::populate(char* file_name){
                 if(result[0].compare("element")==0&&result[1].compare("vertex")==0){
                     num_vertices = std::stoi(result[2]);
                     vertices.reserve(num_vertices);
+                    vertex_faces.reserve(num_vertices);
                 }
                 else if(result[0].compare("element")==0&&result[1].compare("face")==0){
                     num_triangles = std::stoi(result[2]);
-                    vertex_faces.reserve(num_triangles);
+                    tris.reserve(num_triangles);
                 }
                 else if(result[0].compare("end_header")==0){
                     inHeader = false;
                 }
             }
             else if(verticeCount < num_vertices){
-                float x = std::stoi(result[0]);
-                float y = std::stoi(result[1]);
-                float z = std::stoi(result[2]);
+                float x = std::stof(result[0]);
+                float y = std::stof(result[1]);
+                float z = std::stof(result[2]);
                 vertices.push_back(Point3D(x,y,z));
                 verticeCount++;
             }
             else if(triangleCount<num_triangles){
-                std::vector<int> tris;
-                tris.push_back(std::stoi(result[1]));
-                tris.push_back(std::stoi(result[2]));
-                tris.push_back(std::stoi(result[3]));
-                vertex_faces.push_back(tris);
+                std::vector<int> smoltri;
+                smoltri.push_back(std::stoi(result[1]));
+                smoltri.push_back(std::stoi(result[2]));
+                smoltri.push_back(std::stoi(result[3]));
+                tris.push_back(smoltri);
+                // add face to the vertices count
+                vertex_faces[std::stoi(result[1])].push_back(triangleCount);
+                vertex_faces[std::stoi(result[2])].push_back(triangleCount);
+                vertex_faces[std::stoi(result[3])].push_back(triangleCount);
+                triangleCount++;
             }
         }
         file.close();
