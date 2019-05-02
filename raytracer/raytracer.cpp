@@ -3,7 +3,7 @@
 #include <memory>
 #include "samplers/Simple.hpp"
 #include "tracers/Basic.hpp"
-
+// #include "utilities/Mesh.hpp"
 
 int main(int argc, char **argv) {
   World world;
@@ -13,6 +13,7 @@ int main(int argc, char **argv) {
   ViewPlane& viewplane = world.vplane;
   Image image(viewplane);
 
+  // Mesh mesher = Mesh((char*)"goldfish_low_res.ply");
   // SET TRACER HERE
   world.set_tracer(new Basic(&world));
   std::vector<Ray> rays;
