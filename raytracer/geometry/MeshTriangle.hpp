@@ -5,9 +5,6 @@
 
 class MeshTriangle: public Geometry {	
 	public:
-        Mesh* mesh_ptr;	
-		int	index0, index1, index2;
-		Vector3D normal;	
 
 		MeshTriangle();   									
 		
@@ -27,8 +24,11 @@ class MeshTriangle: public Geometry {
 
         virtual Vector3D get_normal() const;			
 
-        void compute_normal();			
+        Vector3D compute_normal();		
 
 	protected:
+		Mesh* mesh_ptr;	
+		int	index0, index1, index2;
+		Vector3D normal;
 		Vector3D interpolate_normal(const float beta, const float gamma) const;
 };

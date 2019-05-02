@@ -2,6 +2,7 @@
 #include "../utilities/Constants.hpp"
 #include <algorithm>
 
+#include <iostream>
 MeshTriangle::MeshTriangle(){
     mesh_ptr = NULL;
     index0 = 0; 
@@ -10,8 +11,8 @@ MeshTriangle::MeshTriangle(){
     normal = Vector3D(0);
 }
 		
-MeshTriangle::MeshTriangle(Mesh* mesh_ptr, const int i0, const int i1, const int i2){
-    mesh_ptr = mesh_ptr;
+MeshTriangle::MeshTriangle(Mesh* m_ptr, const int i0, const int i1, const int i2){
+    mesh_ptr = m_ptr;
     index0 = i0; 
     index1 = i1;
     index2 = i2; 
@@ -49,7 +50,7 @@ bool MeshTriangle::hit(const Ray& ray, float& t_min, ShadeInfo& si) const{
     Point3D v0 = Point3D(mesh_ptr->vertices[index0]);
 	Point3D v1 = Point3D(mesh_ptr->vertices[index1]);
 	Point3D v2 = Point3D(mesh_ptr->vertices[index2]);
-	
+    // std::cout <<"hello"<<"\n";
 	double a = v0.x - v1.x, b = v0.x - v2.x, c = ray.d.x, d = v0.x - ray.o.x; 
 	double e = v0.y - v1.y, f = v0.y - v2.y, g = ray.d.y, h = v0.y - ray.o.y;
 	double i = v0.z - v1.z, j = v0.z - v2.z, k = ray.d.z, l = v0.z - ray.o.z;
@@ -112,11 +113,12 @@ Vector3D MeshTriangle::get_normal() const{
     return normal;
 }			
 
-void MeshTriangle::compute_normal(){
+Vector3D MeshTriangle::compute_normal(){
     normal = (mesh_ptr->vertices[index1] - mesh_ptr->vertices[index0]) ^
 			 (mesh_ptr->vertices[index2] - mesh_ptr->vertices[index0]);
 	normal.normalize();
-}	
+    return normal;
+}
 
 Vector3D MeshTriangle::interpolate_normal(const float beta, const float gamma) const{
     Vector3D normal = Vector3D((1 - beta - gamma) * mesh_ptr->normals[index0] + beta * mesh_ptr->normals[index1] + gamma * mesh_ptr->normals[index2]);

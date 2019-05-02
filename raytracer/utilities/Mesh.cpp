@@ -8,7 +8,7 @@
 Mesh::Mesh(char* file_name){
     std::vector<Point3D> vertices;		
     std::vector<Vector3D> normals;		
-    std::vector<std::vector<int> > 	vertex_faces;
+    std::vector<std::vector<int>> vertex_faces;
     num_vertices=0; 			
     num_triangles=0; 
     populate(file_name);
