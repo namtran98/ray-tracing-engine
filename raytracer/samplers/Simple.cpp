@@ -5,8 +5,8 @@
 #include <iostream>
 
 Simple::Simple(){
-    camera_ptr = NULL;
-    viewplane_ptr = NULL;
+    camera_ptr = nullptr;
+    viewplane_ptr = nullptr;
 }  // initializes members to NULL.
 
 Simple::Simple(Camera* c_ptr, ViewPlane* v_ptr){
