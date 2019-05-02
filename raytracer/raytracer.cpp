@@ -24,8 +24,9 @@ int main(int argc, char **argv) {
       // weighted sum of the shades for each ray.
       RGBColor pixel_color(0);
       rays = sampler->get_rays(x, y);
+      int num_samples = rays.size();
       for (const auto& ray : rays) {
-        pixel_color += world.tracer_ptr->trace_ray(ray);
+        pixel_color += (world.tracer_ptr->trace_ray(ray) / num_samples);
       }
       // Save color to image.
       image.set_pixel(x, y, pixel_color);

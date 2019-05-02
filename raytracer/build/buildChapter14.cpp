@@ -5,6 +5,7 @@
 #include "../materials/Cosine.hpp"
 #include "../cameras/Parallel.hpp"
 #include "../samplers/Simple.hpp"
+#include "../samplers/Jittered.hpp"
 
 
 /**
@@ -31,8 +32,8 @@ World::build(void) {
 
   // camera and sampler.
   set_camera(new Parallel(0, 0, -1));
-  sampler_ptr = std::make_unique<Simple>(camera_ptr.get(), &vplane);
-	
+  sampler_ptr = std::make_unique<Jittered>(camera_ptr.get(), &vplane, 4, 83);
+
   // // colors
   // RGBColor yellow(1, 1, 0);  // yellow
   // RGBColor brown(0.71, 0.40, 0.16);  // brown
@@ -44,7 +45,7 @@ World::build(void) {
   // RGBColor lightPurple(0.65, 0.3, 1);  // light purple
   // RGBColor darkPurple(0.5, 0, 1);  // dark purple
   // RGBColor grey(0.25);  // grey
-	
+
   // spheres
   Sphere* sphere_ptr1 = new Sphere(Point3D(5, 3, 0), 30);
   sphere_ptr1->set_material(new Cosine(yellow));  // yellow
