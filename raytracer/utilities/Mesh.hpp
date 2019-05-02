@@ -1,0 +1,27 @@
+#pragma once
+#include <vector>
+
+#include "Point3D.hpp"
+#include "Vector3D.hpp"
+	
+class Mesh {										  	
+	public:
+		std::vector<Point3D> vertices;	
+        // normal at each vertex;			
+		std::vector<Vector3D> normals;
+        // the triangles shared by each vertex				
+		std::vector<std::vector<int> > 	vertex_faces;			
+		int num_vertices; 			
+		int num_triangles; 
+		
+		Mesh(char* file_name);   								
+			
+		Mesh(const Mesh& m); 						
+
+		~Mesh();   							
+
+		Mesh& 										
+		operator= (const Mesh& rhs);
+
+        void populate(char* file_name);
+};
