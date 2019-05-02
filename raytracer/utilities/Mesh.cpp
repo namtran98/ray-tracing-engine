@@ -53,9 +53,11 @@ void Mesh::populate(char* file_name){
             if(inHeader){
                 if(result[0].compare("element")==0&&result[1].compare("vertex")==0){
                     num_vertices = std::stoi(result[2]);
+                    vertices.reserve(num_vertices);
                 }
                 else if(result[0].compare("element")==0&&result[1].compare("face")==0){
                     num_triangles = std::stoi(result[2]);
+                    vertex_faces.reserve(num_triangles);
                 }
                 else if(result[0].compare("end_header")==0){
                     inHeader = false;
