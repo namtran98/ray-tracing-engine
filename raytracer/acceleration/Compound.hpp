@@ -1,5 +1,5 @@
 #pragma once
-#include "../Geometry/Geometry.hpp"
+#include "../geometry/Geometry.hpp"
 #include <vector>
 
 /**
@@ -37,4 +37,4 @@ public:
     virtual bool hit(const Ray& ray, float& t, ShadeInfo& sinfo) const;
 
     virtual bool shadow_hit(const Ray& ray, double& t) const;
-}
+};

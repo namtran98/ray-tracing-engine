@@ -16,7 +16,8 @@ Compound::Compound(const Compound& object) {
 
 // Assignment operator
 Compound& Compound::operator= (const Compound& rhs) {
-
+    objects = rhs.objects;
+    return *this;
 }
 
 // Destructor
@@ -67,7 +68,8 @@ bool Compound::hit(const Ray& ray, float& t_min, ShadeInfo& sinfo) const {
 } 
 
 bool Compound::shadow_hit(const Ray& ray, double& t_min) const {
-
+    // fix later?
+    return false;
 }
 
 
