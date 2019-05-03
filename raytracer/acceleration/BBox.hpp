@@ -1,6 +1,6 @@
 #include "../utilities/Ray.hpp"
 
-class BBox{
+class BBox {
 public:
   BBox();
   BBox(Point3D min, Point3D max);

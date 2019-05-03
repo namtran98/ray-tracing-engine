@@ -17,12 +17,24 @@ protected:
     std::vector<Geometry*> objects;
     
 public:
+    // Constructors.
+    Compound();  // sets material_ptr to NULL.
 
-    void add_object(const Geometry* object_ptr);
+    // Copy constructor and assignment operator.
+    Compound(const Compound& object);
+    Compound& operator= (const Compound& rhs);
 
-    virtual void set_material(const Material* mPtr);
+    // Destructor.
+    virtual ~Compound();
 
-    virtual bool hit(const Ray& ray, double& t_min, ShadeInfo& s) const;
+    // Virtual copy constructor.
+    virtual Compound* clone() const;
 
-    virtual bool shadow_hit(const Ray& ray, double& t_min) const;
+    void add_object(Geometry* object_ptr);    // const Geometry* object_ptr ?
+
+    virtual void set_material(Material* mPtr);
+
+    virtual bool hit(const Ray& ray, float& t, ShadeInfo& sinfo) const;
+
+    virtual bool shadow_hit(const Ray& ray, double& t) const;
 }
