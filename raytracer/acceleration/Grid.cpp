@@ -5,11 +5,11 @@
 #include "BBox.hpp"
 #include <cmath>
 
-Grid::Grid(void) {
+Grid::Grid() {
 
 }
 
-BBox Grid::get_bounding_box(void) {
+BBox Grid::get_bounding_box() {
 
 }
 
@@ -60,7 +60,7 @@ void Grid::setup_cells(void) {
     int index;        // cells array index
 
     for (int k = 0; k = num_objects; k++) {
-        obj_bbox = objects[k]->get_bounding_box();    //CHECK TYPE MISMATCH 1
+        obj_bbox = objects[k]->get_bounding_box();
 
         // compute cell indices for corners of bounding box of the object
         int ixmin = Math::clamp((obj_bbox.min_point.x - pMin.x) * nx / 
@@ -110,7 +110,7 @@ void Grid::setup_cells(void) {
                         // counts [index] > 1
                         else {         
                             // just add current object
-                            cells[index]->add_object(objects[k]);  //CHECK TYPE MISMATCH 2
+                            cells[index]->add_object(objects[k]); 
 
                             // for statistics only
                             counts[index] += 1;
@@ -127,14 +127,14 @@ void Grid::setup_cells(void) {
     counts.erase(counts.begin(), counts.end());
 }
 
-Point3D Grid::min_coordinates(void) {
+Point3D Grid::min_coordinates() {
     BBox bbox;
     Point3D p0(kHugeValue);
 
     int num_objects = objects.size();
 
     for (int i = 0; i < num_objects; i++) {
-        bbox = objects[i]->get_bounding_box();  //CHECK TYPE MISMATCH 3
+        bbox = objects[i]->get_bounding_box(); 
 
         if (bbox.min_point.x < p0.x)
             p0.x = bbox.min_point.x;
@@ -151,14 +151,14 @@ Point3D Grid::min_coordinates(void) {
     return p0;
 }
 
-Point3D Grid::max_coordinates(void) {
+Point3D Grid::max_coordinates() {
     BBox bbox;
     Point3D p0(kHugeValue);
 
     int num_objects = objects.size();
 
     for (int i = 0; i < num_objects; i++) {
-        bbox = objects[i]->get_bounding_box();  //CHECK TYPE MISMATCH 4
+        bbox = objects[i]->get_bounding_box();
 
         if (bbox.max_point.x > p0.x)
             p0.x = bbox.max_point.x;

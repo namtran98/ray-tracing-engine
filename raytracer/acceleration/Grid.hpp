@@ -5,12 +5,12 @@
 
 class Grid: public Compound {
 public:
-    Grid(void);
+    Grid();
 
     // other constructors
-    virtual BBox get_bounding_box(void);
+    virtual BBox get_bounding_box();
 
-    void setup_cells(void);
+    void setup_cells();
 
     virtual bool hit(Ray& ray, float& t_min, ShadeInfo& s);
 
@@ -20,7 +20,7 @@ private:
     std::vector<Geometry*> cells;   // cells are stored in a 1D array
     BBox bbox;                      // bounding box
     int nx, ny, nz;                 // number of cells in the x, y, and z-dir
-    Point3D min_coordinates(void);  // compute minimum grid coordinates
-    Point3D max_coordinates(void);  // compute maximum grid coordinates
+    Point3D min_coordinates();      // compute minimum grid coordinates
+    Point3D max_coordinates();      // compute maximum grid coordinates
 
 }
