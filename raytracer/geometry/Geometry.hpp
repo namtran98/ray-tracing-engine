@@ -2,6 +2,7 @@
 #include "../materials/Material.hpp"
 #include "../utilities/Ray.hpp"
 #include "../utilities/ShadeInfo.hpp"
+#include "../acceleration/BBox.hpp"
 #include <memory>
 /**
    This file declares the Geometry class which is an abstract class from which
@@ -12,7 +13,9 @@
 
 class Geometry {
 protected:
-  Material* material_ptr;  // this object's material.
+  mutable Material* material_ptr;  // this object's material 
+                                   // mutable for const functions in Compound
+  BBox bbox;
 
 public:
   // Constructors.
@@ -31,6 +34,12 @@ public:
   // Get/set material.
   virtual Material* get_material() const;
   virtual void set_material(Material* mPtr);
+
+  // Makes it possible to get BBox dimensions on a Geometry Object
+  virtual BBox get_bounding_box();
+
+  // Makes it possible to add_objects with Compound objects
+  void add_object(Geometry* object_ptr) {}
 
   // Ray intersection. Set t and sinfo as per intersection with this object.
   virtual bool hit(const Ray& ray, float& t, ShadeInfo& sinfo) const = 0;

@@ -1,29 +1,43 @@
 #include "Geometry.hpp"
 
 // Constructors.
-Geometry::Geometry(){
-    material_ptr = NULL;
-}  // sets material_ptr to NULL.
+
+// sets material_ptr to NULL.
+Geometry::Geometry() : material_ptr(NULL) {}  
 
 // Copy constructor and assignment operator.
-Geometry::Geometry(const Geometry& object){
-    
+Geometry::Geometry(const Geometry& object) {
+    if (object.material_ptr) {
+        material_ptr = object.material_ptr->clone();
+    }
+    else {
+        material_ptr = NULL;
+    }
 }
 
-Geometry& Geometry::operator= (const Geometry& rhs){
+Geometry& Geometry::operator= (const Geometry& rhs) {
     return *this;
 }
 
 // Destructor.
-Geometry::~Geometry(){
-
+Geometry::~Geometry() {
+    if (material_ptr) {
+        delete material_ptr;
+        material_ptr = NULL;
+    }
 }	
 
 // Get/set material.
-Material* Geometry::get_material() const{
+Material* Geometry::get_material() const {
     return material_ptr;
 }
 
-void Geometry::set_material(Material* mPtr){
+void Geometry::set_material(Material* mPtr) {
     this->material_ptr = mPtr;
 }
+
+BBox Geometry::get_bounding_box() {
+    return BBox();
+}
+
+void Geometry::add_object(Geometry* object_ptr) {}
