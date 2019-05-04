@@ -12,6 +12,9 @@ Mesh::Mesh(char* file_name){
   std::vector<std::vector<int>> tris;
   num_vertices=0;
   num_triangles=0;
+  x_offset = 0;
+  y_offset = 0;
+  z_offset = 0;
   populate(file_name);
 }
 
@@ -25,6 +28,12 @@ Mesh::Mesh(const Mesh& m){
 }
 
 Mesh::~Mesh(){
+}
+
+void Mesh::setOffsets(float x, float y, float z){
+  x_offset = x;
+  y_offset = y;
+  z_offset = z;
 }
 
 Mesh& Mesh::operator= (const Mesh& rhs){
@@ -69,9 +78,9 @@ void Mesh::populate(char* file_name){
         }
       }
       else if(verticeCount < num_vertices){
-        float x = std::stof(result[0]);
-        float y = std::stof(result[1]);
-        float z = std::stof(result[2]);
+        float x = std::stof(result[0])+x_offset;
+        float y = std::stof(result[1])+y_offset;
+        float z = std::stof(result[2])+z_offset;
         vertices.push_back(Point3D(x,y,z));
         verticeCount++;
       }

@@ -14,6 +14,9 @@ public:
   std::vector<std::vector<int> > 	tris;
   int num_vertices;
   int num_triangles;
+  float x_offset;
+  float y_offset;
+  float z_offset;
 
   Mesh(char* file_name);
 
@@ -25,4 +28,6 @@ public:
   operator= (const Mesh& rhs);
 
   void populate(char* file_name);
+
+  void setOffsets(float x, float y, float z);
 };
