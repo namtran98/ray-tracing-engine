@@ -11,3 +11,5 @@
 .vscode/
 trace
 *.ppm
+*.jpg
+*.ply

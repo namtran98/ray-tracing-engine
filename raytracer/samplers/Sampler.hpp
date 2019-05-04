@@ -23,7 +23,7 @@ class Sampler {
 protected:
   Camera* camera_ptr;  // the camera that decides the projectors.
   ViewPlane* viewplane_ptr;  // the view plane through which rays are shot.
-  
+
 public:
   // Constructors.
   Sampler();  // initializes members to NULL.
@@ -37,11 +37,11 @@ public:
   virtual Sampler* clone() const = 0;
 
   // Desctructor.
-  virtual ~Sampler();   							
+  virtual ~Sampler();
 
   // Get rays corresponding to a pixel in the view plane. px and py are 0-based
   // indexes of the pixel in the view plane, with the origin at the top left of
   // the view plane.
-  virtual std::vector<Ray> get_rays(int px, int py) const = 0;
-  // i made this virtual bc of the const = 0 thing. feel free to change if not right
+  virtual std::vector<Ray> get_rays(int px, int py) = 0;
+  Point3D screenCoordsToPoint(float px, float py) const;
 };

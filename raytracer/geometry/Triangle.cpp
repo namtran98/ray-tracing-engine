@@ -26,8 +26,8 @@ Triangle::~Triangle(){}
 bool Triangle::hit(const Ray& ray, float& t_min, ShadeInfo& si) const{
   Vector3D edge1, edge2, h, s, q;
   float _a, f, u, v;
-  edge1 = a - b;
-  edge2 = b - c;
+  edge1 = b-a;
+  edge2 = c-a;
   h = ray.d ^ edge2;
   _a = edge1 * h;
   if (_a > -kEpsilon && _a < kEpsilon){

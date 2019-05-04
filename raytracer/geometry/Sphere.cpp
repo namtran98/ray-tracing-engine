@@ -3,21 +3,28 @@
 #include <cmath>
 
 Sphere::Sphere(): c(0), r(0){}
-Sphere::Sphere(const Point3D& center, float radius) : c(center), r(radius){}
+Sphere::Sphere(const Point3D& center, float radius) : c(center), r(radius){
+  bbox = BBox(Point3D(c.x - r, c.y - r, c.z - r), Point3D(c.x + r, c.y + r, c.z + r));
+}
 Sphere::Sphere(const Sphere& object){
   r = object.r;
   c = object.c;
+  bbox = BBox(Point3D(c.x - r, c.y - r, c.z - r), Point3D(c.x + r, c.y + r, c.z + r));
 }
 
 Sphere& Sphere::operator=(const Sphere& rhs){
   r = rhs.r;
   c = rhs.c;
+  bbox = rhs.bbox;
   return *this;
 }
 
 Sphere::~Sphere(){}
 
 bool Sphere::hit(const Ray& ray, float& t_min, ShadeInfo& s) const{
+  if (not bbox.hit(ray)){
+    return false;
+  }
   float t;
   Vector3D origin_to_center = ray.o - c;
   double a = ray.d * ray.d;

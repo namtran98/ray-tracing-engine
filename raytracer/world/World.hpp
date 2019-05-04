@@ -7,6 +7,8 @@
 #include "../samplers/Sampler.hpp"
 #include "../geometry/Geometry.hpp"
 #include "../lights/Light.hpp"
+#include "../acceleration/Acceleration.hpp"
+#include "../tracers/Tracer.hpp"
 #include <vector>
 #include <memory>
 /**
@@ -27,10 +29,10 @@ public:
   std::vector<Light*> lights;
   std::unique_ptr<Camera> camera_ptr;
   std::unique_ptr<Sampler> sampler_ptr;
-
+  std::unique_ptr<Acceleration> accel_ptr;
+  std::unique_ptr<Tracer> tracer_ptr;
   // Light* ambient_ptr;
-  // Tracer* tracer_ptr;
-  // Acceleration* ;
+  
 
 public:
   // Constructors.
@@ -44,8 +46,8 @@ public:
   void add_light(Light* light_ptr);
   void set_camera(Camera* c_ptr);
   // void set_ambient_light(Light* light_ptr);
-  // void set_tracer(Tracer* tracer_ptr);
-  // void set_acceleration(Acceleration* acceleration_ptr);
+  void set_tracer(Tracer* t_ptr);
+  void set_acceleration(Acceleration* acceleration_ptr);
 
   // Build scene - add all geometry, materials, lights, viewplane, camera,
   // samplers, and acceleration structures

@@ -7,24 +7,20 @@ Geometry::Geometry() : material_ptr(NULL) {}
 
 // Copy constructor and assignment operator.
 Geometry::Geometry(const Geometry& object) {
-    if (object.material_ptr) {
-        material_ptr = object.material_ptr->clone();
-    }
-    else {
-        material_ptr = NULL;
-    }
+    material_ptr = object.material_ptr;
+    bbox = object.bbox;
 }
 
 Geometry& Geometry::operator= (const Geometry& rhs) {
+    material_ptr = rhs.material_ptr;
+    bbox = rhs.bbox;
     return *this;
 }
 
 // Destructor.
 Geometry::~Geometry() {
-    if (material_ptr) {
-        delete material_ptr;
-        material_ptr = NULL;
-    }
+    delete material_ptr;
+    material_ptr = NULL;
 }	
 
 // Get/set material.

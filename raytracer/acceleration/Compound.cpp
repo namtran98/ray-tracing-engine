@@ -21,8 +21,7 @@ Compound& Compound::operator= (const Compound& rhs) {
         return *this;
     }
 
-    Geometry::operator= (rhs);
-    copy_objects(rhs.objects);
+    objects = rhs.objects;
     return *this;
 }
 
@@ -107,7 +106,8 @@ bool Compound::hit(const Ray& ray, float& t_min, ShadeInfo& sinfo) const {
 
 
 bool Compound::shadow_hit(const Ray& ray, double& t_min) const {
-
+    // fix later?
+    return false;
 }
 
 

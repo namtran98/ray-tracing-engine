@@ -1,5 +1,5 @@
 #pragma once
-#include "../Geometry/Geometry.hpp"
+#include "../geometry/Geometry.hpp"
 #include <vector>
 
 using namespace std;
@@ -48,6 +48,4 @@ private:
   void delete_objects();
 
   void copy_objects(const vector<Geometry*>& rhs);
-
-
-}
+};

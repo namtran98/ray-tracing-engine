@@ -14,7 +14,7 @@
 class Geometry {
 protected:
   mutable Material* material_ptr;  // this object's material 
-                                   // mutable for const functions in Compound
+                                   // mutable for const functions in Compoun
   BBox bbox;
 
 public:

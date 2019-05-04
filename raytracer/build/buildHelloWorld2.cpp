@@ -1,59 +1,55 @@
 #include "../world/World.hpp"
 #include "../utilities/Constants.hpp"
-#include "../geometry/Sphere.hpp"
+#include "../cameras/Perspective.hpp"
+#include "../samplers/Simple.hpp"
 #include "../geometry/Plane.hpp"
 #include "../materials/Cosine.hpp"
-#include "../cameras/Parallel.hpp"
-#include "../samplers/Simple.hpp"
-#include "../samplers/Jittered.hpp"
-
-
+#include "../geometry/Sphere.hpp"
+#include "../geometry/Triangle.hpp"
 /**
-   This builds a scene that consists of 35 shaded spheres and a plane.
-   Perspective viewing is used with a single sample per pixel.
-   The spheres are the same as those in the Chapter 14 page one image.
-
-   Courtesy Kevin Suffern.
+   This builds a simple scene that consists of a sphere, a triangle, and a
+   plane.
+   Parallel viewing is used with a single sample per pixel.
 */
 
 void
 World::build(void) {
-  // view plane
-  vplane.top_left.x = -200;
-  vplane.top_left.y = 200;
-  vplane.top_left.z = 100;
-  vplane.bottom_right.x = 200;
-  vplane.bottom_right.y = -200;
-  vplane.bottom_right.z = 100;
+  // View plane  .
+  vplane.top_left.x = -10;
+  vplane.top_left.y = -10;
+  vplane.top_left.z = 5;
+  vplane.bottom_right.x = 10;
+  vplane.bottom_right.y = 10;
+  vplane.bottom_right.z = 5;
   vplane.hres = 400;
   vplane.vres = 400;
 
-  bg_color = black;  // background color.
+  // Background color.
+  bg_color = black;
 
-  // camera and sampler.
-  set_camera(new Parallel(0, 0, -1));
-  sampler_ptr = std::make_unique<Jittered>(camera_ptr.get(), &vplane, 4, 83);
+  // Camera and sampler.
+  set_camera(new Perspective(0, 0, 20));
+  sampler_ptr = std::make_unique<Simple>(camera_ptr.get(), &vplane);
 
-  // // colors
-  // RGBColor yellow(1, 1, 0);  // yellow
-  // RGBColor brown(0.71, 0.40, 0.16);  // brown
-  // RGBColor darkGreen(0.0, 0.41, 0.41);  // darkGreen
-  // RGBColor orange(1, 0.75, 0);  // orange
-  // RGBColor green(0, 0.6, 0.3);  // green
-  // RGBColor lightGreen(0.65, 1, 0.30);  // light green
-  // RGBColor darkYellow(0.61, 0.61, 0);  // dark yellow
-  // RGBColor lightPurple(0.65, 0.3, 1);  // light purple
-  // RGBColor darkPurple(0.5, 0, 1);  // dark purple
-  // RGBColor grey(0.25);  // grey
+  // sphere
+  Sphere* sphere_ptr = new Sphere(Point3D(-1, 3, 0), 3);
+  sphere_ptr->set_material(new Cosine(red));
+  add_object(sphere_ptr);
 
-  // spheres
-  Sphere* sphere_ptr1 = new Sphere(Point3D(5, 3, 0), 30);
-  sphere_ptr1->set_material(new Cosine(yellow));  // yellow
-  add_object(sphere_ptr1);
+  // triangle
+  Point3D a(1.5, -2, 1);
+  Point3D b(5, 0, 0);
+  Point3D c(3.5, 5, 0.5);
+  Triangle* triangle_ptr = new Triangle(a, b, c);
+  triangle_ptr->set_material(new Cosine(blue));
+  add_object(triangle_ptr);
 
-  Sphere* sphere_ptr2 = new Sphere(Point3D(45, -7, -60), 20);
-  sphere_ptr2->set_material(new Cosine(brown));  // brown
-  add_object(sphere_ptr2);
+  // plane
+  Point3D o(0);
+  Vector3D n(0, 10, -1);
+  Plane* plane_ptr = new Plane(Point3D(45, -7, -60), 20);
+  plane_ptr->set_material(new Cosine(brown));  // brown
+  add_object(plane_ptr);
 
   Sphere* sphere_ptr3 = new Sphere(Point3D(40, 43, -100), 17);
   sphere_ptr3->set_material(new Cosine(darkGreen));  // dark green
@@ -188,7 +184,7 @@ World::build(void) {
   add_object(sphere_ptr35);
 
   // vertical plane
-  Plane* plane_ptr = new Plane(Point3D(0, 0, -150), Vector3D(0, 0, 1));
-  plane_ptr->set_material(new Cosine(grey));
-  add_object(plane_ptr);
+  Plane* plane_ptr1 = new Plane(Point3D(0, 0, -150), Vector3D(0, 0, 1));
+  plane_ptr1->set_material( new Cosine(grey));
+  add_object(plane_ptr1);
 }
