@@ -78,7 +78,7 @@ void Grid::setup_cells(void) {
                             (pMax.z - pMin.z), 0, nz - 1);
 
         // add objects to the cells
-
+        // i<direction> = initial for initial cells coordinates
         for (int iz = izmin; iz <= izmax; iz++) {          // cells in z-dir
             for (int iy = iymin; iy <= iymax; iy++) {      // cells in y-dir
                 for (int ix = ixmin; ix <= ixmax; ix++) {  // cells in x-dir
@@ -153,7 +153,7 @@ Point3D Grid::min_coordinates() {
 
 Point3D Grid::max_coordinates() {
     BBox bbox;
-    Point3D p0(kHugeValue);
+    Point3D p0(-kHugeValue);
 
     int num_objects = objects.size();
 
@@ -175,10 +175,110 @@ Point3D Grid::max_coordinates() {
     return p0;
 }
 
-bool Grid::hit(Ray& ray, float& t_min, ShadeInfo& s) {
+bool Grid::hit(const Ray& ray, float& t, ShadeInfo& sinfo) const {
+    double origX = ray.o.x;         // ray origin x-coord
+    double origY = ray.o.y;         // ray origin y-coord
+    double origZ = ray.o.z;         // ray origin z-coord
 
-}
+    double dirX = ray.d.x;          // ray x-direction
+    double dirY = ray.d.y;          // ray y-direction
+    double dirZ = ray.d.z;          // ray z-direction
 
-bool Grid::shadow_hit(Ray& ray, float& t_min) {
+    // save bounding box coordinates
+    double minX = bbox.min_point.x; 
+    double minY = bbox.min_point.y; 
+    double minZ = bbox.min_point.z;
 
+    double maxX = bbox.max_point.x; 
+    double maxY = bbox.max_point.y; 
+    double maxZ = bbox.max_point.z;
+
+    // setup vars for tracking ray traversal
+    double t_x_min, t_y_min, t_z_min;
+    double t_x_max, t_y_max, t_z_max;
+
+    // constants (denoted k<direction>) determining position relative to cell
+    double kx = 1.0 / dirX;       
+    if (kx >= 0) {
+        t_x_min = (minX - origX) * kx;
+        t_x_max = (maxX - origX) * kx;
+    }
+    else {
+        t_x_min = (maxX - origX) * kx;
+        t_x_max = (minX - origX) * kx;
+    }
+
+    double ky = 1.0 / dirY;
+    if (ky >= 0) {
+        t_y_min = (minY - origY) * ky;
+        t_y_max = (maxY - origY) * ky;
+    }
+    else {
+        t_y_min = (maxY - origY) * ky;
+        t_y_max = (minY - origY) * ky;
+    }
+
+    double kz = 1.0 / dirZ;
+    if (kz >= 0) {
+        t_z_min = (minZ - origZ) * kz;
+        t_z_max = (maxZ - origZ) * kz;
+    }
+    else {
+        t_z_min = (maxZ - origZ) * kz;
+        t_z_max = (minZ - origZ) * kz;
+    }
+
+    // t_hit value where the ray hits the bounding box
+    double t_hit_min, t_hit_max;
+
+    // determine min ray parameter for entering a cell
+    if (t_x_min > t_y_min) {
+        t_hit_min = t_x_min;
+    }
+    else{
+        t_hit_min = t_y_min;
+    }
+
+    if (t_z_min > t_hit_min) {
+        t_hit_min = t_z_min;
+    }
+
+    // determine max ray parameter for enterting a cell
+    if (t_x_max < t_y_max) {
+        t_hit_max = t_x_max;
+    }
+    else {
+        t_hit_max = t_y_max;
+    }
+
+    if (t_z_max < t_hit_max) {
+        t_hit_max = t_z_max;
+    }
+
+    // initial cell coords
+    int ix, iy, iz;
+
+    // checks if the ray starts inside our grid
+    if (bbox.inside(ray.o)) {
+        ix = Math::clamp((origX - minX) * nx / (maxX - minX), 0, nx - 1);
+        iy = Math::clamp((origY - minY) * ny / (maxY - minY), 0, ny - 1);
+        iz = Math::clamp((origZ - minZ) * nz / (maxZ - minZ), 0, nz - 1);
+    }
+    else {
+        // initial hit point with grid's bounding box
+        Point3D init_hit = ray.o + t_hit_min * ray.d;
+        ix = Math::clamp((init_hit.x - minX) * nx / (maxX - minX), 0, nx - 1);
+        iy = Math::clamp((init_hit.y - minY) * ny / (maxY - minY), 0, ny - 1);
+        iz = Math::clamp((init_hit.z - minZ) * nz / (maxZ - minZ), 0, nz - 1);
+    }
+
+    // ray parameters increment per cell in x,y,z directions
+    // each var helps determine how we step by direction
+    double dtx = (t_x_max - t_x_min) / nx;
+    double dty = (t_y_max - t_y_min) / ny;
+    double dtz = (t_z_max - t_z_min) / nz;
+
+    double tx_next, ty_next, tz_next;
+    int ix_step, iy_step, iz_step;
+    int ix_stop, iy_stop, iz_stop;
 }

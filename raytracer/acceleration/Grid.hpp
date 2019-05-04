@@ -12,9 +12,7 @@ public:
 
     void setup_cells();
 
-    virtual bool hit(Ray& ray, float& t_min, ShadeInfo& s);
-
-    virtual bool shadow_hit(Ray& ray, float& t_min);
+    virtual bool hit(const Ray& ray, float& t, ShadeInfo& sinfo) const;
 
 private: 
     std::vector<Geometry*> cells;   // cells are stored in a 1D array
@@ -23,4 +21,4 @@ private:
     Point3D min_coordinates();      // compute minimum grid coordinates
     Point3D max_coordinates();      // compute maximum grid coordinates
 
-}
+};
