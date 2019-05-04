@@ -72,3 +72,9 @@ bool BBox::hit(const Ray &ray) const{
 
   return (t0 < t1 && t1 > kEpsilon);
 }
+
+bool BBox::inside(const Point3D& p) const {
+  return ((p.x > min_point.x && p.x < max_point.x) && 
+          (p.y > min_point.y && p.y < max_point.y) && 
+          (p.z > min_point.z && p.z < max_point.z));
+}

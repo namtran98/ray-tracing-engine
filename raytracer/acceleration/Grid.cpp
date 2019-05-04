@@ -5,12 +5,15 @@
 #include "BBox.hpp"
 #include <cmath>
 
-Grid::Grid() {
+// Constructor
+Grid::Grid() : Compound(), nx(0), ny(0), nz(0) {}										
 
+Grid* Grid::clone() const {
+    return new Grid (*this);
 }
 
 BBox Grid::get_bounding_box() {
-
+    return bbox;
 }
 
 void Grid::setup_cells(void) {
@@ -273,12 +276,109 @@ bool Grid::hit(const Ray& ray, float& t, ShadeInfo& sinfo) const {
     }
 
     // ray parameters increment per cell in x,y,z directions
-    // each var helps determine how we step by direction
-    double dtx = (t_x_max - t_x_min) / nx;
-    double dty = (t_y_max - t_y_min) / ny;
-    double dtz = (t_z_max - t_z_min) / nz;
+    double dtx = (t_x_max - t_x_min) / nx;   // x-dir location
+    double dty = (t_y_max - t_y_min) / ny;   // y-dir location
+    double dtz = (t_z_max - t_z_min) / nz;   // z-dir location
 
-    double tx_next, ty_next, tz_next;
-    int ix_step, iy_step, iz_step;
-    int ix_stop, iy_stop, iz_stop;
+    double tx_next, ty_next, tz_next;        // track dir-face we will hit next
+    int ix_step, iy_step, iz_step;           // track steps from starting spot
+    int ix_stop, iy_stop, iz_stop;           // tells us when we will exit grid
+
+    // setup x values
+    if (dirX > 0) {
+        tx_next = t_x_min + (ix + 1) * dirX;
+        ix_step = +1;
+        ix_stop = nx;
+    }
+    else {
+        tx_next = t_x_min + (nx - ix) * dirX;
+        ix_step = -1;
+        ix_stop = -1;
+    }
+
+    if (dirX == 0.0) {
+		tx_next = kHugeValue;
+		ix_step = -1;
+		ix_stop = -1;
+	}
+
+    // setup y values
+    if (dirY > 0) {
+		ty_next = t_y_min + (iy + 1) * dty;
+		iy_step = +1;
+		iy_stop = ny;
+	}
+	else {
+		ty_next = t_y_min + (ny - iy) * dty;
+		iy_step = -1;
+		iy_stop = -1;
+	}
+	
+	if (dirY == 0.0) {
+		ty_next = kHugeValue;
+		iy_step = -1;
+		iy_stop = -1;
+	}
+
+    // setup z values
+    if (dirZ > 0) {
+		tz_next = t_z_min + (iz + 1) * dtz;
+		iz_step = +1;
+		iz_stop = nz;
+	}
+	else {
+		tz_next = t_z_min + (nz - iz) * dtz;
+		iz_step = -1;
+		iz_stop = -1;
+	}
+	
+	if (dirZ == 0.0) {
+		tz_next = kHugeValue;
+		iz_step = -1;
+		iz_stop = -1;
+	}
+
+    // finally traverse the grid
+    while (true) {
+        Geometry* object_ptr = cells[ix + nx * iy + nx * ny * iz];
+
+        if (tx_next < ty_next && tx_next < tz_next) {
+			if (object_ptr && object_ptr->hit(ray, t, sinfo) && t < tx_next) {
+				material_ptr = object_ptr->get_material();
+				return (true);
+			}
+			
+			tx_next += dtx;
+			ix += ix_step;
+						
+			if (ix == ix_stop)
+				return (false);
+		}
+        else { 	
+			if (ty_next < tz_next) {
+				if (object_ptr && object_ptr->hit(ray, t, sinfo) && t < ty_next) {
+					material_ptr = object_ptr->get_material();
+					return (true);
+				}
+				
+				ty_next += dty;
+				iy += iy_step;
+								
+				if (iy == iy_stop)
+					return (false);
+		 	}
+		 	else {		
+				if (object_ptr && object_ptr->hit(ray, t, sinfo) && t < tz_next) {
+					material_ptr = object_ptr->get_material();
+					return (true);
+				}
+				
+				tz_next += dtz;
+				iz += iz_step;
+								
+				if (iz == iz_stop)
+					return (false);
+		 	}
+		}
+    }
 }

@@ -1,13 +1,15 @@
 #pragma once
 #include "Compound.hpp"
 #include "BBox.hpp"
+#include "../utilities/Mesh.hpp"
 #include <vector>
 
 class Grid: public Compound {
 public:
     Grid();
+										
+    virtual Grid* clone() const;		
 
-    // other constructors
     virtual BBox get_bounding_box();
 
     void setup_cells();

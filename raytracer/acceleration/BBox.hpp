@@ -9,6 +9,8 @@ public:
   BBox& operator= (const BBox& rhs);
 
   bool hit(const Ray& ray) const;
+  bool inside(const Point3D& p) const;
+
   Point3D min_point; // (x0, y0, z0)
   Point3D max_point; // (x1, y1, z1)
 };
