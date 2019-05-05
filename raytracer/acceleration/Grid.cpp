@@ -1,7 +1,7 @@
 #include "Grid.hpp"
 #include "../utilities/Point3D.hpp"
 #include "../utilities/Constants.hpp"
-#include "../utilities/Math.hpp"
+#include "../utilities/OurMath.hpp"
 #include "BBox.hpp"
 #include <cmath>
 
@@ -62,22 +62,22 @@ void Grid::setup_cells(void) {
     BBox obj_bbox;    // object's bounding box
     int index;        // cells array index
 
-    for (int k = 0; k = num_objects; k++) {
+    for (int k = 0; k < num_objects; k++) {
         obj_bbox = objects[k]->get_bounding_box();
 
         // compute cell indices for corners of bounding box of the object
-        int ixmin = Math::clamp((obj_bbox.min_point.x - pMin.x) * nx / 
+        int ixmin = OurMath::clamp((obj_bbox.min_point.x - pMin.x) * nx / 
                             (pMax.x - pMin.x), 0, nx - 1);
-        int iymin = Math::clamp((obj_bbox.min_point.y - pMin.y) * ny / 
+        int iymin = OurMath::clamp((obj_bbox.min_point.y - pMin.y) * ny / 
                             (pMax.y - pMin.y), 0, ny - 1);
-        int izmin = Math::clamp((obj_bbox.min_point.z - pMin.z) * nz / 
+        int izmin = OurMath::clamp((obj_bbox.min_point.z - pMin.z) * nz / 
                             (pMax.z - pMin.z), 0, nz - 1);
 
-        int ixmax = Math::clamp((obj_bbox.max_point.x - pMin.x) * nx / 
+        int ixmax = OurMath::clamp((obj_bbox.max_point.x - pMin.x) * nx / 
                             (pMax.x - pMin.x), 0, nx - 1);
-        int iymax = Math::clamp((obj_bbox.max_point.y - pMin.y) * ny / 
+        int iymax = OurMath::clamp((obj_bbox.max_point.y - pMin.y) * ny / 
                             (pMax.y - pMin.y), 0, ny - 1);
-        int izmax = Math::clamp((obj_bbox.max_point.z - pMin.z) * nz / 
+        int izmax = OurMath::clamp((obj_bbox.max_point.z - pMin.z) * nz / 
                             (pMax.z - pMin.z), 0, nz - 1);
 
         // add objects to the cells
@@ -263,16 +263,16 @@ bool Grid::hit(const Ray& ray, float& t, ShadeInfo& sinfo) const {
 
     // checks if the ray starts inside our grid
     if (bbox.inside(ray.o)) {
-        ix = Math::clamp((origX - minX) * nx / (maxX - minX), 0, nx - 1);
-        iy = Math::clamp((origY - minY) * ny / (maxY - minY), 0, ny - 1);
-        iz = Math::clamp((origZ - minZ) * nz / (maxZ - minZ), 0, nz - 1);
+        ix = OurMath::clamp((origX - minX) * nx / (maxX - minX), 0, nx - 1);
+        iy = OurMath::clamp((origY - minY) * ny / (maxY - minY), 0, ny - 1);
+        iz = OurMath::clamp((origZ - minZ) * nz / (maxZ - minZ), 0, nz - 1);
     }
     else {
         // initial hit point with grid's bounding box
         Point3D init_hit = ray.o + t_hit_min * ray.d;
-        ix = Math::clamp((init_hit.x - minX) * nx / (maxX - minX), 0, nx - 1);
-        iy = Math::clamp((init_hit.y - minY) * ny / (maxY - minY), 0, ny - 1);
-        iz = Math::clamp((init_hit.z - minZ) * nz / (maxZ - minZ), 0, nz - 1);
+        ix = OurMath::clamp((init_hit.x - minX) * nx / (maxX - minX), 0, nx - 1);
+        iy = OurMath::clamp((init_hit.y - minY) * ny / (maxY - minY), 0, ny - 1);
+        iz = OurMath::clamp((init_hit.z - minZ) * nz / (maxZ - minZ), 0, nz - 1);
     }
 
     // ray parameters increment per cell in x,y,z directions

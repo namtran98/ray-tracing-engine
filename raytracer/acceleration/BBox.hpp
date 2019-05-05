@@ -1,3 +1,4 @@
+#pragma once
 #include "../utilities/Ray.hpp"
 
 class BBox {

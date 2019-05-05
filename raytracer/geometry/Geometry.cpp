@@ -35,5 +35,3 @@ void Geometry::set_material(Material* mPtr) {
 BBox Geometry::get_bounding_box() {
     return BBox();
 }
-
-void Geometry::add_object(Geometry* object_ptr) {}

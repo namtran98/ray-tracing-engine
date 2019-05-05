@@ -1,6 +1,6 @@
 #pragma once
 
-class Math {
+class OurMath {
 public:
 
     /* 
@@ -8,4 +8,4 @@ public:
         interpolation to join the min and the max values. 
     */
     static float clamp(float x, float min, float max);
-}
+};

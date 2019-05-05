@@ -39,7 +39,7 @@ public:
   virtual BBox get_bounding_box();
 
   // Makes it possible to add_objects with Compound objects
-  void add_object(Geometry* object_ptr) {}
+  void add_object(Geometry* object_ptr){}
 
   // Ray intersection. Set t and sinfo as per intersection with this object.
   virtual bool hit(const Ray& ray, float& t, ShadeInfo& sinfo) const = 0;
