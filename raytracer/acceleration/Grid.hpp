@@ -1,10 +1,10 @@
 #pragma once
-#include "Compound.hpp"
 #include "BBox.hpp"
 #include "../utilities/Mesh.hpp"
+#include "Acceleration.hpp"
 #include <vector>
 
-class Grid: public Compound {
+class Grid: public Acceleration {
 public:
     Grid();
 										
@@ -19,7 +19,7 @@ public:
     // for use with add_from_mesh
     void compute_normals(Mesh* m_ptr);
 
-    virtual bool hit(const Ray& ray, float& t, ShadeInfo& sinfo) const;
+    virtual bool hit(const Ray& ray, World& world) const;
 
 private: 
     std::vector<Geometry*> cells;   // cells are stored in a 1D array

@@ -2,12 +2,14 @@
 #include "../utilities/Point3D.hpp"
 #include "../utilities/Constants.hpp"
 #include "../utilities/OurMath.hpp"
+#include "../utilities/ShadeInfo.hpp"
 #include "../geometry/MeshTriangle.hpp"
+#include "../acceleration/Compound.hpp"
 #include "BBox.hpp"
 #include <cmath>
 
 // Constructor
-Grid::Grid() : Compound(), nx(0), ny(0), nz(0) {}										
+Grid::Grid() : Acceleration(), nx(0), ny(0), nz(0) {}									
 
 Grid* Grid::clone() const {
     return new Grid (*this);
@@ -220,7 +222,7 @@ void Grid::compute_normals(Mesh* m_ptr){
 	m_ptr->tris.erase (m_ptr->tris.begin(), m_ptr->tris.end());
 }
 
-bool Grid::hit(const Ray& ray, float& t, ShadeInfo& sinfo) const {
+bool Grid::hit(const Ray& ray, World& world) const {
     double origX = ray.o.x;         // ray origin x-coord
     double origY = ray.o.y;         // ray origin y-coord
     double origZ = ray.o.z;         // ray origin z-coord
@@ -379,6 +381,10 @@ bool Grid::hit(const Ray& ray, float& t, ShadeInfo& sinfo) const {
 		iz_step = -1;
 		iz_stop = -1;
 	}
+
+    ShadeInfo sinfo = ShadeInfo(world);
+    float t = kHugeValue;
+    Material* material_ptr = nullptr;
 
     // finally traverse the grid
     while (true) {

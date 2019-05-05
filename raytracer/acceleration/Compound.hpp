@@ -33,7 +33,7 @@ public:
   virtual Compound* clone() const;
 
   // Adds objects to Compound array
-  void add_object(Geometry* object_ptr); 
+  void add_object(Geometry* object_ptr);
 
   int get_num_objects();
 
