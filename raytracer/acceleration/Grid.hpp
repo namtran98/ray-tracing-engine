@@ -7,8 +7,8 @@
 class Grid: public Acceleration {
 public:
     Grid();
-										
-    virtual Grid* clone() const;		
+
+    virtual Grid* clone() const;
 
     virtual BBox get_bounding_box();
 
@@ -21,7 +21,7 @@ public:
 
     virtual bool hit(const Ray& ray, World& world) const;
 
-private: 
+private:
     std::vector<Geometry*> cells;   // cells are stored in a 1D array
     BBox bbox;                      // bounding box
     int nx, ny, nz;                 // number of cells in the x, y, and z-dir

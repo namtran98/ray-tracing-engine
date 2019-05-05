@@ -17,7 +17,7 @@ protected:
 
 public:
   // Constructors.
-  Acceleration();  // set color to white (1, 1, 1).
+  Acceleration();
 
   // Copy constructor and assignment operator.
   Acceleration(const Acceleration& rhs);
@@ -28,12 +28,11 @@ public:
 
   int get_num_objects();
 
-  // Virtual copy constructor.
-
   // Desctructor.
   virtual ~Acceleration(void);  // dummy function.
-
 
   // Normalized direction vector from light source to hit point.
   virtual bool hit(const Ray& ray, World& world) const = 0;
 };
+
+//  LocalWords:  destructor

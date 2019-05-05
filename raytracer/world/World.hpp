@@ -33,7 +33,7 @@ public:
   std::unique_ptr<Acceleration> accel_ptr;
   std::unique_ptr<Tracer> tracer_ptr;
   // Light* ambient_ptr;
-  
+
 
 public:
   // Constructors.
