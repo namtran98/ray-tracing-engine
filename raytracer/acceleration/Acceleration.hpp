@@ -9,18 +9,17 @@
 class Acceleration {
 public:
   // Constructors.
-  Acceleration();  // set color to white (1, 1, 1).
+  Acceleration();
 
   // Copy constructor and assignment operator.
   Acceleration(const Acceleration& rhs);
   Acceleration& operator= (const Acceleration& rhs);
 
-  // Virtual copy constructor.
-
-  // Desctructor.
+  // Virtual destructor
   virtual ~Acceleration(void);  // dummy function.
-
 
   // Normalized direction vector from light source to hit point.
   virtual bool hit(const Ray& ray) const = 0;
 };
+
+//  LocalWords:  destructor

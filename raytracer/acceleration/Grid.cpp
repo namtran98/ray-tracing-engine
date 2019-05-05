@@ -7,7 +7,7 @@
 #include <cmath>
 
 // Constructor
-Grid::Grid() : Compound(), nx(0), ny(0), nz(0) {}										
+Grid::Grid() : Compound(), nx(0), ny(0), nz(0) {}
 
 Grid* Grid::clone() const {
     return new Grid (*this);
@@ -23,12 +23,12 @@ void Grid::setup_cells() {
     Point3D pMax = max_coordinates();
 
     // store them in the bounding box
-    bbox.min_point.x = pMin.x; 
-    bbox.min_point.y = pMin.y; 
+    bbox.min_point.x = pMin.x;
+    bbox.min_point.y = pMin.y;
     bbox.min_point.z = pMin.z;
 
-    bbox.max_point.x = pMax.x; 
-    bbox.max_point.y = pMax.y; 
+    bbox.max_point.x = pMax.x;
+    bbox.max_point.y = pMax.y;
     bbox.max_point.z = pMax.z;
 
     // compute the number of cells in the x, y, and z-directions
@@ -67,18 +67,18 @@ void Grid::setup_cells() {
         obj_bbox = objects[k]->get_bounding_box();
 
         // compute cell indices for corners of bounding box of the object
-        int ixmin = OurMath::clamp((obj_bbox.min_point.x - pMin.x) * nx / 
+        int ixmin = OurMath::clamp((obj_bbox.min_point.x - pMin.x) * nx /
                             (pMax.x - pMin.x), 0, nx - 1);
-        int iymin = OurMath::clamp((obj_bbox.min_point.y - pMin.y) * ny / 
+        int iymin = OurMath::clamp((obj_bbox.min_point.y - pMin.y) * ny /
                             (pMax.y - pMin.y), 0, ny - 1);
-        int izmin = OurMath::clamp((obj_bbox.min_point.z - pMin.z) * nz / 
+        int izmin = OurMath::clamp((obj_bbox.min_point.z - pMin.z) * nz /
                             (pMax.z - pMin.z), 0, nz - 1);
 
-        int ixmax = OurMath::clamp((obj_bbox.max_point.x - pMin.x) * nx / 
+        int ixmax = OurMath::clamp((obj_bbox.max_point.x - pMin.x) * nx /
                             (pMax.x - pMin.x), 0, nx - 1);
-        int iymax = OurMath::clamp((obj_bbox.max_point.y - pMin.y) * ny / 
+        int iymax = OurMath::clamp((obj_bbox.max_point.y - pMin.y) * ny /
                             (pMax.y - pMin.y), 0, ny - 1);
-        int izmax = OurMath::clamp((obj_bbox.max_point.z - pMin.z) * nz / 
+        int izmax = OurMath::clamp((obj_bbox.max_point.z - pMin.z) * nz /
                             (pMax.z - pMin.z), 0, nz - 1);
 
         // add objects to the cells
@@ -112,9 +112,9 @@ void Grid::setup_cells() {
                             counts[index] += 1;
                         }
                         // counts [index] > 1
-                        else {         
+                        else {
                             // just add current object
-                            cells[index]->add_object(objects[k]); 
+                            cells[index]->add_object(objects[k]);
 
                             // for statistics only
                             counts[index] += 1;
@@ -138,7 +138,7 @@ Point3D Grid::min_coordinates() {
     int num_objects = objects.size();
 
     for (int i = 0; i < num_objects; i++) {
-        bbox = objects[i]->get_bounding_box(); 
+        bbox = objects[i]->get_bounding_box();
 
         if (bbox.min_point.x < p0.x)
             p0.x = bbox.min_point.x;
@@ -191,21 +191,21 @@ void Grid::add_from_mesh(Mesh* m_ptr, Material* mat){
 void Grid::compute_normals(Mesh* m_ptr){
      // calculates normals for the faces, this will need to happen in whatever adds the grid to the scene
   m_ptr->normals.reserve(m_ptr->num_vertices);
-	
+
 	for (int index = 0; index < m_ptr->num_vertices; index++) {
-		Vector3D normal;    
-			
+		Vector3D normal;
+
 		for (int j = 0; j < m_ptr->vertex_faces[index].size(); j++){
-			normal += ((MeshTriangle*)objects[m_ptr->vertex_faces[index][j]])->get_normal();  
+			normal += ((MeshTriangle*)objects[m_ptr->vertex_faces[index][j]])->get_normal();
         }
-		
+
 		if (normal.x == 0.0 && normal.y == 0.0 && normal.z == 0.0){
 			normal.y = 1.0;
         }
 		else {
-			normal.normalize();     
+			normal.normalize();
         }
-		
+
 		m_ptr->normals.push_back(normal);
 	}
     // we can now erase vertex_faces array and tris array
@@ -215,7 +215,7 @@ void Grid::compute_normals(Mesh* m_ptr){
             m_ptr->tris[index].erase (m_ptr->tris[index].begin(), m_ptr->tris[index].end());
         }
     }
-		
+
 	m_ptr->vertex_faces.erase (m_ptr->vertex_faces.begin(), m_ptr->vertex_faces.end());
 	m_ptr->tris.erase (m_ptr->tris.begin(), m_ptr->tris.end());
 }
@@ -230,12 +230,12 @@ bool Grid::hit(const Ray& ray, float& t, ShadeInfo& sinfo) const {
     double dirZ = ray.d.z;          // ray z-direction
 
     // save bounding box coordinates
-    double minX = bbox.min_point.x; 
-    double minY = bbox.min_point.y; 
+    double minX = bbox.min_point.x;
+    double minY = bbox.min_point.y;
     double minZ = bbox.min_point.z;
 
-    double maxX = bbox.max_point.x; 
-    double maxY = bbox.max_point.y; 
+    double maxX = bbox.max_point.x;
+    double maxY = bbox.max_point.y;
     double maxZ = bbox.max_point.z;
 
     // setup vars for tracking ray traversal
@@ -243,7 +243,7 @@ bool Grid::hit(const Ray& ray, float& t, ShadeInfo& sinfo) const {
     double t_x_max, t_y_max, t_z_max;
 
     // constants (denoted k<direction>) determining position relative to cell
-    double kx = 1.0 / dirX;       
+    double kx = 1.0 / dirX;
     if (kx >= 0) {
         t_x_min = (minX - origX) * kx;
         t_x_max = (maxX - origX) * kx;
@@ -355,7 +355,7 @@ bool Grid::hit(const Ray& ray, float& t, ShadeInfo& sinfo) const {
 		iy_step = -1;
 		iy_stop = -1;
 	}
-	
+
 	if (dirY == 0.0) {
 		ty_next = kHugeValue;
 		iy_step = -1;
@@ -373,7 +373,7 @@ bool Grid::hit(const Ray& ray, float& t, ShadeInfo& sinfo) const {
 		iz_step = -1;
 		iz_stop = -1;
 	}
-	
+
 	if (dirZ == 0.0) {
 		tz_next = kHugeValue;
 		iz_step = -1;
@@ -389,35 +389,35 @@ bool Grid::hit(const Ray& ray, float& t, ShadeInfo& sinfo) const {
 				material_ptr = object_ptr->get_material();
 				return (true);
 			}
-			
+
 			tx_next += dtx;
 			ix += ix_step;
-						
+
 			if (ix == ix_stop)
 				return (false);
 		}
-        else { 	
+        else {
 			if (ty_next < tz_next) {
 				if (object_ptr && object_ptr->hit(ray, t, sinfo) && t < ty_next) {
 					material_ptr = object_ptr->get_material();
 					return (true);
 				}
-				
+
 				ty_next += dty;
 				iy += iy_step;
-								
+
 				if (iy == iy_stop)
 					return (false);
 		 	}
-		 	else {		
+		 	else {
 				if (object_ptr && object_ptr->hit(ray, t, sinfo) && t < tz_next) {
 					material_ptr = object_ptr->get_material();
 					return (true);
 				}
-				
+
 				tz_next += dtz;
 				iz += iz_step;
-								
+
 				if (iz == iz_stop)
 					return (false);
 		 	}
