@@ -106,7 +106,7 @@ bool Compound::hit(const Ray& ray, float& t_min, ShadeInfo& sinfo) const {
 
 
 bool Compound::shadow_hit(const Ray& ray, double& t_min) const {
-    // fix later?
+    // implement later?
     return false;
 }
 

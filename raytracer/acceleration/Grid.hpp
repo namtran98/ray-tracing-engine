@@ -14,6 +14,11 @@ public:
 
     void setup_cells();
 
+    void add_from_mesh(Mesh* m_ptr, Material* mat);
+
+    // for use with add_from_mesh
+    void compute_normals(Mesh* m_ptr);
+
     virtual bool hit(const Ray& ray, float& t, ShadeInfo& sinfo) const;
 
 private: 

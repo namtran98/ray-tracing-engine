@@ -2,6 +2,7 @@
 #include "../utilities/Point3D.hpp"
 #include "../utilities/Constants.hpp"
 #include "../utilities/OurMath.hpp"
+#include "../geometry/MeshTriangle.hpp"
 #include "BBox.hpp"
 #include <cmath>
 
@@ -176,6 +177,47 @@ Point3D Grid::max_coordinates() {
     p0.z -= kEpsilon;
 
     return p0;
+}
+
+//first add from mesh and then compute normals
+void Grid::add_from_mesh(Mesh* m_ptr, Material* mat){
+    for(int i = 0; i < m_ptr->num_triangles; i++){
+        MeshTriangle* meshTri = new MeshTriangle(m_ptr, m_ptr->tris[i][0],m_ptr->tris[i][1],m_ptr->tris[i][2]);
+        meshTri->set_material(mat);
+        add_object(meshTri);
+    }
+}
+
+void Grid::compute_normals(Mesh* m_ptr){
+     // calculates normals for the faces, this will need to happen in whatever adds the grid to the scene
+  m_ptr->normals.reserve(m_ptr->num_vertices);
+	
+	for (int index = 0; index < m_ptr->num_vertices; index++) {
+		Vector3D normal;    
+			
+		for (int j = 0; j < m_ptr->vertex_faces[index].size(); j++){
+			normal += ((MeshTriangle*)objects[m_ptr->vertex_faces[index][j]])->get_normal();  
+        }
+		
+		if (normal.x == 0.0 && normal.y == 0.0 && normal.z == 0.0){
+			normal.y = 1.0;
+        }
+		else {
+			normal.normalize();     
+        }
+		
+		m_ptr->normals.push_back(normal);
+	}
+    // we can now erase vertex_faces array and tris array
+    for (int index = 0; index < m_ptr->num_vertices; index++){
+        for (int j = 0; j < m_ptr->vertex_faces[index].size(); j++){
+            m_ptr->vertex_faces[index].erase (m_ptr->vertex_faces[index].begin(), m_ptr->vertex_faces[index].end());
+            m_ptr->tris[index].erase (m_ptr->tris[index].begin(), m_ptr->tris[index].end());
+        }
+    }
+		
+	m_ptr->vertex_faces.erase (m_ptr->vertex_faces.begin(), m_ptr->vertex_faces.end());
+	m_ptr->tris.erase (m_ptr->tris.begin(), m_ptr->tris.end());
 }
 
 bool Grid::hit(const Ray& ray, float& t, ShadeInfo& sinfo) const {

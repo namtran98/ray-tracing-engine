@@ -18,6 +18,19 @@ Mesh::Mesh(char* file_name){
   populate(file_name);
 }
 
+Mesh::Mesh(char* file_name, float x, float y, float z){
+  std::vector<Point3D> vertices;
+  std::vector<Vector3D> normals;
+  std::vector<std::vector<int>> vertex_faces;
+  std::vector<std::vector<int>> tris;
+  num_vertices=0;
+  num_triangles=0;
+  x_offset = x;
+  y_offset = y;
+  z_offset = z;
+  populate(file_name);
+}
+
 Mesh::Mesh(const Mesh& m){
   vertices = m.vertices;
   normals = m.normals;
@@ -25,16 +38,14 @@ Mesh::Mesh(const Mesh& m){
   num_vertices = m.num_vertices;
   num_triangles = m.num_triangles;
   tris = m.tris;
+  x_offset = m.x_offset;
+  y_offset = m.y_offset;
+  z_offset = m.z_offset;
 }
 
 Mesh::~Mesh(){
 }
 
-void Mesh::setOffsets(float x, float y, float z){
-  x_offset = x;
-  y_offset = y;
-  z_offset = z;
-}
 
 Mesh& Mesh::operator= (const Mesh& rhs){
   vertices = rhs.vertices;

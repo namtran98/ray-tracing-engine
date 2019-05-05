@@ -19,7 +19,8 @@ public:
   float z_offset;
 
   Mesh(char* file_name);
-
+  Mesh(char* file_name, float x, float y, float z);
+  
   Mesh(const Mesh& m);
 
   ~Mesh();
@@ -28,6 +29,4 @@ public:
   operator= (const Mesh& rhs);
 
   void populate(char* file_name);
-
-  void setOffsets(float x, float y, float z);
 };
