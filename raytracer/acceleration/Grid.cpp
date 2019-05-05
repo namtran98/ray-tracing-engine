@@ -246,7 +246,7 @@ bool Grid::hit(const Ray& ray, float& t, ShadeInfo& sinfo) const {
         t_hit_min = t_z_min;
     }
 
-    // determine max ray parameter for enterting a cell
+    // determine max ray parameter for entering a cell
     if (t_x_max < t_y_max) {
         t_hit_max = t_x_max;
     }
@@ -258,7 +258,7 @@ bool Grid::hit(const Ray& ray, float& t, ShadeInfo& sinfo) const {
         t_hit_max = t_z_max;
     }
 
-    // initial cell coords
+    // initial cell coordinates
     int ix, iy, iz;
 
     // checks if the ray starts inside our grid
