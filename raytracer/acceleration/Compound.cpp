@@ -103,12 +103,3 @@ bool Compound::hit(const Ray& ray, float& t_min, ShadeInfo& sinfo) const {
 
     return (hit);
 } 
-
-
-bool Compound::shadow_hit(const Ray& ray, double& t_min) const {
-    // implement later?
-    return false;
-}
-
-
-
