@@ -222,7 +222,7 @@ void Grid::compute_normals(Mesh* m_ptr){
 	m_ptr->tris.erase (m_ptr->tris.begin(), m_ptr->tris.end());
 }
 
-bool Grid::hit(const Ray& ray, World& world) const {
+bool Grid::hit(const Ray& ray, ShadeInfo& sinfo) const {
     double origX = ray.o.x;         // ray origin x-coord
     double origY = ray.o.y;         // ray origin y-coord
     double origZ = ray.o.z;         // ray origin z-coord
@@ -382,7 +382,6 @@ bool Grid::hit(const Ray& ray, World& world) const {
 		iz_stop = -1;
 	}
 
-    ShadeInfo sinfo = ShadeInfo(world);
     float t = kHugeValue;
     Material* material_ptr = nullptr;
 

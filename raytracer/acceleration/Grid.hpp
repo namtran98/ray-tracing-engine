@@ -19,7 +19,7 @@ public:
     // for use with add_from_mesh
     void compute_normals(Mesh* m_ptr);
 
-    virtual bool hit(const Ray& ray, World& world) const;
+    virtual bool hit(const Ray& ray, ShadeInfo& sinfo) const;
 
 private:
     std::vector<Geometry*> cells;   // cells are stored in a 1D array

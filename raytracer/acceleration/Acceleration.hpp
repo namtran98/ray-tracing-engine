@@ -32,7 +32,7 @@ public:
   virtual ~Acceleration(void);  // dummy function.
 
   // Normalized direction vector from light source to hit point.
-  virtual bool hit(const Ray& ray, World& world) const = 0;
+  virtual bool hit(const Ray& ray, ShadeInfo& sinfo) const = 0;
 };
 
 //  LocalWords:  destructor
