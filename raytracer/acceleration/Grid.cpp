@@ -17,7 +17,7 @@ BBox Grid::get_bounding_box() {
     return bbox;
 }
 
-void Grid::setup_cells(void) {
+void Grid::setup_cells() {
     // find the min and max coordinates of the grid
     Point3D pMin = min_coordinates();
     Point3D pMax = max_coordinates();

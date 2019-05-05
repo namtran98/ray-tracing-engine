@@ -6,6 +6,7 @@
 #include "../cameras/Camera.hpp"
 #include "../samplers/Sampler.hpp"
 #include "../geometry/Geometry.hpp"
+#include "../acceleration/Grid.hpp"
 #include "../lights/Light.hpp"
 #include "../acceleration/Acceleration.hpp"
 #include "../tracers/Tracer.hpp"

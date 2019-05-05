@@ -1,5 +1,5 @@
 #include "World.hpp"
-#include "../build/buildHelloWorld.cpp"
+#include "../build/buildTestAccel.cpp"
 
 
 World::World(){
