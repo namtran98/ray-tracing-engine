@@ -42,8 +42,6 @@ public:
 
   virtual bool hit(const Ray& ray, float& t, ShadeInfo& sinfo) const;
 
-  virtual bool shadow_hit(const Ray& ray, double& t) const;
-
 private:
   void delete_objects();
 
