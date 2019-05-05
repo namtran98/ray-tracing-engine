@@ -9,6 +9,7 @@ MeshTriangle::MeshTriangle(){
   index1 = 1;
   index2 = 2;
   normal = Vector3D(0);
+  bbox = get_bounding_box();
 }
 
 MeshTriangle::MeshTriangle(Mesh* m_ptr, const int i0, const int i1, const int i2){
@@ -16,6 +17,7 @@ MeshTriangle::MeshTriangle(Mesh* m_ptr, const int i0, const int i1, const int i2
   index0 = i0;
   index1 = i1;
   index2 = i2;
+  bbox = get_bounding_box();
 }
 
 MeshTriangle* MeshTriangle::clone() const{
@@ -28,6 +30,7 @@ MeshTriangle::MeshTriangle(const MeshTriangle& mt){
   index1 = mt.index1;
   index2 = mt.index2;
   normal = mt.normal;
+  bbox = mt.bbox;
 }
 
 MeshTriangle::~MeshTriangle(){
@@ -43,6 +46,7 @@ MeshTriangle& MeshTriangle::operator= (const MeshTriangle& rhs){
   index1 = rhs.index1;
   index2 = rhs.index2;
   normal = rhs.normal;
+  bbox = rhs.bbox;
   return *this;
 }
 

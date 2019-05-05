@@ -21,6 +21,10 @@ Sphere& Sphere::operator=(const Sphere& rhs){
 
 Sphere::~Sphere(){}
 
+BBox Sphere::get_bounding_box(){
+  return bbox;
+}
+
 bool Sphere::hit(const Ray& ray, float& t_min, ShadeInfo& s) const{
   if (not bbox.hit(ray)){
     return false;
