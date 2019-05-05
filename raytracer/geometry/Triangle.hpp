@@ -24,6 +24,8 @@ public:
 
   // Destructor.
   virtual ~Triangle();
+  
+  virtual BBox get_bounding_box();		
 
   // Virtual copy constructor
   virtual Triangle* clone() const;

@@ -25,6 +25,8 @@ public:
 
   // Destructor.
   virtual ~Sphere();
+  
+  virtual BBox get_bounding_box();		
 
   // Virtual copy constructor.
   virtual Sphere* clone() const;
