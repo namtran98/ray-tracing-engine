@@ -47,21 +47,21 @@ World::build(void) {
 
   // calculates normals for the faces, this will need to happen in whatever adds the grid to the scene
   mesher->normals.reserve(mesher->num_vertices);
-	
+
 	for (int index = 0; index < mesher->num_vertices; index++) {
-		Vector3D normal;    
-			
+		Vector3D normal;
+
 		for (int j = 0; j < mesher->vertex_faces[index].size(); j++){
-			normal += ((MeshTriangle*)geometry[mesher->vertex_faces[index][j]])->get_normal();  
+			normal += ((MeshTriangle*)geometry[mesher->vertex_faces[index][j]])->get_normal();
     }
-		
+
 		if (normal.x == 0.0 && normal.y == 0.0 && normal.z == 0.0){
 			normal.y = 1.0;
     }
 		else {
-			normal.normalize();     
+			normal.normalize();
     }
-		
+
 		mesher->normals.push_back(normal);
 	}
 }
