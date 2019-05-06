@@ -278,10 +278,10 @@ bool Grid::hit(const Ray& ray, ShadeInfo& sinfo) const {
         t_z_max = (minZ - origZ) * kz;
     }
 
-    // t_hit value where the ray hits the bounding box
+    // t_hit value where the ray hits and exits the bounding box
     double t_hit_min, t_hit_max;
 
-    // determine min ray parameter for entering a cell
+    // determine largest t parameter for entering a cell
     if (t_x_min > t_y_min) {
         t_hit_min = t_x_min;
     }
@@ -293,7 +293,7 @@ bool Grid::hit(const Ray& ray, ShadeInfo& sinfo) const {
         t_hit_min = t_z_min;
     }
 
-    // determine max ray parameter for entering a cell
+    // determine smallest t parameter for exiting a cell
     if (t_x_max < t_y_max) {
         t_hit_max = t_x_max;
     }
@@ -305,7 +305,7 @@ bool Grid::hit(const Ray& ray, ShadeInfo& sinfo) const {
         t_hit_max = t_z_max;
     }
 
-    if(t_hit_min>t_hit_max){
+    if(t_hit_min > t_hit_max){
         return false;
     }
 
@@ -399,39 +399,39 @@ bool Grid::hit(const Ray& ray, ShadeInfo& sinfo) const {
         if (tx_next < ty_next && tx_next < tz_next) {
 			if (object_ptr && object_ptr->hit(ray, t, sinfo) && t < tx_next) {
 				material_ptr = object_ptr->get_material();
-				return (true);
+				return true;
 			}
 
 			tx_next += dtx;
 			ix += ix_step;
 
 			if (ix == ix_stop)
-				return (false);
+				return false;
 		}
         else {
 			if (ty_next < tz_next) {
 				if (object_ptr && object_ptr->hit(ray, t, sinfo) && t < ty_next) {
 					material_ptr = object_ptr->get_material();
-					return (true);
+					return true;
 				}
 
 				ty_next += dty;
 				iy += iy_step;
 
 				if (iy == iy_stop)
-					return (false);
+					return false;
 		 	}
 		 	else {
 				if (object_ptr && object_ptr->hit(ray, t, sinfo) && t < tz_next) {
 					material_ptr = object_ptr->get_material();
-					return (true);
+					return true;
 				}
 
 				tz_next += dtz;
 				iz += iz_step;
 
 				if (iz == iz_stop)
-					return (false);
+					return false;
 		 	}
 		}
     }
