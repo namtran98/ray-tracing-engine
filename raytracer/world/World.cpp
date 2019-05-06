@@ -1,5 +1,5 @@
 #include "World.hpp"
-#include "../build/buildHelloWorld.cpp"
+#include "../build/buildFishAccel.cpp"
 
 
 World::World(){
@@ -41,8 +41,8 @@ void World::set_acceleration(Acceleration* acceleration_ptr){
 // Returns appropriate shading information corresponding to intersection of
 // the ray with the scene geometry.
 ShadeInfo World::hit_objects(const Ray& ray){
+    ShadeInfo sinfo = ShadeInfo(*this);
     if (accel_ptr == nullptr) {
-        ShadeInfo sinfo = ShadeInfo(*this);
         float t = kHugeValue;
         for (const auto& shape: geometry){
             ShadeInfo temp_sinfo = ShadeInfo(*this);
@@ -56,6 +56,9 @@ ShadeInfo World::hit_objects(const Ray& ray){
         return sinfo;
     }
     else {
-        return accel_ptr->hit(ray, *this);
+        if (accel_ptr->hit(ray, sinfo)) {
+            return sinfo;
+        }
     }
+    return sinfo;
 }

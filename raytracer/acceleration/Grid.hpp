@@ -1,7 +1,7 @@
 #pragma once
 #include "BBox.hpp"
 #include "../utilities/Mesh.hpp"
-#include "Acceleration.hpp"
+#include "../acceleration/Acceleration.hpp"
 #include <vector>
 
 class Grid: public Acceleration {
@@ -14,10 +14,12 @@ public:
 
     void setup_cells();
 
-    void add_from_mesh(Mesh* m_ptr, Material* mat);
+    virtual void add_from_mesh(Mesh* m_ptr, Material* mat);
 
     // for use with add_from_mesh
-    void compute_normals(Mesh* m_ptr);
+    virtual void compute_normals(Mesh* m_ptr);
+
+    virtual void initialize();
 
     virtual bool hit(const Ray& ray, ShadeInfo& sinfo) const;
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "../utilities/Ray.hpp"
+#include "../utilities/Mesh.hpp"
 #include "../geometry/Geometry.hpp"
 #include <vector>
 
@@ -27,6 +28,13 @@ public:
   void add_object(Geometry* object_ptr); 
 
   int get_num_objects();
+
+   virtual void add_from_mesh(Mesh* m_ptr, Material* mat) = 0;
+
+    // for use with add_from_mesh
+    virtual void compute_normals(Mesh* m_ptr) = 0;
+
+  virtual void initialize() = 0;
 
   // Desctructor.
   virtual ~Acceleration(void);  // dummy function.
