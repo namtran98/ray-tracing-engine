@@ -28,6 +28,8 @@ public:
 
   int get_num_objects();
 
+  virtual void initialize() = 0;
+
   // Desctructor.
   virtual ~Acceleration(void);  // dummy function.
 

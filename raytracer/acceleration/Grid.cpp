@@ -19,6 +19,10 @@ BBox Grid::get_bounding_box() {
     return bbox;
 }
 
+void Grid::initialize() {
+    setup_cells();
+}
+
 void Grid::setup_cells() {
     // find the min and max coordinates of the grid
     Point3D pMin = min_coordinates();
@@ -37,7 +41,7 @@ void Grid::setup_cells() {
     int num_objects = objects.size();
     float wx = pMax.x - pMin.x;        // grid extent in x-dir
     float wy = pMax.y - pMin.y;        // grid extent in y-dir
-    float wz = pMax.z - pMax.z;        // grid extent in z-dir
+    float wz = pMax.z - pMin.z;        // grid extent in z-dir
     float multiplier = 2.0;            // about 8 times more cells than objects
     float s = std::pow(wx * wy * wz / num_objects, 0.33333333);
 
@@ -50,7 +54,7 @@ void Grid::setup_cells() {
     cells.reserve(num_objects);
 
     for (int i = 0; i < num_objects; i++) {
-        cells.push_back(NULL);
+        cells.push_back(nullptr);
     }
 
     // setup temporary array to hold the number of objects stored in each cell
