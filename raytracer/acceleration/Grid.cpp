@@ -305,6 +305,10 @@ bool Grid::hit(const Ray& ray, ShadeInfo& sinfo) const {
         t_hit_max = t_z_max;
     }
 
+    if(t_hit_min>t_hit_max){
+        return false;
+    }
+
     // initial cell coordinates
     int ix, iy, iz;
 
@@ -333,12 +337,12 @@ bool Grid::hit(const Ray& ray, ShadeInfo& sinfo) const {
 
     // setup x values
     if (dirX > 0) {
-        tx_next = t_x_min + (ix + 1) * dirX;
+        tx_next = t_x_min + (ix + 1) * dtx;
         ix_step = +1;
         ix_stop = nx;
     }
     else {
-        tx_next = t_x_min + (nx - ix) * dirX;
+        tx_next = t_x_min + (nx - ix) * dtx;
         ix_step = -1;
         ix_stop = -1;
     }

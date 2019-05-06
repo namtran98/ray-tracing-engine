@@ -46,6 +46,10 @@ MeshTriangle& MeshTriangle::operator= (const MeshTriangle& rhs){
 }
 
 bool MeshTriangle::hit(const Ray& ray, float& t_min, ShadeInfo& si) const{
+  if (not bbox.hit(ray)){
+    return false;
+  }
+  
   Point3D v0 = Point3D(mesh_ptr->vertices[index0]);
 	Point3D v1 = Point3D(mesh_ptr->vertices[index1]);
 	Point3D v2 = Point3D(mesh_ptr->vertices[index2]);
