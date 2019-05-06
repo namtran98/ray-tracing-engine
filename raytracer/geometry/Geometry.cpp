@@ -19,8 +19,6 @@ Geometry& Geometry::operator= (const Geometry& rhs) {
 
 // Destructor.
 Geometry::~Geometry() {
-    delete material_ptr;
-    material_ptr = NULL;
 }	
 
 // Get/set material.

@@ -33,12 +33,7 @@ MeshTriangle::MeshTriangle(const MeshTriangle& mt){
   bbox = mt.bbox;
 }
 
-MeshTriangle::~MeshTriangle(){
-  if (mesh_ptr) {
-		delete mesh_ptr;
-		mesh_ptr = NULL;
-	}
-}
+MeshTriangle::~MeshTriangle(){}
 
 MeshTriangle& MeshTriangle::operator= (const MeshTriangle& rhs){
   mesh_ptr = rhs.mesh_ptr;
