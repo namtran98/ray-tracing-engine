@@ -2,6 +2,7 @@
 #include "../utilities/RGBColor.hpp"
 #include "../utilities/Vector3D.hpp"
 #include "../utilities/ShadeInfo.hpp"
+#include "samplers/Sampler.hpp"
 
 
 /**
@@ -36,4 +37,8 @@ public:
 	   Vector3D& wi, float& pdf) const = 0;
   virtual RGBColor
   rho(const ShadeInfo& sinfo, const Vector3D& wo) const = 0;
+
+
+  protected:
+    Sampler* sampler_ptr;
 };
