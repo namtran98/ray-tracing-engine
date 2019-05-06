@@ -36,7 +36,7 @@ World::build(void) {
   sampler_ptr = std::make_unique<Simple>(camera_ptr.get(), &vplane);
 
   // will get seg fault unless add normals
-  Mesh* mesher = new Mesh((char*)"goldfish_low_res.ply");
+  Mesh* mesher = new Mesh((char*)"../resources/goldfish_low_res.ply");
 
   for(int i = 0; i < mesher->num_triangles; i++){
     MeshTriangle* meshTri1 = new MeshTriangle(mesher, mesher->tris[i][0],mesher->tris[i][1],mesher->tris[i][2]);

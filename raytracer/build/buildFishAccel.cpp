@@ -37,7 +37,7 @@ World::build(void) {
 
   set_acceleration(new Grid());
 
-  Mesh* mesher = new Mesh((char*)"goldfish_low_res.ply");
+  Mesh* mesher = new Mesh((char*)"../resources/goldfish_low_res.ply");
 
   accel_ptr->add_from_mesh(mesher, new Cosine(red));
   
