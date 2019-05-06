@@ -66,7 +66,43 @@ RGBColor Lambertian::sample_f(const ShadeInfo& sr, const Vector3D& wo,
 	return (kd * cd * invPI);
 }
 
+RGBColor Lambertian::sample_f(const ShadeInfo& sr, const Vector3D& wo, Vector3D& wi) const {
+	Vector3D w = sr.normal;
+	Vector3D v = Vector3D(0.0034, 1, 0.0071) ^ w;
+	v.normalize();
+	Vector3D u = v ^ w;
+
+	Point3D sp = sampler_ptr->sample_hemisphere();
+	wi = sp.x * u + sp.y * v + sp.z * w;
+	wi.normalize();
+	return (kd * cd * invPI);
+}
 // ---------------------------------------------------------------------- rho
 RGBColor Lambertian::rho(const ShadeInfo& sr, const Vector3D& wo) const {
 	return (kd * cd);
+}
+
+// -------------------------------------------------------------- set_ka
+inline void Lambertian::set_ka(const float k) {
+	kd = k;
+}
+
+// -------------------------------------------------------------- set_kd
+inline void Lambertian::set_kd(const float k) {
+	kd = k;
+}
+
+// -------------------------------------------------------------- set_cd
+inline void Lambertian::set_cd(const RGBColor& c) {
+	cd = c;
+}
+
+// ---------------------------------------------------------------- set_cd
+inline void Lambertian::set_cd(const float r, const float g, const float b) {
+	cd.r = r; cd.g = g; cd.b = b;
+}
+
+// ---------------------------------------------------------------- set_cd
+inline void Lambertian::set_cd(const float c) {
+	cd.r = c; cd.g = c; cd.b = c;
 }

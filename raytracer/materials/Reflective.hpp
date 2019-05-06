@@ -41,18 +41,3 @@ class Reflective: public Material {
     PerfectSpecular* reflective_brdf;
 };
 
-inline void Reflective::set_kr(const float k) {
-  reflective_brdf->set_kr(k);
-}
-
-inline void Reflective::set_cr(const RGBColor& c) {
-  reflective_brdf->set_cr(c);
-}
-
-inline void Reflective::set_cr(const float r, const float g, const float b) {
-  reflective_brdf->set_cr(r, g, b);
-}
-
-inline void Reflective::set_cr(const float c) {
-  reflective_brdf->set_cr(c);
-}

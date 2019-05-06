@@ -5,10 +5,10 @@
 Reflective::Reflective()
     : Material(),
       reflective_brdf(new PerfectSpecular)
-{} 
+{}
 
-// Copy constructor 
-Reflective::Reflective(const Reflective& rm) 
+// Copy constructor
+Reflective::Reflective(const Reflective& rm)
     : Material(rm) {
     if (rm.reflective_brdf) {
         reflective_brdf = rm.reflective_brdf->clone();
@@ -62,10 +62,24 @@ RGBColor Reflective::shade(const ShadeInfo& sr) const {
     Ray reflected_ray(sr.hit_point, wi);
     reflected_ray.w = sr.depth + 1;
 
-    // I removed the depth thing here bc i guess this ray should have some sort of depth 
+    // I removed the depth thing here bc i guess this ray should have some sort of depth
     L += fr * (sr.w->tracer_ptr->trace_ray(reflected_ray)) * (sr.normal * wi);
 
     return (L);
 }
 
+inline void Reflective::set_kr(const float k) {
+  reflective_brdf->set_kr(k);
+}
 
+inline void Reflective::set_cr(const RGBColor& c) {
+  reflective_brdf->set_cr(c);
+}
+
+inline void Reflective::set_cr(const float r, const float g, const float b) {
+  reflective_brdf->set_cr(r, g, b);
+}
+
+inline void Reflective::set_cr(const float c) {
+  reflective_brdf->set_cr(c);
+}

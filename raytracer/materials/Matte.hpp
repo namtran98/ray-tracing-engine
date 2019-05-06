@@ -6,10 +6,10 @@
 
 
 #include "Material.hpp"
-#include "Lambertian.h"
+#include "../brdfs/Lambertian.hpp"
+#include "../utilities/ShadeInfo.hpp"
 
 //----------------------------------------------------------------------------- class Matte
-
 class Matte: public Material {
 	public:
 
@@ -30,7 +30,7 @@ class Matte: public Material {
 		void set_cd(const float c);
 
 		virtual RGBColor
-		shade(ShadeRec& sr);
+		shade(const ShadeInfo& sr) const;
 
 	private:
 

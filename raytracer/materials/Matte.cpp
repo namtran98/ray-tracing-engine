@@ -4,6 +4,9 @@
 //	See the file COPYING.txt for the full license.
 
 #include "Matte.hpp"
+#include "../brdfs/Lambertian.hpp"
+#include "../utilities/ShadeInfo.hpp"
+#include "../world/World.hpp"
 
 // ---------------------------------------------------------------- default constructor
 
@@ -82,17 +85,17 @@ Matte::~Matte() {
 
 // ---------------------------------------------------------------- shade
 
-RGBColor Matte::shade(ShadeRec& sr) {
+RGBColor Matte::shade(const ShadeInfo& sr) const {
 	Vector3D 	wo 			= -sr.ray.d;
-	RGBColor 	L 			= ambient_brdf->rho(sr, wo) * sr.w.ambient_ptr->L(sr);
-	int 		num_lights	= sr.w.lights.size();
+	RGBColor 	L 			= ambient_brdf->rho(sr, wo) * sr.w->ambient_ptr->L(sr);
+	int 		num_lights	= sr.w->lights.size();
 
 	for (int j = 0; j < num_lights; j++) {
-		Vector3D wi = sr.w.lights[j]->get_direction(sr);
+		Vector3D wi = sr.w->lights[j]->get_direction(sr);
 		float ndotwi = sr.normal * wi;
 
 		if (ndotwi > 0.0)
-			L += diffuse_brdf->f(sr, wo, wi) * sr.w.lights[j]->L(sr) * ndotwi;
+			L += diffuse_brdf->f(sr, wo, wi) * sr.w->lights[j]->L(sr) * ndotwi;
 	}
 
 	return (L);

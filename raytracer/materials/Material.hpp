@@ -22,7 +22,7 @@ public:
   virtual Material* clone() const = 0;
 
   // Desctructor.
-  virtual ~Material();   							
+  virtual ~Material();
 
   // Get color.
   virtual RGBColor shade(const ShadeInfo& sinfo) const = 0;
