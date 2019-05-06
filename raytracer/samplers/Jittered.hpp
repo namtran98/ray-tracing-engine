@@ -21,14 +21,4 @@ public:
   virtual std::vector<Ray> get_rays(int px, int py);
 
   void generateSamples();
-
-protected:
-  struct Point2D{
-    float x;
-    float y;
-  };
-  int num_samples;
-  int num_sets;
-  unsigned long count;
-  std::vector<Point2D> samples;
 };

@@ -3,35 +3,36 @@
 
 class GlossySpecular: public BRDF {
 	public:
-	
-		GlossySpecular(void);
-		
-		~GlossySpecular(void);
-		
-		virtual GlossySpecular* clone(void) const;
-		
+
+		GlossySpecular();
+
+		~GlossySpecular();
+
+		virtual GlossySpecular* clone() const;
+
 		virtual RGBColor f(const ShadeInfo& sr, const Vector3D& wo, const Vector3D& wi) const;
-				
+
 		virtual RGBColor sample_f(const ShadeInfo& sr, const Vector3D& wo, Vector3D& wi, float& pdf) const;
 
 		virtual RGBColor sample_f(const ShadeInfo& sr, const Vector3D& wo, Vector3D& wi) const;
-		
+
 		virtual RGBColor rho(const ShadeInfo& sr, const Vector3D& wo) const;
-		
+
 		void set_ks(const float ks);
-		
+
 		void set_exp(const float exp);
-		
+
 		void set_cs(const RGBColor& c);
-		
+
 		void set_cs(const float r, const float g, const float b);
-		
+
 		void set_cs(const float c);
-		
-		void set_sampler(Sampler* sp, const float exp);   			// any type of sampling
-		
+
+		void set_sampler(Sampler* sp, const float exp);   			  // any type of sampling
+    void set_sampler(const int num_samples, const float exp); // sets up jittered sampling
+
 	private:
-	
+
 		float		ks;
 		RGBColor 	cs;			// specular color
 		float		exp; 		// specular exponent
@@ -64,7 +65,7 @@ GlossySpecular::set_cs(const RGBColor& c) {
 
 // ---------------------------------------------------------------- set_cs
 
-inline void													
+inline void
 GlossySpecular::set_cs(const float r, const float g, const float b) {
 	cs.r = r; cs.g = g; cs.b = b;
 }
@@ -72,7 +73,7 @@ GlossySpecular::set_cs(const float r, const float g, const float b) {
 
 // ---------------------------------------------------------------- set_cs
 
-inline void													
+inline void
 GlossySpecular::set_cs(const float c) {
 	cs.r = c; cs.g = c; cs.b = c;
 }
