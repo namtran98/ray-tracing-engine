@@ -51,7 +51,7 @@ void Grid::setup_cells() {
 
     // setup array of cells with null pointers
     int num_cells = nx * ny * nz;
-    cells.reserve(num_objects);
+    cells.reserve(num_cells);
 
     for (int i = 0; i < num_objects; i++) {
         cells.push_back(nullptr);
@@ -98,7 +98,6 @@ void Grid::setup_cells() {
                     if (counts[index] == 0) {
                         cells[index] = objects[k];
                         counts[index] += 1;
-                        index = 1;
                     }
                     else {
                         if (counts[index] == 1) {
