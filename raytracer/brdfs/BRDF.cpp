@@ -1,5 +1,5 @@
 #include "BRDF.hpp"
-#include "utilities/Constants.hpp"
+#include "../utilities/Constants.hpp"
 
 BRDF::BRDF() 
 	: sampler_ptr(nullptr)

@@ -1,5 +1,5 @@
 #include "BRDF.hpp"
-#include "utilities/Vector3D.hpp"
+#include "../utilities/Vector3D.hpp"
 
 class GlossySpecular: public BRDF {
 	public:
@@ -13,6 +13,8 @@ class GlossySpecular: public BRDF {
 		virtual RGBColor f(const ShadeInfo& sr, const Vector3D& wo, const Vector3D& wi) const;
 				
 		virtual RGBColor sample_f(const ShadeInfo& sr, const Vector3D& wo, Vector3D& wi, float& pdf) const;
+
+		virtual RGBColor sample_f(const ShadeInfo& sr, const Vector3D& wo, Vector3D& wi) const;
 		
 		virtual RGBColor rho(const ShadeInfo& sr, const Vector3D& wo) const;
 		

@@ -1,5 +1,5 @@
 #include "Reflective.hpp"
-
+#include "../world/World.hpp"
 
 // Default constructors.
 Reflective::Reflective()
@@ -19,7 +19,7 @@ Reflective::Reflective(const Reflective& rm)
 }
 
 // Assignment operator
-Reflective& Reflective::operator = (const Reflective& rhs) {
+Reflective& Reflective::operator= (const Reflective& rhs) {
     if (this == &rhs) {
         return (*this);
     }
@@ -62,7 +62,8 @@ RGBColor Reflective::shade(const ShadeInfo& sr) const {
     Ray reflected_ray(sr.hit_point, wi);
     reflected_ray.w = sr.depth + 1;
 
-    L += fr * sr.w->tracer_ptr->trace_ray(reflected_ray, sr.depth + 1) * (sr.normal * wi);
+    // I removed the depth thing here bc i guess this ray should have some sort of depth 
+    L += fr * (sr.w->tracer_ptr->trace_ray(reflected_ray)) * (sr.normal * wi);
 
     return (L);
 }

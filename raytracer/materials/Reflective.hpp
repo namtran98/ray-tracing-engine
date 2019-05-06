@@ -2,7 +2,7 @@
 #include "../utilities/ShadeInfo.hpp"
 #include "../utilities/RGBColor.hpp"
 #include "Material.hpp"
-#include "brdfs/PerfectSpecular.hpp"
+#include "../brdfs/PerfectSpecular.hpp"
 
 /**
    This file declares the Material class which is an abstract class for concrete
@@ -18,7 +18,7 @@ class Reflective: public Material {
 
     // Copy constuctor and assignment operator.
     Reflective(const Reflective& other);
-    Reflective& operator=(const Material& other);
+    Reflective& operator=(const Reflective& rhs);
 
     // Virtual copy constructor.
     virtual Reflective* clone() const;

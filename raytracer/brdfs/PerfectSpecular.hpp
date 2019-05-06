@@ -1,5 +1,5 @@
 #include "BRDF.hpp"
-#include "utilities/Vector3D.hpp"
+#include "../utilities/Vector3D.hpp"
 
 class PerfectSpecular: public BRDF {
     public: 

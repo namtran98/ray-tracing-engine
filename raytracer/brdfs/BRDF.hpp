@@ -2,7 +2,7 @@
 #include "../utilities/RGBColor.hpp"
 #include "../utilities/Vector3D.hpp"
 #include "../utilities/ShadeInfo.hpp"
-#include "samplers/Sampler.hpp"
+#include "../samplers/Sampler.hpp"
 
 
 /**
