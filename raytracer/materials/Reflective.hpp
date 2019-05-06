@@ -24,7 +24,7 @@ class Reflective: public Material {
     virtual Reflective* clone() const;
 
     // Desctructor.
-    virtual ~Reflective();   							
+    virtual ~Reflective();
 
     // Get color.
     virtual RGBColor shade(const ShadeInfo& sinfo) const;
@@ -37,7 +37,7 @@ class Reflective: public Material {
 
     void set_cr(const float c);
 
-  private: 
+  private:
     PerfectSpecular* reflective_brdf;
 };
 
