@@ -1,5 +1,5 @@
 #include "World.hpp"
-#include "../build/buildTestAccel.cpp"
+#include "../build/buildHelloWorld.cpp"
 
 
 World::World(){
@@ -41,16 +41,21 @@ void World::set_acceleration(Acceleration* acceleration_ptr){
 // Returns appropriate shading information corresponding to intersection of
 // the ray with the scene geometry.
 ShadeInfo World::hit_objects(const Ray& ray){
-    ShadeInfo sinfo = ShadeInfo(*this);
-    float t = kHugeValue;
-    for (const auto& shape: geometry){
-        ShadeInfo temp_sinfo = ShadeInfo(*this);
-        float tempt = 0.0f;
+    if (accel_ptr == nullptr) {
+        ShadeInfo sinfo = ShadeInfo(*this);
+        float t = kHugeValue;
+        for (const auto& shape: geometry){
+            ShadeInfo temp_sinfo = ShadeInfo(*this);
+            float tempt = 0.0f;
 
-        if(shape->hit(ray, tempt, temp_sinfo) && tempt < t ){
-            t = tempt;
-            sinfo = temp_sinfo;
+            if(shape->hit(ray, tempt, temp_sinfo) && tempt < t ){
+                t = tempt;
+                sinfo = temp_sinfo;
+            }
         }
+        return sinfo;
     }
-    return sinfo;
+    else {
+        return accel_ptr->hit(ray, *this);
+    }
 }
