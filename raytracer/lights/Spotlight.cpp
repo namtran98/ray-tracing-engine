@@ -37,7 +37,7 @@ void Spotlight::set_direction(const Vector3D& d){
   dir.normalize();
 }
 
-Vector3D Spotlight::get_direction(ShadeInfo& sinfo) const{
+Vector3D Spotlight::get_direction(const ShadeInfo& sinfo) const{
   // TODO: Figure out if this should be like a directional
   // light or a point light or something else
   Vector3D to_pt = pos - sinfo.hit_point;
@@ -46,7 +46,7 @@ Vector3D Spotlight::get_direction(ShadeInfo& sinfo) const{
 }
 
 // Luminance from this light source at hit point.
-RGBColor Spotlight::L(ShadeInfo& sinfo) const{
+RGBColor Spotlight::L(const ShadeInfo& sinfo) const{
   return ls * color;
 }
 

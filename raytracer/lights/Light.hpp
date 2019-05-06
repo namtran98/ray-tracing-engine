@@ -37,8 +37,8 @@ public:
   void set_color(const RGBColor& _color);  // to _color.
 
   // Normalized direction vector from light source to hit point.
-  virtual Vector3D get_direction(ShadeInfo& sinfo) const = 0;
+  virtual Vector3D get_direction(const ShadeInfo& sinfo) const = 0;
 
   // Luminance from this light source at hit point.
-  virtual RGBColor L(ShadeInfo& sinfo) const = 0;
+  virtual RGBColor L(const ShadeInfo& sinfo) const = 0;
 };

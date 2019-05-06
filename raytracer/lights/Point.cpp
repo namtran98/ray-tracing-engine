@@ -20,14 +20,14 @@ Point& Point::operator= (const Point& rhs){
 
 
 // Normalized direction vector from light source to hit point.
-Vector3D Point::get_direction(ShadeInfo& sinfo) const{
+Vector3D Point::get_direction(const ShadeInfo& sinfo) const{
   Vector3D dir = pos - sinfo.hit_point;
   dir.normalize();
   return dir;
 }
 
 // Luminance from this light source at hit point.
-RGBColor Point::L(ShadeInfo& sinfo) const{
+RGBColor Point::L(const ShadeInfo& sinfo) const{
   return ls * color;
 }
 

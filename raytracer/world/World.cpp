@@ -1,5 +1,5 @@
 #include "World.hpp"
-#include "../build/buildFishAccel.cpp"
+#include "../build/buildChapter14.cpp"
 
 
 World::World(){
@@ -25,6 +25,11 @@ void World::add_object(Geometry* geom_ptr){
 void World::add_light(Light* light_ptr){
     lights.push_back(light_ptr);
 }
+
+void World::set_ambient_light(Light *light_ptr){
+  ambient_ptr = light_ptr;
+}
+
 void World::set_camera(Camera* c_ptr){
     camera_ptr = std::unique_ptr<Camera>(c_ptr);
 }
