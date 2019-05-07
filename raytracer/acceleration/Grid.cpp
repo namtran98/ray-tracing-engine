@@ -9,7 +9,7 @@
 #include <cmath>
 
 // Constructor
-Grid::Grid() : Acceleration(), nx(0), ny(0), nz(0) {}									
+Grid::Grid() : Acceleration(), nx(0), ny(0), nz(0), reverse_normal(false) {}									
 
 Grid* Grid::clone() const {
   return new Grid (*this);
