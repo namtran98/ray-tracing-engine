@@ -9,7 +9,7 @@
 #include <cmath>
 
 // Constructor
-Grid::Grid() : Acceleration(), nx(0), ny(0), nz(0) {}									
+Grid::Grid() : Acceleration(), nx(0), ny(0), nz(0) {}
 
 Grid* Grid::clone() const {
   return new Grid (*this);
@@ -187,7 +187,7 @@ Point3D Grid::max_coordinates() {
 //first add from mesh and then compute normals
 void Grid::add_from_mesh(Mesh* m_ptr, Material* mat){
   for(int i = 0; i < m_ptr->num_triangles; i++){
-    MeshTriangle* meshTri = new MeshTriangle(m_ptr, m_ptr->tris[i][0],m_ptr->tris[i][1],m_ptr->tris[i][2]);
+    MeshTriangle* meshTri = new MeshTriangle(m_ptr, std::get<0>(m_ptr->tris[i]), std::get<1>(m_ptr->tris[i]), std::get<2>(m_ptr->tris[i]));
     meshTri->set_material(mat);
     add_object(meshTri);
   }
@@ -200,7 +200,7 @@ void Grid::compute_normals(Mesh* m_ptr){
 	for (int index = 0; index < m_ptr->num_vertices; index++) {
 		Vector3D normal;
 
-		for (int j = 0; j < m_ptr->vertex_faces[index].size(); j++){
+		for (unsigned int j = 0; j < m_ptr->vertex_faces[index].size(); j++){
 			normal += ((MeshTriangle*)objects[m_ptr->vertex_faces[index][j]])->get_normal();
     }
 
@@ -215,14 +215,13 @@ void Grid::compute_normals(Mesh* m_ptr){
 	}
   // we can now erase vertex_faces array and tris array
   for (int index = 0; index < m_ptr->num_vertices; index++){
-    for (int j = 0; j < m_ptr->vertex_faces[index].size(); j++){
-      m_ptr->vertex_faces[index].erase (m_ptr->vertex_faces[index].begin(), m_ptr->vertex_faces[index].end());
-      m_ptr->tris[index].erase (m_ptr->tris[index].begin(), m_ptr->tris[index].end());
+    for (unsigned int j = 0; j < m_ptr->vertex_faces[index].size(); j++){
+      m_ptr->vertex_faces[index].clear();
     }
   }
 
-	m_ptr->vertex_faces.erase (m_ptr->vertex_faces.begin(), m_ptr->vertex_faces.end());
-	m_ptr->tris.erase (m_ptr->tris.begin(), m_ptr->tris.end());
+	m_ptr->vertex_faces.clear();
+	m_ptr->tris.clear();
 }
 
 bool Grid::hit(const Ray& ray, ShadeInfo& sinfo) const {

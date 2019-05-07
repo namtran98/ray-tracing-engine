@@ -40,7 +40,6 @@ World::build(void) {
   Mesh* mesher = new Mesh((char*)"../resources/goldfish_low_res.ply");
 
   accel_ptr->add_from_mesh(mesher, new Cosine(red));
-  
   accel_ptr->compute_normals(mesher);
 
   accel_ptr->initialize();

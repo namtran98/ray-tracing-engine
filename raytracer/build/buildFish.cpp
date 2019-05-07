@@ -39,7 +39,7 @@ World::build(void) {
   Mesh* mesher = new Mesh((char*)"../resources/goldfish_low_res.ply");
 
   for(int i = 0; i < mesher->num_triangles; i++){
-    MeshTriangle* meshTri1 = new MeshTriangle(mesher, mesher->tris[i][0],mesher->tris[i][1],mesher->tris[i][2]);
+    MeshTriangle* meshTri1 = new MeshTriangle(mesher, std::get<0>(mesher->tris[i]), std::get<1>(mesher->tris[i]), std::get<2>(mesher->tris[i]));
     meshTri1->set_material(new Cosine(red));
     // mesher->normals.push_back(meshTri1->compute_normal());
     add_object(meshTri1);
@@ -51,7 +51,7 @@ World::build(void) {
 	for (int index = 0; index < mesher->num_vertices; index++) {
 		Vector3D normal;
 
-		for (int j = 0; j < mesher->vertex_faces[index].size(); j++){
+		for (unsigned int j = 0; j < mesher->vertex_faces[index].size(); j++){
 			normal += ((MeshTriangle*)geometry[mesher->vertex_faces[index][j]])->get_normal();
     }
 
