@@ -1,8 +1,10 @@
 #pragma once
-#include <vector>
 
 #include "Point3D.hpp"
 #include "Vector3D.hpp"
+#include <vector>
+#include <tuple>
+
 
 class Mesh {
 public:
@@ -11,7 +13,7 @@ public:
   std::vector<Vector3D> normals;
   // the triangles shared by each vertex
   std::vector<std::vector<int> > 	vertex_faces;
-  std::vector<std::vector<int> > 	tris;
+  std::vector<std::tuple<int, int, int>>tris;
   int num_vertices;
   int num_triangles;
   float x_offset;
@@ -20,7 +22,7 @@ public:
 
   Mesh(char* file_name);
   Mesh(char* file_name, float x, float y, float z);
-  
+
   Mesh(const Mesh& m);
 
   ~Mesh();

@@ -3,7 +3,7 @@
 // Constructors.
 
 // sets material_ptr to NULL.
-Geometry::Geometry() : material_ptr(NULL) {}  
+Geometry::Geometry() : material_ptr(nullptr) {}
 
 // Copy constructor and assignment operator.
 Geometry::Geometry(const Geometry& object) {
@@ -19,7 +19,7 @@ Geometry& Geometry::operator= (const Geometry& rhs) {
 
 // Destructor.
 Geometry::~Geometry() {
-}	
+}
 
 // Get/set material.
 Material* Geometry::get_material() const {

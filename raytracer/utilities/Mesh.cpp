@@ -9,7 +9,7 @@ Mesh::Mesh(char* file_name){
   std::vector<Point3D> vertices;
   std::vector<Vector3D> normals;
   std::vector<std::vector<int>> vertex_faces;
-  std::vector<std::vector<int>> tris;
+  std::vector<std::tuple<int, int, int>> tris;
   num_vertices=0;
   num_triangles=0;
   x_offset = 0;
@@ -22,7 +22,7 @@ Mesh::Mesh(char* file_name, float x, float y, float z){
   std::vector<Point3D> vertices;
   std::vector<Vector3D> normals;
   std::vector<std::vector<int>> vertex_faces;
-  std::vector<std::vector<int>> tris;
+  std::vector<std::tuple<int, int, int>> tris;
   num_vertices=0;
   num_triangles=0;
   x_offset = x;
@@ -78,7 +78,9 @@ void Mesh::populate(char* file_name){
         if(result[0].compare("element")==0&&result[1].compare("vertex")==0){
           num_vertices = std::stoi(result[2]);
           vertices.reserve(num_vertices);
-          vertex_faces.reserve(num_vertices);
+          for (int i = 0; i < num_vertices; i++){
+            vertex_faces.push_back(std::vector<int>());
+          }
         }
         else if(result[0].compare("element")==0&&result[1].compare("face")==0){
           num_triangles = std::stoi(result[2]);
@@ -96,10 +98,7 @@ void Mesh::populate(char* file_name){
         verticeCount++;
       }
       else if(triangleCount<num_triangles){
-        std::vector<int> smoltri;
-        smoltri.push_back(std::stoi(result[1]));
-        smoltri.push_back(std::stoi(result[2]));
-        smoltri.push_back(std::stoi(result[3]));
+        std::tuple<int,int, int> smoltri = std::make_tuple(std::stoi(result[1]), std::stoi(result[2]), std::stoi(result[3]));
         tris.push_back(smoltri);
         // add face to the vertices count
         vertex_faces[std::stoi(result[1])].push_back(triangleCount);

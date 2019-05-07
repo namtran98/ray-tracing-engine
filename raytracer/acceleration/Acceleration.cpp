@@ -10,7 +10,7 @@ Acceleration::Acceleration(const Acceleration& rhs) {
 
 
 void Acceleration::add_object(Geometry* object_ptr) {
-    objects.push_back(object_ptr); 
+    objects.push_back(object_ptr);
 }
 
 

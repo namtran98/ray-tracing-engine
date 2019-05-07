@@ -12,6 +12,7 @@
 #include "../world/World.hpp"
 #include "../utilities/Mesh.hpp"
 #include "../geometry/MeshTriangle.hpp"
+#include "../acceleration/BVH.hpp"
 
 #include <iostream>
 void
@@ -33,14 +34,13 @@ World::build(void) {
   // set_camera(new Parallel(0, 0, -1));
 
   set_camera(new Perspective(0, 0, 20));
-  sampler_ptr = std::make_unique<Simple>(camera_ptr.get(), &vplane);
+  sampler_ptr = std::make_unique<Jittered>(camera_ptr.get(), &vplane, 4, 83);
 
-  set_acceleration(new Grid());
+  set_acceleration(new BVH());
 
   Mesh* mesher = new Mesh((char*)"../resources/goldfish_low_res.ply");
 
   accel_ptr->add_from_mesh(mesher, new Cosine(red));
-  
   accel_ptr->compute_normals(mesher);
 
   accel_ptr->initialize();

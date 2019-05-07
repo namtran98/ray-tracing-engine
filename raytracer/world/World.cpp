@@ -1,5 +1,6 @@
 #include "World.hpp"
 #include "../build/buildFishAccel.cpp"
+#include <iostream>
 
 
 World::World(){
@@ -47,13 +48,11 @@ ShadeInfo World::hit_objects(const Ray& ray){
         for (const auto& shape: geometry){
             ShadeInfo temp_sinfo = ShadeInfo(*this);
             float tempt = 0.0f;
-
             if(shape->hit(ray, tempt, temp_sinfo) && tempt < t ){
                 t = tempt;
                 sinfo = temp_sinfo;
             }
         }
-        return sinfo;
     }
     else {
         if (accel_ptr->hit(ray, sinfo)) {

@@ -32,7 +32,7 @@ public:
 
   // Copy constructor.
   ShadeInfo(const ShadeInfo& sr);
-  
+
   // Destructor.
   ~ShadeInfo();
 };

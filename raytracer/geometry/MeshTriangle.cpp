@@ -1,8 +1,8 @@
 #include "MeshTriangle.hpp"
 #include "../utilities/Constants.hpp"
 #include <algorithm>
-
 #include <iostream>
+
 MeshTriangle::MeshTriangle(){
   mesh_ptr = NULL;
   index0 = 0;
@@ -53,50 +53,39 @@ bool MeshTriangle::hit(const Ray& ray, float& t_min, ShadeInfo& si) const{
   Point3D v0 = Point3D(mesh_ptr->vertices[index0]);
 	Point3D v1 = Point3D(mesh_ptr->vertices[index1]);
 	Point3D v2 = Point3D(mesh_ptr->vertices[index2]);
-  // std::cout <<"hello"<<"\n";
-	double a = v0.x - v1.x, b = v0.x - v2.x, c = ray.d.x, d = v0.x - ray.o.x;
-	double e = v0.y - v1.y, f = v0.y - v2.y, g = ray.d.y, h = v0.y - ray.o.y;
-	double i = v0.z - v1.z, j = v0.z - v2.z, k = ray.d.z, l = v0.z - ray.o.z;
-
-	double m = f * k - g * j, n = h * k - g * l, p = f * l - h * j;
-	double q = g * i - e * k, s = e * j - f * i;
-
-	double inv_denom  = 1.0 / (a * m + b * q + c * s);
-
-	double e1 = d * m - b * n - c * p;
-	double beta = e1 * inv_denom;
-
-	if (beta < 0.0){
+  Vector3D edge1, edge2, h, s, q;
+  float _a, f, u, v;
+  edge1 = v1-v0;
+  edge2 = v2-v0;
+  h = ray.d ^ edge2;
+  _a = edge1 * h;
+  if (_a > -kEpsilon && _a < kEpsilon){
+    return false; // ray parallel to triangle
+  }
+  f = 1.0 / _a;
+  s = ray.o - v0;
+  u = f * (s * h);
+  if (u < 0.0 || u > 1.0){
     return false;
   }
-
-	double r = e * l - h * i;
-	double e2 = a * n + d * q + c * r;
-	double gamma = e2 * inv_denom;
-
-	if (gamma < 0.0){
+  q = s ^ edge1;
+  v = f * (ray.d * q);
+  if (v < 0.0 || u + v > 1.0){
     return false;
   }
-
-	if (beta + gamma > 1.0){
-    return false;
+  float t = f * (edge2 * q);
+  if (t > kEpsilon){
+    si.hit_point = ray.o + (ray.d * t);
+    si.normal = edge1 ^ edge2;
+    si.hit = true;
+    si.material_ptr = material_ptr;
+    si.ray = ray;
+    t_min = t;
+    si.t = t;
+    return true;
+  } else {
+    return false; // Line intersects but before the origin
   }
-
-	double e3 = a * p - b * r + d * s;
-	double t = e3 * inv_denom;
-
-	if (t < kEpsilon){
-    return false;
-  }
-
-  si.hit = true;
-  si.material_ptr = material_ptr;
-  si.ray = ray;
-  t_min = t;
-	si.normal = interpolate_normal(beta, gamma); // for smooth shading
-	si.hit_point = ray.o + t * ray.d;
-	si.t = t;
-	return true;
 }
 
 BBox MeshTriangle::get_bounding_box(){
