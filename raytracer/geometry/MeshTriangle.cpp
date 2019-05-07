@@ -1,8 +1,8 @@
 #include "MeshTriangle.hpp"
 #include "../utilities/Constants.hpp"
 #include <algorithm>
-
 #include <iostream>
+
 MeshTriangle::MeshTriangle(){
   mesh_ptr = NULL;
   index0 = 0;

@@ -53,7 +53,7 @@ void Grid::setup_cells() {
   int num_cells = nx * ny * nz;
   cells.reserve(num_cells);
 
-  for (int i = 0; i < num_objects; i++) {
+  for (int i = 0; i < num_cells; i++) {
     cells.push_back(nullptr);
   }
 
@@ -177,9 +177,9 @@ Point3D Grid::max_coordinates() {
       p0.z = bbox.max_point.z;
   }
 
-  p0.x -= kEpsilon;
-  p0.y -= kEpsilon;
-  p0.z -= kEpsilon;
+  p0.x += kEpsilon;
+  p0.y += kEpsilon;
+  p0.z += kEpsilon;
 
   return p0;
 }
@@ -277,10 +277,10 @@ bool Grid::hit(const Ray& ray, ShadeInfo& sinfo) const {
     t_z_max = (minZ - origZ) * kz;
   }
 
-  // t_hit value where the ray hits the bounding box
+  // t_hit value where the ray hits and exits cell
   double t_hit_min, t_hit_max;
 
-  // determine min ray parameter for entering a cell
+  // determine largest t parameter for entering a cell
   if (t_x_min > t_y_min) {
     t_hit_min = t_x_min;
   }
@@ -292,7 +292,7 @@ bool Grid::hit(const Ray& ray, ShadeInfo& sinfo) const {
     t_hit_min = t_z_min;
   }
 
-  // determine max ray parameter for entering a cell
+  // determine smallest t parameter for exiting a cell
   if (t_x_max < t_y_max) {
     t_hit_max = t_x_max;
   }
@@ -347,46 +347,46 @@ bool Grid::hit(const Ray& ray, ShadeInfo& sinfo) const {
   }
 
   if (dirX == 0.0) {
-		tx_next = kHugeValue;
-		ix_step = -1;
-		ix_stop = -1;
-	}
+    tx_next = kHugeValue;
+    ix_step = -1;
+    ix_stop = -1;
+  }
 
   // setup y values
   if (dirY > 0) {
-		ty_next = t_y_min + (iy + 1) * dty;
-		iy_step = +1;
-		iy_stop = ny;
-	}
-	else {
-		ty_next = t_y_min + (ny - iy) * dty;
-		iy_step = -1;
-		iy_stop = -1;
-	}
+    ty_next = t_y_min + (iy + 1) * dty;
+    iy_step = +1;
+    iy_stop = ny;
+  }
+  else {
+    ty_next = t_y_min + (ny - iy) * dty;
+    iy_step = -1;
+    iy_stop = -1;
+  }
 
-	if (dirY == 0.0) {
-		ty_next = kHugeValue;
-		iy_step = -1;
-		iy_stop = -1;
-	}
+  if (dirY == 0.0) {
+    ty_next = kHugeValue;
+    iy_step = -1;
+    iy_stop = -1;
+  }
 
   // setup z values
   if (dirZ > 0) {
-		tz_next = t_z_min + (iz + 1) * dtz;
-		iz_step = +1;
-		iz_stop = nz;
-	}
-	else {
-		tz_next = t_z_min + (nz - iz) * dtz;
-		iz_step = -1;
-		iz_stop = -1;
-	}
+    tz_next = t_z_min + (iz + 1) * dtz;
+    iz_step = +1;
+    iz_stop = nz;
+  }
+  else {
+    tz_next = t_z_min + (nz - iz) * dtz;
+    iz_step = -1;
+    iz_stop = -1;
+  }
 
-	if (dirZ == 0.0) {
-		tz_next = kHugeValue;
-		iz_step = -1;
-		iz_stop = -1;
-	}
+  if (dirZ == 0.0) {
+    tz_next = kHugeValue;
+    iz_step = -1;
+    iz_stop = -1;
+  }
 
   float t = kHugeValue;
   Material* material_ptr = nullptr;
@@ -396,42 +396,42 @@ bool Grid::hit(const Ray& ray, ShadeInfo& sinfo) const {
     Geometry* object_ptr = cells[ix + nx * iy + nx * ny * iz];
 
     if (tx_next < ty_next && tx_next < tz_next) {
-			if (object_ptr && object_ptr->hit(ray, t, sinfo) && t < tx_next) {
-				material_ptr = object_ptr->get_material();
-				return (true);
-			}
+      if (object_ptr && object_ptr->hit(ray, t, sinfo) && t < tx_next) {
+        material_ptr = object_ptr->get_material();
+	return true;
+      }
 
-			tx_next += dtx;
-			ix += ix_step;
+      tx_next += dtx;
+      ix += ix_step;
 
-			if (ix == ix_stop)
-				return (false);
-		}
+      if (ix == ix_stop)
+        return false;
+      }
     else {
-			if (ty_next < tz_next) {
-				if (object_ptr && object_ptr->hit(ray, t, sinfo) && t < ty_next) {
-					material_ptr = object_ptr->get_material();
-					return (true);
-				}
+      if (ty_next < tz_next) {
+        if (object_ptr && object_ptr->hit(ray, t, sinfo) && t < ty_next) {
+          material_ptr = object_ptr->get_material();
+	  return true;
+        }
 
-				ty_next += dty;
-				iy += iy_step;
+	ty_next += dty;
+	iy += iy_step;
 
-				if (iy == iy_stop)
-					return (false);
-		 	}
-		 	else {
-				if (object_ptr && object_ptr->hit(ray, t, sinfo) && t < tz_next) {
-					material_ptr = object_ptr->get_material();
-					return (true);
-				}
+	if (iy == iy_stop)
+	  return false;
+      }
+      else {
+	if (object_ptr && object_ptr->hit(ray, t, sinfo) && t < tz_next) {
+	  material_ptr = object_ptr->get_material();
+	  return true;
+	}
 
-				tz_next += dtz;
-				iz += iz_step;
+	tz_next += dtz;
+	iz += iz_step;
 
-				if (iz == iz_stop)
-					return (false);
-		 	}
-		}
+	if (iz == iz_stop)
+	  return false;
+      }
+    }
   }
 }
