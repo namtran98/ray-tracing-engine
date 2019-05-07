@@ -21,8 +21,8 @@ bool zInOrder(Geometry *a, Geometry*b){
   return (aBB.min_point.z + aBB.max_point.z) / 2 <= (bBB.min_point.z + bBB.max_point.z) / 2;
 }
 
-BVH::BVH() : split_dim(0), bbox(){}
-BVH::BVH(int split) : split_dim(split){}
+BVH::BVH() : split_dim(0), bbox(), left(nullptr), right(nullptr){}
+BVH::BVH(int split) : split_dim(split), bbox(), left(nullptr), right(nullptr){}
 BVH::BVH(int split, BVH *_left, BVH *_right) : split_dim(split), left(_left), right(_right){}
 BVH::~BVH(){
   if (left != nullptr){
