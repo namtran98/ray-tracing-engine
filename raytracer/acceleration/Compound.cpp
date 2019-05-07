@@ -52,7 +52,7 @@ void Compound::delete_objects() {
 
     for (int i = 0; i < num_objects; i++) {
         delete objects[i];
-        objects[i] = NULL;
+        objects[i] = nullptr;
     }
 
     objects.erase(objects.begin(), objects.end());
@@ -79,27 +79,17 @@ void Compound::set_material(Material* mPtr) {
 
 bool Compound::hit(const Ray& ray, float& t_min, ShadeInfo& sinfo) const {
     float t;
-    Vector3D n;
-    Point3D local_hit_point;
     bool hit = false;
-    t_min = kHugeValue;          
+    t_min = kHugeValue;
     int num_objects = objects.size();
-
+    ShadeInfo temp_si(*sinfo.w);
     for (int i = 0; i < num_objects; i++) {
-        if (objects[i]->hit(ray, t, sinfo) && (t < t_min)) {
+        if (objects[i]->hit(ray, t, temp_si) && (t < t_min)) {
             hit = true;
             t_min = t;
-            material_ptr = objects[i]->get_material(); 
-            n = sinfo.normal;
-            local_hit_point = sinfo.hit_point;
+            sinfo = ShadeInfo(temp_si);
+            sinfo.material_ptr = objects[i]->get_material();
         }
     }
-    
-    if (hit) {
-        sinfo.t = t_min;
-        sinfo.normal = n;
-        sinfo.hit_point = local_hit_point;
-    }
-
     return (hit);
-} 
+}

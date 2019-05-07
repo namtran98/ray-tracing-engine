@@ -12,6 +12,7 @@
 #include "../world/World.hpp"
 #include "../utilities/Mesh.hpp"
 #include "../geometry/MeshTriangle.hpp"
+#include "../acceleration/BVH.hpp"
 
 #include <iostream>
 void
@@ -35,7 +36,7 @@ World::build(void) {
   set_camera(new Perspective(0, 0, 20));
   sampler_ptr = std::make_unique<Simple>(camera_ptr.get(), &vplane);
 
-  set_acceleration(new Grid());
+  set_acceleration(new BVH());
 
   Mesh* mesher = new Mesh((char*)"../resources/goldfish_low_res.ply");
 
