@@ -348,16 +348,16 @@ bool Grid::hit(const Ray& ray, ShadeInfo& sinfo) const {
   }
 
   if (dirX == 0.0) {
-	tx_next = kHugeValue;
-	ix_step = -1;
-	ix_stop = -1;
+    tx_next = kHugeValue;
+    ix_step = -1;
+    ix_stop = -1;
   }
 
   // setup y values
   if (dirY > 0) {
-	ty_next = t_y_min + (iy + 1) * dty;
-	iy_step = +1;
-	iy_stop = ny;
+    ty_next = t_y_min + (iy + 1) * dty;
+    iy_step = +1;
+    iy_stop = ny;
   }
   else {
     ty_next = t_y_min + (ny - iy) * dty;
@@ -373,21 +373,21 @@ bool Grid::hit(const Ray& ray, ShadeInfo& sinfo) const {
 
   // setup z values
   if (dirZ > 0) {
-	tz_next = t_z_min + (iz + 1) * dtz;
-	iz_step = +1;
-	iz_stop = nz;
+    tz_next = t_z_min + (iz + 1) * dtz;
+    iz_step = +1;
+    iz_stop = nz;
   }
   else {
-	tz_next = t_z_min + (nz - iz) * dtz;
-	iz_step = -1;
-	iz_stop = -1;
+    tz_next = t_z_min + (nz - iz) * dtz;
+    iz_step = -1;
+    iz_stop = -1;
   }
 
   if (dirZ == 0.0) {
-	tz_next = kHugeValue;
-	iz_step = -1;
-	iz_stop = -1;
-	}
+    tz_next = kHugeValue;
+    iz_step = -1;
+    iz_stop = -1;
+  }
 
   float t = kHugeValue;
   Material* material_ptr = nullptr;
@@ -397,42 +397,42 @@ bool Grid::hit(const Ray& ray, ShadeInfo& sinfo) const {
     Geometry* object_ptr = cells[ix + nx * iy + nx * ny * iz];
 
     if (tx_next < ty_next && tx_next < tz_next) {
-	  if (object_ptr && object_ptr->hit(ray, t, sinfo) && t < tx_next) {
-		material_ptr = object_ptr->get_material();
-		return true;
-	  }
+      if (object_ptr && object_ptr->hit(ray, t, sinfo) && t < tx_next) {
+        material_ptr = object_ptr->get_material();
+	return true;
+      }
 
-	  tx_next += dtx;
-	  ix += ix_step;
+      tx_next += dtx;
+      ix += ix_step;
 
-	  if (ix == ix_stop)
-		return false;
-	}
+      if (ix == ix_stop)
+        return false;
+      }
     else {
-	  if (ty_next < tz_next) {
-		if (object_ptr && object_ptr->hit(ray, t, sinfo) && t < ty_next) {
-		  material_ptr = object_ptr->get_material();
-			return true;
-		}
+      if (ty_next < tz_next) {
+        if (object_ptr && object_ptr->hit(ray, t, sinfo) && t < ty_next) {
+          material_ptr = object_ptr->get_material();
+	  return true;
+        }
 
-		ty_next += dty;
-		iy += iy_step;
+	ty_next += dty;
+	iy += iy_step;
 
-		if (iy == iy_stop)
-		  return false;
-	  }
-	  else {
-		if (object_ptr && object_ptr->hit(ray, t, sinfo) && t < tz_next) {
-		  material_ptr = object_ptr->get_material();
-		  return true;
-		}
-
-		tz_next += dtz;
-		iz += iz_step;
-
-		if (iz == iz_stop)
-		  return false;
-	  }
+	if (iy == iy_stop)
+	  return false;
+      }
+      else {
+	if (object_ptr && object_ptr->hit(ray, t, sinfo) && t < tz_next) {
+	  material_ptr = object_ptr->get_material();
+	  return true;
 	}
+
+	tz_next += dtz;
+	iz += iz_step;
+
+	if (iz == iz_stop)
+	  return false;
+      }
+    }
   }
 }
