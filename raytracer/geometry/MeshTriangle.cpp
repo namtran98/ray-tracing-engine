@@ -49,7 +49,7 @@ bool MeshTriangle::hit(const Ray& ray, float& t_min, ShadeInfo& si) const{
   if (not bbox.hit(ray)){
     return false;
   }
-  
+
   Point3D v0 = Point3D(mesh_ptr->vertices[index0]);
 	Point3D v1 = Point3D(mesh_ptr->vertices[index1]);
 	Point3D v2 = Point3D(mesh_ptr->vertices[index2]);
@@ -100,13 +100,11 @@ bool MeshTriangle::hit(const Ray& ray, float& t_min, ShadeInfo& si) const{
 }
 
 BBox MeshTriangle::get_bounding_box(){
-  double delta = 0.0001;
-
 	Point3D v1 = Point3D(mesh_ptr->vertices[index0]);
 	Point3D v2 = Point3D(mesh_ptr->vertices[index1]);
 	Point3D v3 = Point3D(mesh_ptr->vertices[index2]);
-  Point3D min = Point3D(std::min(std::min(v1.x, v2.x), v3.x) - delta, std::min(std::min(v1.y, v2.y), v3.y) - delta, std::min(std::min(v1.z, v2.z), v3.z) - delta);
-  Point3D max = Point3D(std::max(std::max(v1.x, v2.x), v3.x) + delta, std::max(std::max(v1.y, v2.y), v3.y) + delta, std::max(std::max(v1.z, v2.z), v3.z) + delta);
+  Point3D min = Point3D(std::min(std::min(v1.x, v2.x), v3.x), std::min(std::min(v1.y, v2.y), v3.y), std::min(std::min(v1.z, v2.z), v3.z));
+  Point3D max = Point3D(std::max(std::max(v1.x, v2.x), v3.x), std::max(std::max(v1.y, v2.y), v3.y), std::max(std::max(v1.z, v2.z), v3.z));
 
 	return BBox(min, max);
 }
