@@ -177,9 +177,9 @@ Point3D Grid::max_coordinates() {
       p0.z = bbox.max_point.z;
   }
 
-  p0.x -= kEpsilon;
-  p0.y -= kEpsilon;
-  p0.z -= kEpsilon;
+  p0.x += kEpsilon;
+  p0.y += kEpsilon;
+  p0.z += kEpsilon;
 
   return p0;
 }
