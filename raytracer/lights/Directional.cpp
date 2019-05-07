@@ -28,12 +28,12 @@ Directional& Directional::operator= (const Directional& rhs){
 
 
 // Normalized direction vector from light source to hit directional.
-Vector3D Directional::get_direction(ShadeInfo& sinfo) const{
+Vector3D Directional::get_direction(const ShadeInfo& sinfo) const{
   return dir;
 }
 
 // Luminance from this light source at hit directional.
-RGBColor Directional::L(ShadeInfo& sinfo) const{
+RGBColor Directional::L(const ShadeInfo& sinfo) const{
   return ls * color;
 }
 

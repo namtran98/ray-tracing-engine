@@ -27,10 +27,10 @@ public:
   virtual ~Ambient(void);  // dummy function.
 
   // Normalized direction vector from light source to hit point.
-  virtual Vector3D get_direction(ShadeInfo& sinfo) const;
+  virtual Vector3D get_direction(const ShadeInfo& sinfo) const;
 
   // Luminance from this light source at hit point.
-  virtual RGBColor L(ShadeInfo& sinfo) const;
+  virtual RGBColor L(const ShadeInfo& sinfo) const;
 protected:
   float ls;
 };

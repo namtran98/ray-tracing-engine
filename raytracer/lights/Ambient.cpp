@@ -20,13 +20,13 @@ Ambient& Ambient::operator= (const Ambient& rhs){
 
 // Normalized direction vector from light source to hit point.
 // 0 vector from the textbook
-Vector3D Ambient::get_direction(ShadeInfo& sinfo) const{
+Vector3D Ambient::get_direction(const ShadeInfo& sinfo) const{
   std::cout << "Warning: Calling get direction on ambient light" << std::endl;
   return Vector3D(0);
 }
 
 // Luminance from this light source at hit point.
-RGBColor Ambient::L(ShadeInfo& sinfo) const{
+RGBColor Ambient::L(const ShadeInfo& sinfo) const{
   return ls * color;
 }
 

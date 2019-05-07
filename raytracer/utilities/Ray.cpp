@@ -4,12 +4,14 @@ Ray::Ray(){
     o = Point3D(0,0,0);
     d = Vector3D(0,0,0);
     w = 1.0f;
+    depth = 0;
 }  // set origin and dir to (0, 0, 0), w to 1.
 
 Ray::Ray(const Point3D& origin, const Vector3D& dir){
     o = origin;
     d = dir;
     w = 1.0f;
+    depth = 0;
 }  // set origin, dir; w is 1.
 
   // Copy constructor and assignment operator.

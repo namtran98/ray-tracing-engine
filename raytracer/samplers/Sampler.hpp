@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 #include "../cameras/Camera.hpp"
-// #include "../world/ViewPlane.hpp"
 #include "../utilities/Ray.hpp"
 
 /**
@@ -21,13 +20,27 @@ class ViewPlane;
 
 class Sampler {
 protected:
+  struct Point2D{
+    float x;
+    float y;
+  };
   Camera* camera_ptr;  // the camera that decides the projectors.
   ViewPlane* viewplane_ptr;  // the view plane through which rays are shot.
+  std::vector<Point2D> samples;				// sample points on a unit square
+  std::vector<Point3D> hemisphere_samples;
+  std::vector<int> shuffled_indices;		// shuffled samples array indices
+
+
+  int num_samples;
+  int num_sets;
+  unsigned long count;
+  int jump;
 
 public:
   // Constructors.
   Sampler();  // initializes members to NULL.
   Sampler(Camera* c_ptr, ViewPlane* v_ptr);  // set members.
+  Sampler(Camera* c_ptr, ViewPlane* v_ptr, int num_samples, int num_sets);  // set members.
 
   // Copy constuctor and assignment operator.
   Sampler(const Sampler& camera);
@@ -44,4 +57,9 @@ public:
   // the view plane.
   virtual std::vector<Ray> get_rays(int px, int py) = 0;
   Point3D screenCoordsToPoint(float px, float py) const;
+  void map_samples_to_hemisphere(const float p);
+  Point3D sample_hemisphere();
+  void setup_shuffled_indices();
+
+
 };

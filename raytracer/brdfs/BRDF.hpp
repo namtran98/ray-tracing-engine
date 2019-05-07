@@ -2,6 +2,7 @@
 #include "../utilities/RGBColor.hpp"
 #include "../utilities/Vector3D.hpp"
 #include "../utilities/ShadeInfo.hpp"
+#include "../samplers/Sampler.hpp"
 
 
 /**
@@ -24,16 +25,16 @@ public:
   virtual BRDF* clone() const = 0;
 
   // Desctructor.
-  virtual ~BRDF();   							
+  virtual ~BRDF();
 
   // Get colors.
   virtual RGBColor
   f(const ShadeInfo& sinfo, const Vector3D& wo, const Vector3D& wi) const = 0;
-  virtual RGBColor
-  sample_f(const ShadeInfo& sinfo, const Vector3D& wo, Vector3D& wi) const = 0;
-  virtual RGBColor
-  sample_f(const ShadeInfo& sinfo, const Vector3D& wo,
-	   Vector3D& wi, float& pdf) const = 0;
+  virtual RGBColor sample_f(const ShadeInfo& sinfo, const Vector3D& wo, Vector3D& wi) const = 0;
+  virtual RGBColor sample_f(const ShadeInfo& sinfo, const Vector3D& wo, Vector3D& wi, float& pdf) const = 0;
   virtual RGBColor
   rho(const ShadeInfo& sinfo, const Vector3D& wo) const = 0;
+
+  protected:
+    Sampler* sampler_ptr;
 };

@@ -32,7 +32,7 @@ public:
   std::unique_ptr<Sampler> sampler_ptr;
   std::unique_ptr<Acceleration> accel_ptr;
   std::unique_ptr<Tracer> tracer_ptr;
-  // Light* ambient_ptr;
+  Light* ambient_ptr;
 
 
 public:
@@ -46,7 +46,7 @@ public:
   void add_object(Geometry* geom_ptr);
   void add_light(Light* light_ptr);
   void set_camera(Camera* c_ptr);
-  // void set_ambient_light(Light* light_ptr);
+  void set_ambient_light(Light* light_ptr);
   void set_tracer(Tracer* t_ptr);
   void set_acceleration(Acceleration* acceleration_ptr);
 

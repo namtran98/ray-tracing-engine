@@ -53,10 +53,11 @@ bool MeshTriangle::hit(const Ray& ray, float& t_min, ShadeInfo& si) const{
   Point3D v0 = Point3D(mesh_ptr->vertices[index0]);
 	Point3D v1 = Point3D(mesh_ptr->vertices[index1]);
 	Point3D v2 = Point3D(mesh_ptr->vertices[index2]);
+
   Vector3D edge1, edge2, h, s, q;
   float _a, f, u, v;
-  edge1 = v1-v0;
-  edge2 = v2-v0;
+  edge1 = v1 - v0;
+  edge2 = v2 - v0;
   h = ray.d ^ edge2;
   _a = edge1 * h;
   if (_a > -kEpsilon && _a < kEpsilon){

@@ -13,7 +13,7 @@ Jittered::Jittered(){
   count = 0;
   generateSamples();
 }
-Jittered::Jittered(Camera* c_ptr, ViewPlane* v_ptr, int _num_samples, int _num_sets): Sampler(c_ptr, v_ptr), num_samples(_num_samples), num_sets(_num_sets), count(0) {
+Jittered::Jittered(Camera* c_ptr, ViewPlane* v_ptr, int _num_samples, int _num_sets): Sampler(c_ptr, v_ptr, _num_samples, _num_sets) {
   generateSamples();
 }
 
