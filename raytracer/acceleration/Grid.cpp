@@ -53,7 +53,7 @@ void Grid::setup_cells() {
   int num_cells = nx * ny * nz;
   cells.reserve(num_cells);
 
-  for (int i = 0; i < num_objects; i++) {
+  for (int i = 0; i < num_cells; i++) {
     cells.push_back(nullptr);
   }
 
