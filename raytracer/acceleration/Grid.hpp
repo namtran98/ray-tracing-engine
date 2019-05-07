@@ -27,7 +27,6 @@ private:
     std::vector<Geometry*> cells;   // cells are stored in a 1D array
     BBox bbox;                      // bounding box
     int nx, ny, nz;                 // number of cells in the x, y, and z-dir
-    bool reverse_normal;
     Point3D min_coordinates();      // compute minimum grid coordinates
     Point3D max_coordinates();      // compute maximum grid coordinates
 
