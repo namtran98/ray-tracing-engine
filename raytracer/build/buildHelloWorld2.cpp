@@ -1,11 +1,14 @@
 #include "../world/World.hpp"
 #include "../utilities/Constants.hpp"
 #include "../cameras/Perspective.hpp"
+#include "../cameras/Parallel.hpp"
 #include "../samplers/Simple.hpp"
 #include "../geometry/Plane.hpp"
 #include "../materials/Cosine.hpp"
 #include "../geometry/Sphere.hpp"
 #include "../geometry/Triangle.hpp"
+#include "../materials/Reflective.hpp"
+
 /**
    This builds a simple scene that consists of a sphere, a triangle, and a
    plane.
@@ -28,7 +31,8 @@ World::build(void) {
   bg_color = black;
 
   // Camera and sampler.
-  set_camera(new Perspective(0, 0, 20));
+  // set_camera(new Parallel(0, 0, -1));
+  set_camera(new Perspective(0, 0, 10));
   sampler_ptr = std::make_unique<Simple>(camera_ptr.get(), &vplane);
 
   // sphere
@@ -48,7 +52,7 @@ World::build(void) {
   Point3D o(0);
   Vector3D n(0, 10, -1);
   Plane* plane_ptr = new Plane(Point3D(45, -7, -60), 20);
-  plane_ptr->set_material(new Cosine(brown));  // brown
+  plane_ptr->set_material(new Reflective());  // brown
   add_object(plane_ptr);
 
   Sphere* sphere_ptr3 = new Sphere(Point3D(40, 43, -100), 17);

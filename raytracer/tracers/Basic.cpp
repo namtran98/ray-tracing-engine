@@ -1,4 +1,7 @@
 #include "Basic.hpp"
+#include <iostream>
+#include <string>
+#include <sstream>
 
 
 
@@ -22,6 +25,7 @@ RGBColor Basic::trace_ray(const Ray& ray) const {
     ShadeInfo sinfo = world_ptr->hit_objects(ray);
     if (sinfo.hit) {
         return weight * sinfo.material_ptr->shade(sinfo);
+        cout << "here";
     }
     else {
         return weight * world_ptr->bg_color;
