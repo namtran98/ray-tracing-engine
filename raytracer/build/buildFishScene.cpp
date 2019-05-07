@@ -48,13 +48,13 @@ World::build(void) {
 
   // Anything added after this seems to segfault
 
-  // Mesh* fish3 = new Mesh((char*)"../resources/goldfish_low_res.ply", -15, 0, 0);
-  // accel_ptr->add_from_mesh(fish3, new Cosine(green));
-  // accel_ptr->compute_normals(fish3);
+  Mesh* fish3 = new Mesh((char*)"../resources/goldfish_low_res.ply", -15, 0, 0);
+  accel_ptr->add_from_mesh(fish3, new Cosine(green));
+  accel_ptr->compute_normals(fish3);
 
-  // Mesh* fish4 = new Mesh((char*)"../resources/goldfish_low_res.ply", 3, 0, 0);
-  // accel_ptr->add_from_mesh(fish4, new Cosine(yellow));
-  // accel_ptr->compute_normals(fish4);
+  Mesh* fish4 = new Mesh((char*)"../resources/goldfish_low_res.ply", 3, 0, 0);
+  accel_ptr->add_from_mesh(fish4, new Cosine(yellow));
+  accel_ptr->compute_normals(fish4);
 
 
   accel_ptr->initialize();

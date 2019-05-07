@@ -6,19 +6,19 @@
 bool xInOrder(Geometry *a, Geometry*b){
   BBox aBB = a->get_bounding_box();
   BBox bBB = b->get_bounding_box();
-  return (aBB.min_point.x + aBB.max_point.x) / 2 <= (bBB.min_point.x + bBB.max_point.x) / 2;
+  return (aBB.min_point.x + aBB.max_point.x) / 2 < (bBB.min_point.x + bBB.max_point.x) / 2;
 }
 
 bool yInOrder(Geometry *a, Geometry*b){
   BBox aBB = a->get_bounding_box();
   BBox bBB = b->get_bounding_box();
-  return (aBB.min_point.y + aBB.max_point.y) / 2 <= (bBB.min_point.y + bBB.max_point.y) / 2;
+  return (aBB.min_point.y + aBB.max_point.y) / 2 < (bBB.min_point.y + bBB.max_point.y) / 2;
 }
 
 bool zInOrder(Geometry *a, Geometry*b){
   BBox aBB = a->get_bounding_box();
   BBox bBB = b->get_bounding_box();
-  return (aBB.min_point.z + aBB.max_point.z) / 2 <= (bBB.min_point.z + bBB.max_point.z) / 2;
+  return (aBB.min_point.z + aBB.max_point.z) / 2 < (bBB.min_point.z + bBB.max_point.z) / 2;
 }
 
 BVH::BVH() : split_dim(0), bbox(), left(nullptr), right(nullptr){}
