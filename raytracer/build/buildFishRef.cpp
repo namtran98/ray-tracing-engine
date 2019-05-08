@@ -37,14 +37,14 @@ World::build(void) {
   sampler_ptr = std::make_unique<Jittered>(camera_ptr.get(), &vplane, 4, 83);
 
   Reflective* ref_material = new Reflective();
-//   ref_material->set_kr(.5);
-// //   ref_material->set_kd(.5);
-//   ref_material->set_cr(.5);
-//   const float ka = .25;
-//   const float kd = 1.0;
-//   ref_material->set_ka(.5);
-//   ref_material->set_kd(.5);
-//   ref_material->set_cd(.5);
+  // ref_material->set_kr(.5);
+  // ref_material->set_kd(.5);
+  // ref_material->set_cr(.5);
+  // const float ka = .25;
+  // const float kd = 1.0;
+  // ref_material->set_ka(.5);
+  // ref_material->set_kd(.5);
+  // ref_material->set_cd(.5);
 
   set_acceleration(new BVH());
 
