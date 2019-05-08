@@ -99,28 +99,25 @@ RGBColor Reflective::shade(const ShadeInfo& sr, std::vector<int> shadows) const 
 
 
     Vector3D wo = -sr.ray.d;
-    Vector3D wi;
-    RGBColor fr = reflective_brdf->sample_f(sr, wo, wi);
-    
     RGBColor L  = ambient_brdf->rho(sr, wo) * sr.w->ambient_ptr->L(sr);
     int num_lights = sr.w->lights.size();
 
     for (int i = 0; i < num_lights; i++)
     {
-        wi = sr.w->lights[i]->get_direction(sr);
-        float ndotwi = sr.normal * wi;
+        Vector3D wii = sr.w->lights[i]->get_direction(sr);
+        float ndotwi = sr.normal * wii;
 
-        // if (ndotwi > 0.0) {
-        //     bool in_shadow = false;
-
-        //     if (sr.w->lights[i])
-        // }
-    }
+        if (ndotwi > 0.0) {
+            L += (diffuse_brdf->f(sr, wo, wii) + 
+                reflective_brdf->f(sr, wo, wii))
+                * sr.w->lights[i]->L(sr) * ndotwi;
+        }
+    } 
     
-
+    
+    Vector3D wi;
+    RGBColor fr = reflective_brdf->sample_f(sr, wo, wi);
     Ray reflected_ray(sr.hit_point, wi);
-    reflected_ray.depth = sr.depth + 1;
-
     L += fr * (sr.w->tracer_ptr->trace_ray(reflected_ray)) * (sr.normal * wi);
 
     return (L);
