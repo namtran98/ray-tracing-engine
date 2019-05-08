@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12" style="text-align: center">
+                <div class="page-header" class="mx-auto" style="display: inline-block">
+                    <h1>
+                        Ray Tracing Engine (CSCI 155)
+                    </h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="text-align: center">
+            <div class="col-md-6" style="display: inline-block">
+                <h3 class="text-center">
+                    Low Quality Render
+                </h3>
+                <img class="w-50 p-3" alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                <p class="text-muted">
+                    Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>.
+                    Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea 
+                    dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia 
+                    non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi 
+                    commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, 
+                    metus nunc consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, 
+                    vulputate nec bibendum nec, posuere nec lacus. <small>Aliquam mi erat, aliquam vel 
+                    luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat ipsum consequat eu.</small>
+                </p>
+            </div>
+            <div class="col-md-6" style="text-align: center">
+                <h3 class="text-center" style="display: inline-block">
+                    High Quality Render
+                </h3>
+                <br>
+                <img class="w-50 p-3" alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                <p class="text-muted">
+                        Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>.
+                        Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea 
+                        dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia 
+                        non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi 
+                        commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, 
+                        metus nunc consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, 
+                        vulputate nec bibendum nec, posuere nec lacus. <small>Aliquam mi erat, aliquam vel 
+                        luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat ipsum consequat eu.</small>
+                    </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" style="text-align: center">
+                <h3 class="text-center" style="display: inline-block">
+                    Without BVH
+                </h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                # Of Primitives
+                            </th>
+                            <th>
+                                Time Taken
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                1
+                            </td>
+                            <td>
+                                TB - Monthly
+                            </td>
+                            <td>
+                                01/04/2012
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                2
+                            </td>
+                            <td>
+                                TB - Monthly
+                            </td>
+                            <td>
+                                01/04/2012
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                3
+                            </td>
+                            <td>
+                                TB - Monthly
+                            </td>
+                            <td>
+                                02/04/2012
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                4
+                            </td>
+                            <td>
+                                TB - Monthly
+                            </td>
+                            <td>
+                                03/04/2012
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                5
+                            </td>
+                            <td>
+                                TB - Monthly
+                            </td>
+                            <td>
+                                04/04/2012
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6" style="text-align: center">
+                    <h3 class="text-center" style="display: inline-block">
+                        With BVH
+                    </h3>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    #
+                                </th>
+                                <th>
+                                    # Of Primitives
+                                </th>
+                                <th>
+                                    Time Taken
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    TB - Monthly
+                                </td>
+                                <td>
+                                    01/04/2012
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    2
+                                </td>
+                                <td>
+                                    TB - Monthly
+                                </td>
+                                <td>
+                                    01/04/2012
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    3
+                                </td>
+                                <td>
+                                    TB - Monthly
+                                </td>
+                                <td>
+                                    02/04/2012
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    4
+                                </td>
+                                <td>
+                                    TB - Monthly
+                                </td>
+                                <td>
+                                    03/04/2012
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    5
+                                </td>
+                                <td>
+                                    TB - Monthly
+                                </td>
+                                <td>
+                                    04/04/2012
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>
+                    h3. Lorem ipsum dolor sit amet.
+                </h3>
+                <p>
+                    Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat ipsum consequat eu.</small>
+                </p>
+            </div>
+            <div class="col-md-6">
+                <h3>
+                    h3. Lorem ipsum dolor sit amet.
+                </h3>
+                <p>
+                    Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat ipsum consequat eu.</small>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <h3>
+                    h3. Lorem ipsum dolor sit amet.
+                </h3>
+                <p>
+                    Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat ipsum consequat eu.</small>
+                </p>
+                <ul>
+                    <li class="list-item">
+                        Owen Gillespie
+                    </li>
+                    <li class="list-item">
+                        Victor Machado
+                    </li>
+                    <li class="list-item">
+                        Paul Mesa
+                    </li>
+                    <li class="list-item">
+                        Nam Tran
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                    <div class="col-md-6">
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                    <div class="col-md-6">
+                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Aliquam eget sapien sapien. Curabitur in metus urna. In hac habitasse platea dictumst. Phasellus eu sem sapien, sed vestibulum velit. Nam purus nibh, lacinia non faucibus et, pharetra in dolor. Sed iaculis posuere diam ut cursus. <em>Morbi commodo sodales nisi id sodales. Proin consectetur, nisi id commodo imperdiet, metus nunc consequat lectus, id bibendum diam velit et dui.</em> Proin massa magna, vulputate nec bibendum nec, posuere nec lacus. <small>Aliquam mi erat, aliquam vel luctus eu, pharetra quis elit. Nulla euismod ultrices massa, et feugiat ipsum consequat eu.</small>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
