@@ -38,15 +38,15 @@ World::build(void) {
 
   set_camera(new Perspective(0, 0, 20));
   sampler_ptr = std::make_unique<Jittered>(camera_ptr.get(), &vplane, 4, 83);
-  set_ambient_light(new Ambient(1, 1, 1, 1));
-  add_light(new Point(RGBColor(0,0,1), 1, Point3D(0,20,0)));
+  set_ambient_light(new Ambient(1, 1, 1, .4));
+  add_light(new Point(RGBColor(1,1,1), 1, Point3D(0,20,0)));
 
-  Matte *matte_material = new Matte();
-  const float ka = .25;
-  const float kd = 1.0;
-  matte_material->set_ka(.5);
-  matte_material->set_kd(.5);
-  matte_material->set_cd(.5);
+  // Matte *matte_material = new Matte();
+  // const float ka = .25;
+  // const float kd = 1.0;
+  // matte_material->set_ka(.5);
+  // matte_material->set_kd(.5);
+  // matte_material->set_cd(.5);
 
   Reflective *reflective_material = new Reflective();
   reflective_material->set_ka(.3);
@@ -73,8 +73,14 @@ World::build(void) {
   triangle_ptr->set_material(new Cosine(blue));
   add_object(triangle_ptr);
 
+  Matte *matte_material = new Matte();
+  // const float ka = .25;
+  // const float kd = 1.0;
+  matte_material->set_ka(.5);
+  matte_material->set_kd(.5);
+  matte_material->set_cd(1,1,0);
   // plane
   Plane* plane_ptr = new Plane(Point3D(0,-4,0), Vector3D(0, 5, 2));
-  plane_ptr->set_material(new Cosine(green));  // green
+  plane_ptr->set_material(matte_material);  // green
   add_object(plane_ptr);
 }
