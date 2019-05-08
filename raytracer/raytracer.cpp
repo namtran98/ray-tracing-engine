@@ -5,6 +5,8 @@
 #include "tracers/Basic.hpp"
 #include "tracers/Shadow.hpp"
 #include <iostream>
+
+#include <ctime>
 // #include "utilities/Mesh.hpp"
 
 int main(int argc, char **argv) {
@@ -14,11 +16,15 @@ int main(int argc, char **argv) {
   Sampler* sampler = world.sampler_ptr.get();
   ViewPlane& viewplane = world.vplane;
   Image image(viewplane);
+  // timer
+  clock_t timing;
 
   // Mesh mesher = Mesh((char*)"goldfish_low_res.ply");
   // SET TRACER HERE
   world.set_tracer(new Shadow(&world));
   std::vector<Ray> rays;
+
+  timing = std::clock();
   int pixels_done = 0;
   int one_percent = viewplane.hres * viewplane.vres / 100;
   for (int x = 0; x < viewplane.hres; x++) {  // across.
@@ -39,6 +45,9 @@ int main(int argc, char **argv) {
       }
     }
   }
+  timing = clock() - timing;
+
+  std::cout<<"THIS TOOK " << (float)timing/CLOCKS_PER_SEC << " seconds long to run!!\n";
   // Write image to file.
   image.write_ppm("scene.ppm");
 
