@@ -11,6 +11,7 @@ World::World(){
     sampler_ptr = NULL;
     accel_ptr = NULL;
     tracer_ptr = NULL;
+    ambient_ptr = nullptr;
 } // initialize members.
 
 // Destructor.
