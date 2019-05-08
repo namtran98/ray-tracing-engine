@@ -29,7 +29,9 @@ RGBColor Shadow::trace_ray(const Ray& ray) const {
             Vector3D dir = lights[i]->get_direction(sinfo);
             Ray shadowRay = Ray(sinfo.hit_point, dir);
             ShadeInfo sinfoshadow = world_ptr->hit_objects(shadowRay);
-            shadows.push_back(i);
+            if(sinfoshadow.hit){
+                shadows.push_back(i);
+            }
             // shadow = sinfoshadow.hit;
         }
         // if(!shadow){
