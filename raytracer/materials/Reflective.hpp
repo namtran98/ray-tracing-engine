@@ -3,6 +3,7 @@
 #include "../utilities/RGBColor.hpp"
 #include "Material.hpp"
 #include "../brdfs/PerfectSpecular.hpp"
+#include "../brdfs/Lambertian.hpp"
 
 /**
    This file declares the Material class which is an abstract class for concrete
@@ -39,5 +40,7 @@ class Reflective: public Material {
 
   private:
     PerfectSpecular* reflective_brdf;
+    Lambertian*		ambient_brdf;
+		Lambertian*		diffuse_brdf;
 };
 

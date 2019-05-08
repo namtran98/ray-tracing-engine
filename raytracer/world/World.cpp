@@ -1,5 +1,5 @@
 #include "World.hpp"
-#include "../build/buildHelloWorld2.cpp"
+#include "../build/buildChapter14.cpp"
 
 
 World::World(){
@@ -11,6 +11,7 @@ World::World(){
     sampler_ptr = NULL;
     accel_ptr = NULL;
     tracer_ptr = NULL;
+    ambient_ptr = nullptr;
 } // initialize members.
 
 // Destructor.
