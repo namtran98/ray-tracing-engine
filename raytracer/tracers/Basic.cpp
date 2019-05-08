@@ -24,8 +24,7 @@ RGBColor Basic::trace_ray(const Ray& ray) const {
     float weight = ray.w;  // ray weight for the pixel.
     ShadeInfo sinfo = world_ptr->hit_objects(ray);
     if (sinfo.hit) {
-        return weight * sinfo.material_ptr->shade(sinfo);
-        cout << "here";
+        return weight * sinfo.material_ptr->shade(sinfo,{});
     }
     else {
         return weight * world_ptr->bg_color;

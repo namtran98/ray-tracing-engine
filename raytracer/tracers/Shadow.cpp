@@ -23,7 +23,7 @@ RGBColor Shadow::trace_ray(const Ray& ray) const {
     if (sinfo.hit) {
         bool shadow = false;
         std::vector<Light*> lights = world_ptr->lights;
-        std::vector<int> shadows;
+        std::vector<int> shadows = {};
         //check for intersection of prims on way to light
         for (int i = 0;i<lights.size();i++){
             Vector3D dir = lights[i]->get_direction(sinfo);

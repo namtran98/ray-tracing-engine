@@ -2,6 +2,7 @@
 #include "../utilities/ShadeInfo.hpp"
 #include "../utilities/RGBColor.hpp"
 #include <vector>
+#include<algorithm>
 /**
    This file declares the Material class which is an abstract class for concrete
    materials to inherit from.
