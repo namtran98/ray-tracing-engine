@@ -17,6 +17,6 @@ Material& Material::operator=(const Material& other){
 Material::~Material(){}
 
 // Shade to make the linker work
-RGBColor Material::shade(const ShadeInfo& sinfo) const {
+RGBColor Material::shade(const ShadeInfo& sinfo, std::vector<int> shadows) const {
   return RGBColor();
 }

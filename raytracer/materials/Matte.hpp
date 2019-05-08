@@ -29,7 +29,7 @@ class Matte: public Material {
 		void set_cd(const float r, const float g, const float b);
 		void set_cd(const float c);
 
-		virtual RGBColor shade(const ShadeInfo& sr) const;
+		virtual RGBColor shade(const ShadeInfo& sr, std::vector<int> shadows) const;
 
 	private:
 

@@ -94,7 +94,7 @@ Reflective::~Reflective() {
 }
 
 // shade
-RGBColor Reflective::shade(const ShadeInfo& sr) const {
+RGBColor Reflective::shade(const ShadeInfo& sr, std::vector<int> shadows) const {
     
 
 

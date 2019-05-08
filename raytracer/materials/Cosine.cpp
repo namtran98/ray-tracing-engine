@@ -36,7 +36,7 @@ Cosine::~Cosine(){
     \theta is the angle between the normal at the hit point and the ray.
     Assuming unit vectors, cos \theta = dot product of normal and -ray.dir.
 */
-RGBColor Cosine::shade(const ShadeInfo& sinfo) const{
+RGBColor Cosine::shade(const ShadeInfo& sinfo, std::vector<int> shadows) const{
     Vector3D normal_copy = sinfo.normal;
     Vector3D ray_copy = sinfo.ray.d;
     normal_copy.normalize();

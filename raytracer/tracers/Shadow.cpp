@@ -23,19 +23,22 @@ RGBColor Shadow::trace_ray(const Ray& ray) const {
     if (sinfo.hit) {
         bool shadow = false;
         std::vector<Light*> lights = world_ptr->lights;
+        std::vector<int> shadows;
         //check for intersection of prims on way to light
         for (int i = 0;i<lights.size();i++){
             Vector3D dir = lights[i]->get_direction(sinfo);
             Ray shadowRay = Ray(sinfo.hit_point, dir);
             ShadeInfo sinfoshadow = world_ptr->hit_objects(shadowRay);
-            shadow = sinfoshadow.hit;
+            shadows.push_back(i);
+            // shadow = sinfoshadow.hit;
         }
-        if(!shadow){
-            return weight * sinfo.material_ptr->shade(sinfo);
-        }else{
-            // add something here that uses the in shadow color
-            return world_ptr->ambient_ptr->L(sinfo);
-        }
+        // if(!shadow){
+        return weight * sinfo.material_ptr->shade(sinfo,shadows);
+        // }else{
+            // add something here that uses the in shadow color see chapter 15
+            // ambient_brdf->rho(sr, wo)
+            // return world_ptr->ambient_ptr->L(sinfo);
+        // }
     }
     return weight * world_ptr->bg_color;
 }

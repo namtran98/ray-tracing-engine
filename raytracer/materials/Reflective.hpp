@@ -28,7 +28,7 @@ class Reflective: public Material {
     virtual ~Reflective();
 
     // Get color.
-    virtual RGBColor shade(const ShadeInfo& sinfo) const;
+    virtual RGBColor shade(const ShadeInfo& sinfo, std::vector<int> shadows) const;
 
     void set_kr(const float k);
 
