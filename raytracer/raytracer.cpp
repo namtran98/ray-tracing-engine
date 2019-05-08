@@ -3,6 +3,7 @@
 #include <memory>
 #include "samplers/Simple.hpp"
 #include "tracers/Basic.hpp"
+#include "tracers/Shadow.hpp"
 #include <iostream>
 // #include "utilities/Mesh.hpp"
 
