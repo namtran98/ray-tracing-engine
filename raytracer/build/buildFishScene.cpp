@@ -36,7 +36,7 @@ World::build(void) {
   // Camera and sampler.
   // set_camera(new Parallel(0, 0, -1));
 
-  set_camera(new Perspective(0, 0, 100));
+  set_camera(new Perspective(0, 0, 20));
   sampler_ptr = std::make_unique<Jittered>(camera_ptr.get(), &vplane, 4, 83);
   set_ambient_light(new Ambient(1, 1, 1, 1));
   add_light(new Point({1, 0, 0}, 1, {0, 20, 0}));

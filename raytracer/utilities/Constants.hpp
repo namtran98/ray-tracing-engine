@@ -23,7 +23,9 @@ const RGBColor white(1.0);
 const RGBColor grey(0.5);
 const RGBColor red(1.0, 0.0, 0.0);
 const RGBColor blue(0.0, 0.0, 1.0);
- // colors
+// colors
+const RGBColor skyBlue(0.498, 0.855, 1);  //sky blue
+const RGBColor oceanBlue(0, 0.467, 0.745);  //ocean blue
 const RGBColor yellow(1, 1, 0);  // yellow
 const RGBColor brown(0.71, 0.40, 0.16);  // brown
 const RGBColor darkGreen(0.0, 0.41, 0.41);  // darkGreen

@@ -1,7 +1,6 @@
 /**
-   This builds a simple scene that consists of a sphere, a triangle, and a
-   plane.
-   Parallel viewing is used with a single sample per pixel.
+   This builds a simple scene that consists fish under the sea.
+   Perspective viewing is used.
 */
 #include "../cameras/Perspective.hpp"
 #include "../cameras/Parallel.hpp"
@@ -12,10 +11,11 @@
 #include "../world/World.hpp"
 #include "../utilities/Mesh.hpp"
 #include "../geometry/MeshTriangle.hpp"
+#include "../lights/Point.hpp"
+#include "../lights/Ambient.hpp"
 
 #include <iostream>
-void
-World::build(void) {
+void World::build(void) {
   // View plane  .
   vplane.top_left.x = -10;
   vplane.top_left.y = 10;
@@ -23,17 +23,19 @@ World::build(void) {
   vplane.bottom_right.x = 10;
   vplane.bottom_right.y = -10;
   vplane.bottom_right.z = 10;
-  vplane.hres = 500;
-  vplane.vres = 500;
+  vplane.hres = 1000;
+  vplane.vres = 1000;
 
   // Background color.
-  bg_color = white;
+  bg_color = oceanBlue;
 
   // Camera and sampler.
   // set_camera(new Parallel(0, 0, -1));
 
   set_camera(new Perspective(0, 0, 20));
   sampler_ptr = std::make_unique<Simple>(camera_ptr.get(), &vplane);
+  set_ambient_light(new Ambient(1, 1, 1, .1));
+  add_light(new Point(white, 1, Point3D(0,0,200)));
 
   // will get seg fault unless add normals
   Mesh* mesher = new Mesh((char*)"../resources/goldfish_low_res.ply");
@@ -45,23 +47,4 @@ World::build(void) {
     add_object(meshTri1);
   }
 
-  // calculates normals for the faces, this will need to happen in whatever adds the grid to the scene
-  mesher->normals.reserve(mesher->num_vertices);
-
-	for (int index = 0; index < mesher->num_vertices; index++) {
-		Vector3D normal;
-
-		for (unsigned int j = 0; j < mesher->vertex_faces[index].size(); j++){
-			normal += ((MeshTriangle*)geometry[mesher->vertex_faces[index][j]])->get_normal();
-    }
-
-		if (normal.x == 0.0 && normal.y == 0.0 && normal.z == 0.0){
-			normal.y = 1.0;
-    }
-		else {
-			normal.normalize();
-    }
-
-		mesher->normals.push_back(normal);
-	}
 }
