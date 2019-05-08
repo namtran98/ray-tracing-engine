@@ -1,5 +1,5 @@
 #include "World.hpp"
-#include "../build/buildFishScene.cpp"
+#include "../build/buildChapter14Lit.cpp"
 
 
 World::World(){
@@ -46,31 +46,22 @@ void World::set_acceleration(Acceleration* acceleration_ptr){
 // Returns appropriate shading information corresponding to intersection of
 // the ray with the scene geometry.
 ShadeInfo World::hit_objects(const Ray& ray){
-
-  ShadeInfo sinfo = ShadeInfo(*this);
-  if (accel_ptr == nullptr) {
-    float t = 0.0f;
-    Vector3D normal;
-    Point3D local_hit_point;
-    float t_min = kHugeValue;
-    for (const auto& shape: geometry){
-      if(shape->hit(ray, t, sinfo) && (t < t_min)){
-        t_min = t;
-        sinfo.hit = true;
-        sinfo.material_ptr = shape->get_material();
-        sinfo.hit_point = ray.o + t * ray.d;
-        normal = sinfo.normal;
-        local_hit_point = sinfo.local_hit_point;
-      }
+    ShadeInfo sinfo = ShadeInfo(*this);
+    if (accel_ptr == nullptr) {
+        float t = kHugeValue;
+        for (const auto& shape: geometry){
+            ShadeInfo temp_sinfo = ShadeInfo(*this);
+            float tempt = 0.0f;
+            if(shape->hit(ray, tempt, temp_sinfo) && tempt < t ){
+                t = tempt;
+                sinfo = temp_sinfo;
+            }
+        }
     }
-    sinfo.t = t_min;
-    sinfo.normal = normal;
-    sinfo.local_hit_point = local_hit_point;
-  }
-  else {
-    if (accel_ptr->hit(ray, sinfo)) {
-      return sinfo;
+    else {
+        if (accel_ptr->hit(ray, sinfo)) {
+            return sinfo;
+        }
     }
-  }
-  return sinfo;
+    return sinfo;
 }
