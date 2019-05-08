@@ -39,7 +39,7 @@ World::build(void) {
   set_camera(new Perspective(0, 0, 20));
   sampler_ptr = std::make_unique<Jittered>(camera_ptr.get(), &vplane, 4, 83);
   set_ambient_light(new Ambient(1, 1, 1, 1));
-  add_light(new Point({1, 0, 0}, 1, {0, 20, 0}));
+  add_light(new Point(RGBColor(0,0,1), 1, Point3D(0,20,0)));
 
   Matte *matte_material = new Matte();
   const float ka = .25;
@@ -59,6 +59,11 @@ World::build(void) {
   Sphere* sphere_ptr = new Sphere(Point3D(-3, 2, 0), 5);
   sphere_ptr->set_material(reflective_material);
   add_object(sphere_ptr);
+
+    // sphere
+  Sphere* sphere_ptr1 = new Sphere(Point3D(-3, 2, 8), 2);
+  sphere_ptr1->set_material(reflective_material);
+  add_object(sphere_ptr1);
 
   // triangle
   Point3D a(2.5, -5, 1);
