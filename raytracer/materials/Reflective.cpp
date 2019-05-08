@@ -115,6 +115,7 @@ RGBColor Reflective::shade(const ShadeInfo& sr, std::vector<int> shadows) const 
     } 
     
     
+    
     Vector3D wi;
     RGBColor fr = reflective_brdf->sample_f(sr, wo, wi);
     Ray reflected_ray(sr.hit_point, wi);
