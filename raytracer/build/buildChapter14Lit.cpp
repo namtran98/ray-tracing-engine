@@ -7,6 +7,7 @@
 #include "../samplers/Simple.hpp"
 #include "../samplers/Jittered.hpp"
 #include "../lights/Point.hpp"
+#include "../lights/Ambient.hpp"
 
 
 /**
@@ -34,8 +35,8 @@ World::build(void) {
   // camera and sampler.
   set_camera(new Parallel(0, 0, -1));
   sampler_ptr = std::make_unique<Jittered>(camera_ptr.get(), &vplane, 4, 83);
-
-  add_light(new Point(white, 1, Point3D(-1,0,-1)));
+  set_ambient_light(new Ambient(1, 1, 1, .1));
+  add_light(new Point(white, 1, Point3D(0,0,200)));
   // // colors
   // RGBColor yellow(1, 1, 0);  // yellow
   // RGBColor brown(0.71, 0.40, 0.16);  // brown
