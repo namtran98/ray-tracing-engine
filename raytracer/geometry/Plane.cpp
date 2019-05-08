@@ -1,4 +1,5 @@
 #include "Plane.hpp"
+#include "../utilities/Constants.hpp"
 #include <cmath>
 // Constructors.
 Plane::Plane(){
@@ -40,8 +41,8 @@ Plane* Plane::clone() const{
 
 // Ray intersection. Set t and sinfo as per intersection with this object.
 bool Plane::hit(const Ray& ray, float& t_min, ShadeInfo& s) const{
-  const float EPSILON = .000001;
     // d * n
+    double EPSILON = .001;
     double check = ray.d * n;
     if(std::abs(check) > 0.0){
         // calc and set info
