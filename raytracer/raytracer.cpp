@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
 
   // Mesh mesher = Mesh((char*)"goldfish_low_res.ply");
   // SET TRACER HERE
-  world.set_tracer(new Shadow(&world));
+  world.set_tracer(new Basic(&world));
   std::vector<Ray> rays;
 
   timing = std::clock();

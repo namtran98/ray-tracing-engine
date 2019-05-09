@@ -4,7 +4,7 @@
 */
 #include "../cameras/Perspective.hpp"
 #include "../cameras/Parallel.hpp"
-#include "../materials/Cosine.hpp"
+#include "../materials/Matte.hpp"
 #include "../samplers/Simple.hpp"
 #include "../samplers/Jittered.hpp"
 #include "../utilities/Constants.hpp"
@@ -33,16 +33,22 @@ void World::build(void) {
   // set_camera(new Parallel(0, 0, -1));
 
   set_camera(new Perspective(0, 0, 20));
-  sampler_ptr = std::make_unique<Simple>(camera_ptr.get(), &vplane);
+  sampler_ptr = std::make_unique<Jittered>(camera_ptr.get(), &vplane, 4, 83);
   set_ambient_light(new Ambient(1, 1, 1, .1));
-  add_light(new Point(white, 1, Point3D(0,0,200)));
+  add_light(new Point(white, 1, Point3D(0,0,100)));
 
+  Matte *matte_material1 = new Matte();
+  // const float ka = .25;
+  // const float kd = 1.0;
+  matte_material1->set_ka(.8);
+  matte_material1->set_kd(.8);
+  matte_material1->set_cd(lightPurple);
   // will get seg fault unless add normals
   Mesh* mesher = new Mesh((char*)"../resources/goldfish_low_res.ply");
 
   for(int i = 0; i < mesher->num_triangles; i++){
     MeshTriangle* meshTri1 = new MeshTriangle(mesher, std::get<0>(mesher->tris[i]), std::get<1>(mesher->tris[i]), std::get<2>(mesher->tris[i]));
-    meshTri1->set_material(new Cosine(red));
+    meshTri1->set_material(matte_material1);
     // mesher->normals.push_back(meshTri1->compute_normal());
     add_object(meshTri1);
   }
