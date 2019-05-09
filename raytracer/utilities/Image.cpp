@@ -55,9 +55,9 @@ void Image::write_ppm(std::string path){
   // the pixel values
   for (int i = pic_vres; i >=0 ; i--){
     for (int j = 0; j < pic_hres; j++){
-      file << (int) (255 * colors[j][i].r) << " ";
-      file << (int) (255 * colors[j][i].g) << " ";
-      file << (int) (255 * colors[j][i].b) << "\t";
+      file << (unsigned int) (255 * colors[j][i].r) << " ";
+      file << (unsigned int) (255 * colors[j][i].g) << " ";
+      file << (unsigned int) (255 * colors[j][i].b) << "\t";
     }
     file << "\n";
   }

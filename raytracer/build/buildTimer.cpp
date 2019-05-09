@@ -38,28 +38,38 @@ World::build(void) {
   bg_color = white;
 
   set_camera(new Perspective(0, 0, 550));
-  sampler_ptr = std::make_unique<Simple>(camera_ptr.get(), &vplane);
+  sampler_ptr = std::make_unique<Jittered>(camera_ptr.get(), &vplane, 4, 83);
   set_ambient_light(new Ambient(1, 1, 1, .4));
   add_light(new Point(RGBColor(1,1,1), 10, Point3D(0,20,0)));
 
+  bool accel = true;
+  int NUM_OBJECTS = 100000;
+
   std::random_device rd; // obtain a random number from hardware
   std::mt19937 eng(rd()); // seed the generator
-  std::uniform_int_distribution<> distr(-500, 500); // define the range
-  set_acceleration(new BVH());
+  std::uniform_int_distribution<> distr(-480, 480); // define the range
+  if (accel){
+    set_acceleration(new BVH());
+  }
 
-  int NUM_OBJECTS = 100000;
 
   for(int i = 0; i < NUM_OBJECTS; i++){
     int x = distr(eng);
-    int y = distr(eng); 
+    int y = distr(eng);
     int z = distr(eng);
     // std::cout<<x << " "<< y<<" "<< z << "\n";
     Sphere* sphere_ptr = new Sphere(Point3D(x,y,z), 10);
-    sphere_ptr->set_material(new Cosine(red));
-    accel_ptr->add_object(sphere_ptr);
+    sphere_ptr->set_material(new Cosine(rand() % 256 / 256.0, rand() % 256 / 256.0, rand() % 256 / 256.0));
+    if (accel){
+      accel_ptr->add_object(sphere_ptr);
+    } else {
+      add_object(sphere_ptr);
+    }
     // add_object(sphere_ptr);
   }
   // sphere
-  
-   accel_ptr->initialize();
+
+  if(accel){
+    accel_ptr->initialize();
+  }
 }
