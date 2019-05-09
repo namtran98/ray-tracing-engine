@@ -12,6 +12,7 @@
 #include "../utilities/Mesh.hpp"
 #include "../geometry/Sphere.hpp"
 #include "../geometry/MeshTriangle.hpp"
+#include "../acceleration/BVH.hpp"
 #include "../lights/Point.hpp"
 #include "../lights/Ambient.hpp"
 
@@ -37,6 +38,8 @@ void World::build(void) {
   sampler_ptr = std::make_unique<Simple>(camera_ptr.get(), &vplane);
   set_ambient_light(new Ambient(1, 1, 1, .1));
   add_light(new Point(white, 1, Point3D(0,0,200)));
+
+  set_acceleration(new BVH());
 
   // will get seg fault unless add normals
   Mesh* mesher = new Mesh((char*)"../resources/goldfish_low_res.ply");

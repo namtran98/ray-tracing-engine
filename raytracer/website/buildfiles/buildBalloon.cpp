@@ -5,6 +5,8 @@
 #include "../cameras/Perspective.hpp"
 #include "../cameras/Parallel.hpp"
 #include "../materials/Cosine.hpp"
+#include "../materials/Matte.hpp"
+#include "../materials/Reflective.hpp"
 #include "../samplers/Simple.hpp"
 #include "../samplers/Jittered.hpp"
 #include "../utilities/Constants.hpp"
@@ -13,116 +15,136 @@
 #include "../geometry/Sphere.hpp"
 #include "../geometry/Triangle.hpp"
 #include "../geometry/MeshTriangle.hpp"
+#include "../acceleration/BVH.hpp"
 #include "../lights/Point.hpp"
+#include "../lights/Directional.hpp"
 #include "../lights/Ambient.hpp"
 
 #include <iostream>
 void World::build(void) {
-  // View plane  .
-  vplane.top_left.x = -10;
-  vplane.top_left.y = 10;
-  vplane.top_left.z = 10;
-  vplane.bottom_right.x = 10;
-  vplane.bottom_right.y = -10;
-  vplane.bottom_right.z = 10;
+  // View plane.
+  vplane.top_left.x = -1000;
+  vplane.top_left.y = 1000;
+  vplane.top_left.z = 1000;
+  vplane.bottom_right.x = 1000;
+  vplane.bottom_right.y = -1000;
+  vplane.bottom_right.z = 1000;
   vplane.hres = 500;
   vplane.vres = 500;
 
+  // vplane.top_left.x = -400;
+  // vplane.top_left.y = 400;
+  // vplane.top_left.z = 50;
+  // vplane.bottom_right.x = 400;
+  // vplane.bottom_right.y = -400;
+  // vplane.bottom_right.z = 50;
+  // vplane.hres = 400;
+  // vplane.vres = 400;
+
   // Background color.
-  bg_color = skyBlue;
+  bg_color = nightBlue;
 
   // Camera and sampler.
-  // set_camera(new Parallel(0, 0, -1));
+  set_camera(new Parallel());
 
-  set_camera(new Perspective(0, 0, 20));
+  // set_camera(new Perspective(0, 0, 600)); //9 //15 //25
   sampler_ptr = std::make_unique<Simple>(camera_ptr.get(), &vplane);
-  set_ambient_light(new Ambient(1, 1, 1, .1));
-  add_light(new Point(white, 1, Point3D(0,0,200)));
+  set_ambient_light(new Ambient(1, 1, 1, .5));
+  add_light(new Point(white, .05, Point3D(0,0,200)));
+  // add_light(new Directional(sunYellow, .4, Vector3D(0, 1, 0)));
 
-  // will get seg fault unless add normals
-  Mesh* mesher = new Mesh((char*)"../resources/teapot.ply", 0, -5, 0);
+  set_acceleration(new BVH());
 
-  for(int i = 0; i < mesher->num_triangles; i++){
-    MeshTriangle* meshTri1 = new MeshTriangle(mesher, std::get<0>(mesher->tris[i]), std::get<1>(mesher->tris[i]), std::get<2>(mesher->tris[i]));
-    meshTri1->set_material(new Cosine(grey));
-    // mesher->normals.push_back(meshTri1->compute_normal());
-    add_object(meshTri1);
-  }
+  // First hot air balloon
+  Mesh* mesher = new Mesh((char*)"../resources/balloonRotate.ply", 650, -500, -30); //30, -30, 0
+  Matte *matte_material = new Matte();
+  matte_material->set_ka(.5);
+  matte_material->set_kd(.5);
+  matte_material->set_cd(oceanBlue);
 
-  // calculates normals for the faces, this will need to happen in whatever adds the grid to the scene
-  mesher->normals.reserve(mesher->num_vertices);
+  accel_ptr->add_from_mesh(mesher, matte_material);
+  accel_ptr->compute_normals(mesher);
 
-	for (int index = 0; index < mesher->num_vertices; index++) {
-		Vector3D normal;
+  // Second hot air balloon
+  Mesh* mesher2 = new Mesh((char*)"../resources/balloonRotate.ply", -600, 300, -10); //30, -30, 0
+  Matte *matte_material2 = new Matte();
+  matte_material2->set_ka(.5);
+  matte_material2->set_kd(.5);
+  matte_material2->set_cd(brown);
 
-		for (unsigned int j = 0; j < mesher->vertex_faces[index].size(); j++){
-			normal += ((MeshTriangle*)geometry[mesher->vertex_faces[index][j]])->get_normal();
-    }
+  accel_ptr->add_from_mesh(mesher2, matte_material2);
+  accel_ptr->compute_normals(mesher2);
 
-		if (normal.x == 0.0 && normal.y == 0.0 && normal.z == 0.0){
-			normal.y = 1.0;
-    }
-		else {
-			normal.normalize();
-    }
+  // First teapot
+  Mesh* mesher3 = new Mesh((char*)"../resources/teapotScale.ply", 600, -310, -30); //600, -310, -30
+  Reflective *reflectiveMat = new Reflective();
+  reflectiveMat->set_kr(.5);
+  reflectiveMat->set_ka(.5);
+  reflectiveMat->set_kd(.5);
+  reflectiveMat->set_cr(lightPurple);
+  reflectiveMat->set_cd(white);
 
-		mesher->normals.push_back(normal);
-	}
+  accel_ptr->add_from_mesh(mesher3, reflectiveMat);
+  accel_ptr->compute_normals(mesher3);
 
-  // spheres
-  Sphere* sphere_ptr1 = new Sphere(Point3D(-20, 30, -30), 20);
-  sphere_ptr1->set_material(new Cosine(oceanBlue)); 
-  add_object(sphere_ptr1);
+  // Second teapot
+  Mesh* mesher4 = new Mesh((char*)"../resources/teapotScale.ply", -650, 490, -30); //600, -310, -30
+  Reflective *reflectiveMat2 = new Reflective();
+  reflectiveMat2->set_kr(.5);
+  reflectiveMat2->set_ka(.5);
+  reflectiveMat2->set_kd(.5);
+  reflectiveMat2->set_cr(lightPurple);
+  reflectiveMat2->set_cd(white);
 
-  Sphere* sphere_ptr2 = new Sphere(Point3D(-10, 30, -30), 20);
-  sphere_ptr2->set_material(new Cosine(brown));  
-  add_object(sphere_ptr2);
+  accel_ptr->add_from_mesh(mesher4, reflectiveMat2);
+  accel_ptr->compute_normals(mesher4);
 
-  Sphere* sphere_ptr3 = new Sphere(Point3D(0, 30, -30), 20);
-  sphere_ptr3->set_material(new Cosine(darkGreen));  
-  add_object(sphere_ptr3);
+  // Airplane
+  Mesh* mesher5 = new Mesh((char*)"../resources/airplane.ply", -300, -900, -30); //600, -310, -30
+  Matte *matte_material3 = new Matte();
+  matte_material3->set_ka(.5);
+  matte_material3->set_kd(.5);
+  matte_material3->set_cd(grey);
 
-  Sphere* sphere_ptr4 = new Sphere(Point3D(10, 30, -30), 20);
-  sphere_ptr4->set_material(new Cosine(orange));  
-  add_object(sphere_ptr4);
+  accel_ptr->add_from_mesh(mesher5, matte_material3);
+  accel_ptr->compute_normals(mesher5);
+  
+  // First goose
+  Mesh* mesher6 = new Mesh((char*)"../resources/goose.ply", -400, -400, -30);
+  Matte *matte_goose = new Matte();
+  matte_goose->set_ka(.5);
+  matte_goose->set_kd(.5);
+  matte_goose->set_cd(brown);
 
-  Sphere* sphere_ptr5 = new Sphere(Point3D(20, 30, -30), 20);
-  sphere_ptr5->set_material(new Cosine(green)); 
-  add_object(sphere_ptr5);
+  accel_ptr->add_from_mesh(mesher6, matte_goose);
+  accel_ptr->compute_normals(mesher6);
 
-  // Second layering
-  Sphere* sphere_ptr6 = new Sphere(Point3D(-20, 35, -25), 20);
-  sphere_ptr6->set_material(new Cosine(green)); 
-  add_object(sphere_ptr6);
+  // Second goose
+  Mesh* mesher7 = new Mesh((char*)"../resources/goose.ply", -470, -450, -30); 
 
-  Sphere* sphere_ptr7 = new Sphere(Point3D(-10, 35, -25), 20);
-  sphere_ptr7->set_material(new Cosine(orange)); 
-  add_object(sphere_ptr7);
+  accel_ptr->add_from_mesh(mesher7, matte_goose);
+  accel_ptr->compute_normals(mesher7);
 
-  Sphere* sphere_ptr8 = new Sphere(Point3D(0, 35, -25), 20);
-  sphere_ptr8->set_material(new Cosine(darkGreen));
-  add_object(sphere_ptr8);
+  // Third goose
+  Mesh* mesher8 = new Mesh((char*)"../resources/goose.ply", -560, -500, -30);
 
-  Sphere* sphere_ptr9 = new Sphere(Point3D(10, 35, -25), 20);
-  sphere_ptr9->set_material(new Cosine(brown));  
-  add_object(sphere_ptr9);
+  accel_ptr->add_from_mesh(mesher8, matte_goose);
+  accel_ptr->compute_normals(mesher8);
 
-  Sphere* sphere_ptr10 = new Sphere(Point3D(20, 35, -25), 20);
-  sphere_ptr10->set_material(new Cosine(oceanBlue));  
-  add_object(sphere_ptr10);
+  // Fourth goose
+  Mesh* mesher9 = new Mesh((char*)"../resources/goose.ply", -660, -450, -30); 
 
-  //Triangles
-  Point3D a(5, -10, 0);
-  Point3D b(11, 5, 0);
-  Point3D c(8.3, 0, 0);
-  Triangle* triangle_ptr1 = new Triangle(a, b, c);
-  triangle_ptr1->set_material(new Cosine(black));
-  add_object(triangle_ptr1);
+  accel_ptr->add_from_mesh(mesher9, matte_goose);
+  accel_ptr->compute_normals(mesher9);
 
-  Point3D d(-5, -10, 0);
-  Point3D e(-11, 5, 0);
-  Point3D f(-8.3, 0, 0);
-  Triangle* triangle_ptr2 = new Triangle(d, e, f);
-  triangle_ptr2->set_material(new Cosine(black));
-  add_object(triangle_ptr2);
+  // Fifth goose
+  Mesh* mesher10 = new Mesh((char*)"../resources/goose.ply", -720, -400, -30);
+
+  accel_ptr->add_from_mesh(mesher10, matte_goose);
+  accel_ptr->compute_normals(mesher10);
+
+
+  accel_ptr->initialize();
+
+  
 }
