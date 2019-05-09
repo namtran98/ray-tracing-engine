@@ -128,7 +128,7 @@
                         <h5 class="text-center" style="display: inline-block">
                                 High Quality Render
                         </h5>
-                        <img alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                        <img src="Project 2 Images/spheregrid.png" height="450" width="450" />
                     </div>
                     <div class="col-md-4">
                         <h5 class="text-center" style="display: inline-block">
@@ -152,7 +152,9 @@
                 </h3>
                 <img class="w-50 p-3" alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
                 <p class="text-muted">
-                        summarize your concept and how you arrived at it and shortly describe how you built your scene
+                        While developing scenes, we noticed that intersecting spheres looked like the balloon portion of hot air balloons so we were inspired to create a scene that incorporated these.
+                        Initially, we were thinking about using a teapot as a basket because of the scene in Alice in Wonderland that has something similar. Due to the difficulty of this, we decided to 
+                        just use ply meshes of hot air balloons. Our scene was constructed by loading in some meshes with transformations attached to them and then giving these our materials.
                 </p>
             </div>
             <div class="col-md-6" style="text-align: center">
@@ -369,7 +371,21 @@
                             Build Files
                         </h3>
                         <p>
-                            Link The build files here
+                            <li><a href="buildfiles/buildBalloon.cpp">Balloon</a></li>
+                            <li><a href="buildfiles/buildChapter14.cpp">Chapter 14</a></li>
+                            <li><a href="buildfiles/buildChapter14Lit.cpp">Chapter 14 Lit</a></li>
+                            <li><a href="buildfiles/buildFish.cpp">Fish</a></li>
+                            <li><a href="buildfiles/buildFishAccel.cpp">Fish with BVH</a></li>
+                            <li><a href="buildfiles/buildFishRef.cpp">Fish with Reflective Mat</a></li>
+                            <li><a href="buildfiles/buildFishScene.cpp">Fish Scene</a></li>
+                            <li><a href="buildfiles/buildFishScene2.cpp">Fish Scene 2</a></li>
+                            <li><a href="buildfiles/buildHelloWorld.cpp">Hello World</a></li>
+                            <li><a href="buildfiles/buildHelloWorld2.cpp">Hello World 2</a></li>
+                            <li><a href="buildfiles/buildMatte.cpp">Matte Tester</a></li>
+                            <li><a href="buildfiles/buildRef.cpp">Reflective Tester</a></li>
+                            <li><a href="buildfiles/buildSphereGrid.cpp">Sphere Grid</a></li>
+                            <li><a href="buildfiles/buildTestAccel.cpp">BVH Tester</a></li>
+                            <li><a href="buildfiles/buildTimer.cpp">Random Spheres for timing</a></li>
                         </p>
                     </div>
             <div class="col-md-6">
@@ -392,7 +408,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <h4>
                     Sources
                 </h4>
@@ -403,6 +419,17 @@
                     </ul>
                 </p>
             </div>
+            <div class="col-md-6">
+                    <h3>
+                        How to run
+                    </h3>
+                    <p>
+                        Inside the raytracer.cpp file set the tracer that you want on line 24. Then Inside world.cpp include the proper build file that you would like to run.
+                        All thats left is to run ./make.sh inside the raytracer directory which will compile and then run tracer. We have included a progression timer so you can see
+                        how close your image is to rendering. You can then open the ppm as you see fit.
+                    </p>
+                </div>
+
         </div>
     </div>
 </body>

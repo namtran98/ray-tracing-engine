@@ -1,5 +1,5 @@
 #include "World.hpp"
-#include "../build/buildRef.cpp"
+#include "../build/buildSphereGrid.cpp"
 
 
 World::World(){
