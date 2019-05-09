@@ -5,7 +5,7 @@
 */
 #include "../cameras/Perspective.hpp"
 #include "../cameras/Parallel.hpp"
-#include "../materials/Cosine.hpp"
+#include "../materials/Matte.hpp"
 #include "../samplers/Simple.hpp"
 #include "../samplers/Jittered.hpp"
 #include "../utilities/Constants.hpp"
@@ -13,6 +13,8 @@
 #include "../utilities/Mesh.hpp"
 #include "../geometry/MeshTriangle.hpp"
 #include "../acceleration/BVH.hpp"
+#include "../lights/Point.hpp"
+#include "../lights/Ambient.hpp"
 
 #include <iostream>
 void
@@ -28,10 +30,17 @@ World::build(void) {
   vplane.vres = 500;
 
   // Background color.
-  bg_color = white;
+  bg_color = oceanBlue;
+  set_ambient_light(new Ambient(1, 1, 1, .3));
+  add_light(new Point(white, 1, Point3D(10,10,10)));
 
   // Camera and sampler.
   // set_camera(new Parallel(0, 0, -1));
+
+  Matte *matte_material1 = new Matte();
+  matte_material1->set_ka(.8);
+  matte_material1->set_kd(.8);
+  matte_material1->set_cd(lightPurple);
 
   set_camera(new Perspective(0, 0, 20));
   sampler_ptr = std::make_unique<Jittered>(camera_ptr.get(), &vplane, 4, 83);
@@ -40,7 +49,7 @@ World::build(void) {
 
   Mesh* mesher = new Mesh((char*)"../resources/goldfish_low_res.ply");
 
-  accel_ptr->add_from_mesh(mesher, new Cosine(red));
+  accel_ptr->add_from_mesh(mesher,matte_material1);
   accel_ptr->compute_normals(mesher);
 
   accel_ptr->initialize();
