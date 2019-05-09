@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ray Tracing Presentation</title>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12" style="text-align: center">
+                <div class="page-header" class="mx-auto" style="display: inline-block">
+                    <h1>
+                        Ray Tracing Engine (CSCI 155)
+                    </h1>
+                </div>
+                <div class="row" style="padding-top: 50px">
+                    <div class="col-md-4">
+                        <h5 class="text-center" style="display: inline-block">
+                                Chapter 14
+                        </h5>
+                        <img src="Project 2 Images/chapter14.png" height="450" width="450" />
+                    </div>
+                    <div class="col-md-4">
+                        <h5 class="text-center" style="display: inline-block">
+                                Hello World 
+                        </h5>
+                        <img src="Project 2 Images/Hello World.png" height="450" width="450" />
+                    </div>
+                    <div class="col-md-4">
+                        <h5 class="text-center" style="display: inline-block">
+                                Hello World 2
+                        </h5>
+                        <img src="Project 2 Images/Hello World 2.png" height="450" width="450" />
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 50px">
+                    <div class="col-md-4">
+                        <h5 class="text-center" style="display: inline-block">
+                                Simple Low Ress Fish
+                        </h5>
+                        <img src="Project 2 Images/simple low res fish.png" height="450" width="450" />
+                    </div>
+                    <div class="col-md-4">
+                        <h5 class="text-center" style="display: inline-block">
+                                Jittered Low Res Fish
+                        </h5>
+                        <img src="Project 2 Images/jittered low res fish.png" height="450" width="450" />
+                    </div>
+                    <div class="col-md-4">
+                        <h5 class="text-center" style="display: inline-block">
+                                Simple Low Res Fish Final
+                        </h5>
+                        <img src="Project 2 Images/FISSSHHH.png" height="450" width="450" />
+                    </div>
+    
+                </div>
+                <div class="row" style="padding-top: 50px">
+                    <div class="col-md-4">
+                        <h5 class="text-center" style="display: inline-block">
+                                Many Fish
+                        </h5>
+                        <img src="Project 2 Images/meanfish.png" height="450" width="450" />
+                    </div>
+                    <div class="col-md-4">
+                        <h5 class="text-center" style="display: inline-block">
+                                Purple Matte Fish
+                        </h5>
+                        <img src="Project 2 Images/purplemattefish.png" height="450" width="450" />
+                    </div>
+                    <div class="col-md-4">
+                        <h5 class="text-center" style="display: inline-block">
+                                3 Matte Spheres
+                        </h5>
+                        <img src="Project 2 Images/matte no shadows.png" height="450" width="450" />
+                    </div>
+                   
+                </div>
+                <div class="row" style="padding-top: 50px">
+                    <div class="col-md-4">
+                        <h5 class="text-center" style="display: inline-block">
+                                3 Matte Spheres with Shadows
+                        </h5>
+                        <img src="Project 2 Images/matte w shadows.png" height="450" width="450" />
+                    </div>
+                    <div class="col-md-4">
+                        <h5 class="text-center" style="display: inline-block">
+                                Reflective demo
+                        </h5>
+                        <img src="Project 2 Images/reflective.png" height="450" width="450" />
+                    </div>
+                    <div class="col-md-4">
+                        <h5 class="text-center" style="display: inline-block">
+                                Reflective and Matte Primitives
+                        </h5>
+                        <img src="Project 2 Images/refandmats.png" height="450" width="450" />
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 50px">
+                    <div class="col-md-4">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img src="Project 2 Images/chapter14reflective.png" height="450" width="450" />
+                    </div>
+                    <div class="col-md-4">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img src="Project 2 Images/helloworld2reflective.png" height="450" width="450" />
+                    </div>
+                    <div class="col-md-4">
+                        <h5 class="text-center" style="display: inline-block">
+                                High Quality Render
+                        </h5>
+                        <img src="Project 2 Images/helloworld2reflective.png" height="450" width="450" />
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 50px">
+                    <div class="col-md-4">
+                        <h5 class="text-center" style="display: inline-block">
+                                Sphere Grid
+                        </h5>
+                        <img src="Project 2 Images/spheregrid.png" height="450" width="450" />
+                    </div>
+                    <div class="col-md-4">
+                        <h5 class="text-center" style="display: inline-block">
+                                Perspective Distortion with bad Viewplane
+                        </h5>
+                        <img src="Project 2 Images/perspectivedist.png" height="450" width="450" />
+                    </div>
+                    <div class="col-md-4">
+                        <h5 class="text-center" style="display: inline-block">
+                                Perspective Distortion with good Viewplane
+                        </h5>
+                        <img src="Project 2 Images/timingren.png" height="450" width="450" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="text-align: center; padding-top: 100px">
+            <div class="col-md-6" style="display: inline-block">
+                <h3 class="text-center">
+                    Low Res Image
+                </h3>
+                <img class="w-50 p-3" alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                <p class="text-muted">
+                        While developing scenes, we noticed that intersecting spheres looked like the balloon portion of hot air balloons so we were inspired to create a scene that incorporated these.
+                        Initially, we were thinking about using a teapot as a basket because of the scene in Alice in Wonderland that has something similar. Due to the difficulty of this, we decided to 
+                        just use ply meshes of hot air balloons. Our scene was constructed by loading in some meshes with transformations attached to them and then giving these our materials.
+                </p>
+            </div>
+            <div class="col-md-6" style="text-align: center">
+                <h3 class="text-center" style="display: inline-block">
+                    High Res Image
+                </h3>
+                <img class="w-50 p-3" alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg" />
+                <br>
+                <p class="text-muted">
+                    highlight interesting parts or features of your image. Additional images may be included for this purpose.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" style="text-align: center">
+                <h3 class="text-center" style="display: inline-block">
+                    Without BVH
+                </h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                # Of Primitives
+                            </th>
+                            <th>
+                                Seconds
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                1
+                            </td>
+                            <td>
+                                100
+                            </td>
+                            <td>
+                                    3.48255
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                2
+                            </td>
+                            <td>
+                                10K
+                            </td>
+                            <td>
+                                    304.343
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                3
+                            </td>
+                            <td>
+                                25K
+                            </td>
+                            <td>
+                                    765.767
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                4
+                            </td>
+                            <td>
+                                50K
+                            </td>
+                            <td>
+                                    1532.06
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                5
+                            </td>
+                            <td>
+                                100K
+                            </td>
+                            <td>
+                                Likely an hour
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6" style="text-align: center">
+                    <h3 class="text-center" style="display: inline-block">
+                        With BVH
+                    </h3>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    #
+                                </th>
+                                <th>
+                                    # Of Primitives
+                                </th>
+                                <th>
+                                    Seconds
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    100
+                                </td>
+                                <td>
+                                        0.310817
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    2
+                                </td>
+                                <td>
+                                    10K
+                                </td>
+                                <td>
+                                        0.533931
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    3
+                                </td>
+                                <td>
+                                    25K
+                                </td>
+                                <td>
+                                        0.635118
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    4
+                                </td>
+                                <td>
+                                    50K
+                                </td>
+                                <td>
+                                        0.660836
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    5
+                                </td>
+                                <td>
+                                    100K
+                                </td>
+                                <td>
+                                        0.677387
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>
+                    Additions to the code base
+                </h3>
+                <p>
+                    We added the following features to the code base
+                </p>
+                <ul>    
+                    <li>Jittered Sampler</li>
+                    <li>BVH Acceleration Structure</li>
+                    <li>Shadow Tracer</li>
+                    <li>Mesh Reader</li>
+                    <li>Matte material</li>
+                    <li>Reflective material</li>
+                    <li>Brdfs for the above materials</li>
+                </ul>
+               
+            </div>
+            <div class="col-md-6">
+                    <h3>
+                        Team Members
+                    </h3>
+                    <ul>
+                        <li class="list-item">
+                            <big>Owen Gillespie</big>
+                        </li>
+                        <li class="list-item">
+                                <big>Victor Machado</big>
+                        </li>
+                        <li class="list-item">
+                                <big>Paul Mesa</big>
+                        </li>
+                        <li class="list-item">
+                                <big>Nam Tran</big>
+                        </li>
+                    </ul>
+                </div>
+            
+        </div>
+        <div class="row">
+                <div class="col-md-6">
+                        <h3>
+                            Build Files
+                        </h3>
+                        <p>
+                            <li><a href="buildfiles/buildBalloon.cpp">Balloon</a></li>
+                            <li><a href="buildfiles/buildChapter14.cpp">Chapter 14</a></li>
+                            <li><a href="buildfiles/buildChapter14Lit.cpp">Chapter 14 Lit</a></li>
+                            <li><a href="buildfiles/buildFish.cpp">Fish</a></li>
+                            <li><a href="buildfiles/buildFishAccel.cpp">Fish with BVH</a></li>
+                            <li><a href="buildfiles/buildFishRef.cpp">Fish with Reflective Mat</a></li>
+                            <li><a href="buildfiles/buildFishScene.cpp">Fish Scene</a></li>
+                            <li><a href="buildfiles/buildFishScene2.cpp">Fish Scene 2</a></li>
+                            <li><a href="buildfiles/buildHelloWorld.cpp">Hello World</a></li>
+                            <li><a href="buildfiles/buildHelloWorld2.cpp">Hello World 2</a></li>
+                            <li><a href="buildfiles/buildMatte.cpp">Matte Tester</a></li>
+                            <li><a href="buildfiles/buildRef.cpp">Reflective Tester</a></li>
+                            <li><a href="buildfiles/buildSphereGrid.cpp">Sphere Grid</a></li>
+                            <li><a href="buildfiles/buildTestAccel.cpp">BVH Tester</a></li>
+                            <li><a href="buildfiles/buildTimer.cpp">Random Spheres for timing</a></li>
+                            <li><a href="buildfiles/buildHelloWorld2shadowreflect.cpp">Hello World 2 with Reflect</a></li>
+                            <li><a href="buildfiles/buildChapter14shadowreflect.cpp">Chapter 14 with Reflect</a></li>
+                        </p>
+                    </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="Project 2 Images/nam.png" height="175" width="175" />
+                    </div>
+                    <div class="col-md-6">
+                        <img src="Project 2 Images/owen.png" height="175" width="175" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="Project 2 Images/paul.png" height="175" width="175"/>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="Project 2 Images/victor.png" height="175" width="175"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h4>
+                    Sources
+                </h4>
+                <p>
+                    <ul>
+                        <li><a href="http://www.raytracegroundup.com/">Book Website</a> </li>
+                        <li><a href="https://l.messenger.com/l.php?u=https%3A%2F%2Fpeople.sc.fsu.edu%2F~jburkardt%2Fdata%2Fply%2Fply.html&h=AT0EHntd1vG0rBTsrxOS3_5TQl-aKmTYN6LQvSldU2bPlwQ7K_W2k4doJZn2d5x60-1Io7QuOBLT4Ny8_gyO_y8qKb8JtmQWDO85SJ9NVQ7-Gjh9OrPGa_Zvy6i9biyQEO-LYIT1gyo">PLY Files</a> </li>
+                    </ul>
+                </p>
+            </div>
+            <div class="col-md-6">
+                    <h3>
+                        How to run
+                    </h3>
+                    <p>
+                        Inside the raytracer.cpp file set the tracer that you want on line 24. Then Inside world.cpp include the proper build file that you would like to run.
+                        All thats left is to run ./make.sh inside the raytracer directory which will compile and then run tracer. We have included a progression timer so you can see
+                        how close your image is to rendering. You can then open the ppm as you see fit.
+                    </p>
+                </div>
+
+        </div>
+    </div>
+</body>
+</html>
