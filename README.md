@@ -2,7 +2,7 @@
 
 ### Features
 
-This ia a ray tracing engine by using OOP. The included ray tracing features are
+This ia a ray tracing engine built using OOP. The included ray tracing features are
 
 - tracing a ray through a scene
   - Shadow Tracer
@@ -14,6 +14,6 @@ This ia a ray tracing engine by using OOP. The included ray tracing features are
   - Reflective material
 - scene sampling for anti-aliasing, via Jittered Sampler
 
-Presentation can be found in:
+Presentation can be found at http://owengillespie.com/graphics/.
 
 
